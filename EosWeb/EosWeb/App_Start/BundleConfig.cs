@@ -21,11 +21,23 @@ namespace EosWeb
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.js",
-                      "~/Scripts/respond.js"));
-
+                      "~/Scripts/respond.js",
+                      "~/Scripts/fastclick.js",
+                      "~/Scripts/nprogress.js",
+                      "~/Scripts/Chart.min.js",
+                      "~/Scripts/gauge.min.js",
+                      "~/Scripts/icheck.min.js",
+                      "~/Scripts/skycons.js",
+                      "~/Scripts/custom.min.js"));
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
+                      "~/Content/font-awesome.css",
                       "~/Content/site.css"));
+            bundles.Add(new StyleBundle("~/Content/customs").Include(
+                      "~/Content/custom.css"));
+            bundles.Add(new StyleBundle("~/Content/extra").Include(
+                      "~/Content/green.css",
+                      "~/Content/nprogress.css"));
         }
     }
 }
