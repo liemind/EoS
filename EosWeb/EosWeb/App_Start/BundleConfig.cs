@@ -20,24 +20,41 @@ namespace EosWeb
                         "~/Scripts/modernizr-*"));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                      "~/Scripts/bootstrap.js",
-                      "~/Scripts/respond.js",
+                      "~/Scripts/jquery-ui.min.js",
+                      "~/Scripts/bootstrap.min.js",
+                      "~/Scripts/raphael.min.js",
+                      "~/Scripts/morris.min.js",
+                      "~/Scripts/jquery.sparkline.min.js",
+                      "~/Scripts/jquery-jvectormap-1.2.2.min.js",
+                      "~/Scripts/jquery-jvectormap-world-mill-en.min.js",
+                      "~/Scripts/jquery.knob.min.js",
+                      "~/Scripts/bootstrap3-wysihtml5.all.min.js",
+                      "~/Scripts/jquery.slimscroll.min.js",
                       "~/Scripts/fastclick.js",
-                      "~/Scripts/nprogress.js",
-                      "~/Scripts/Chart.min.js",
-                      "~/Scripts/gauge.min.js",
-                      "~/Scripts/icheck.min.js",
-                      "~/Scripts/skycons.js",
-                      "~/Scripts/custom.min.js"));
+                      "~/Scripts/adminlte.min.js",
+                      "~/Scripts/dashboard.js",
+                      "~/Scripts/demo.js"
+                      ));
+
+
+            bundles.Add(new ScriptBundle("~/bundles/tables").Include(
+                        "~/Scripts/jquery.dataTables.min.js",
+                        "~/Scripts/dataTables.bootstrap.min.js"));
+
+            bundles.Add(new StyleBundle("~/Content/cssTables").Include(
+                      "~/Content/dataTables.bootstrap.min.css"));
+
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
-                      "~/Content/font-awesome.css",
-                      "~/Content/site.css"));
-            bundles.Add(new StyleBundle("~/Content/customs").Include(
-                      "~/Content/custom.css"));
+                      "~/Content/font-awesome.min.css"));
+            bundles.Add(new StyleBundle("~/Content/ionicons").Include(
+                      "~/Content/ionicons.min.css"));
+            bundles.Add(new StyleBundle("~/Content/adminLTE").Include(
+                      "~/Content/AdminLTE.min.css"));
             bundles.Add(new StyleBundle("~/Content/extra").Include(
-                      "~/Content/green.css",
-                      "~/Content/nprogress.css"));
+                      "~/Content/_all-skins.min.css",
+                      "~/Content/jquery-jvectormap.css",
+                      "~/Content/"));
         }
     }
 }
