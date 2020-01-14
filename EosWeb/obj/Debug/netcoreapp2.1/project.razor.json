@@ -1,0 +1,16 @@
+{
+  "FilePath": "c:\\Users\\Liemind\\Documents\\Universidad de Talca\\2019-2\\Diseño y Analisis de Algoritmos\\EoS\\Eosweb\\Eosweb.csproj",
+  "Configuration": {
+    "ConfigurationName": "MVC-2.1",
+    "LanguageVersion": "2.1",
+    "Extensions": [
+      {
+        "ExtensionName": "MVC-2.1"
+      }
+    ]
+  },
+  "ProjectWorkspaceState": null,
+  "RootNamespace": "Eosweb",
+  "Documents": [],
+  "SerializationFormat": "0.2"
+}
