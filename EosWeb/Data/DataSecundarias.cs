@@ -5,16 +5,17 @@ using MySql.Data.MySqlClient;
 
 namespace Eosweb.Data
 {
-    public class DataConstantes
+    public class DataSecundarias
     {
-        public static Boolean Crear(Constantes c) {
+        public static Boolean Crear(Secundarias c) {
             try
             {
-                var command = new MySqlCommand() { CommandText = "sp_constantes_crear", CommandType = System.Data.CommandType.StoredProcedure };
+                var command = new MySqlCommand() { CommandText = "sp_secundarias_crear", CommandType = System.Data.CommandType.StoredProcedure };
                 command.Parameters.Add(new MySqlParameter() { ParameterName = "in_A", Direction = System.Data.ParameterDirection.Input, Value = c.A });
                 command.Parameters.Add(new MySqlParameter() { ParameterName = "in_B", Direction = System.Data.ParameterDirection.Input, Value = c.B });
                 command.Parameters.Add(new MySqlParameter() { ParameterName = "in_C", Direction = System.Data.ParameterDirection.Input, Value = c.C });
-                command.Parameters.Add(new MySqlParameter() { ParameterName = "in_D", Direction = System.Data.ParameterDirection.Input, Value = c.D });
+                command.Parameters.Add(new MySqlParameter() { ParameterName = "in_tmin_k", Direction = System.Data.ParameterDirection.Input, Value = c.Tmin_k });
+                command.Parameters.Add(new MySqlParameter() { ParameterName = "in_tmax_k", Direction = System.Data.ParameterDirection.Input, Value = c.Tmax_k });
                 var datos = DataSource.ExecuteProcedure(command);
                 return true;
             }
@@ -25,25 +26,26 @@ namespace Eosweb.Data
             }
         }
 
-        public static List<Constantes> LeerTodo() {
+        public static List<Secundarias> LeerTodo() {
             try
             {
-                var command = new MySqlCommand() { CommandText = "sp_constantes_leer_todo", CommandType = System.Data.CommandType.StoredProcedure };
+                var command = new MySqlCommand() { CommandText = "sp_secundarias_leer_todo", CommandType = System.Data.CommandType.StoredProcedure };
                 var datos = DataSource.GetDataSet(command);
 
-                List<Constantes> c = new List<Constantes>();
+                List<Secundarias> c = new List<Secundarias>();
                 if (datos.Tables[0].Rows.Count > 0)
                 {
                     foreach (System.Data.DataRow row in datos.Tables[0].Rows)
                     {
                         var prodData = row;
-                        var comp = new Constantes()
+                        var comp = new Secundarias()
                         {
                             Id = Convert.ToInt32(prodData["id"]),
                             A = Convert.ToDouble(prodData["A"]),
                             B = Convert.ToDouble(prodData["B"]),
                             C = Convert.ToDouble(prodData["C"]),
-                            D = Convert.ToDouble(prodData["D"])
+                            Tmin_k = Convert.ToDouble(prodData["tmin_k"]),
+                            Tmax_k = Convert.ToDouble(prodData["tmax_k"]),
                         };
                         
                         c.Add(comp);
@@ -62,22 +64,23 @@ namespace Eosweb.Data
             return null;
         }
 
-        public static Constantes Leer(int Id) {
+        public static Secundarias Leer(int Id) {
             try
             {
-                var command = new MySqlCommand() { CommandText = "sp_leer_constantes", CommandType = System.Data.CommandType.StoredProcedure };
+                var command = new MySqlCommand() { CommandText = "sp_leer_secundarias", CommandType = System.Data.CommandType.StoredProcedure };
                 command.Parameters.Add(new MySqlParameter() { ParameterName = "in_id", Direction = System.Data.ParameterDirection.Input, Value = Id });
                 var datos = DataSource.GetDataSet(command);
 
                 if (datos.Tables[0].Rows.Count > 0)
                 {
                     var prodData = datos.Tables[0].Rows[0];
-                    var comp = new Constantes()
+                    var comp = new Secundarias()
                     {
                         A = Convert.ToDouble(prodData["A"]),
                         B = Convert.ToDouble(prodData["B"]),
                         C = Convert.ToDouble(prodData["C"]),
-                        D = Convert.ToDouble(prodData["D"])
+                        Tmin_k = Convert.ToDouble(prodData["tmin_k"]),
+                        Tmax_k = Convert.ToDouble(prodData["tmax_k"])
                     };
                     comp.Id = Id;
                     return comp;
@@ -88,18 +91,14 @@ namespace Eosweb.Data
             {
                 Console.WriteLine(ex.ToString());
             }
-            finally
-            {
-
-            }
             return null;
         }
 
         public static Boolean Eliminar(int Id) {
             try
             {
-                var command = new MySqlCommand() { CommandText = "sp_constantes_eliminar", CommandType = System.Data.CommandType.StoredProcedure };
-                command.Parameters.Add(new MySqlParameter() { ParameterName = "in_id", Direction = System.Data.ParameterDirection.Input, Value = codigo });
+                var command = new MySqlCommand() { CommandText = "sp_secundarias_eliminar", CommandType = System.Data.CommandType.StoredProcedure };
+                command.Parameters.Add(new MySqlParameter() { ParameterName = "in_id", Direction = System.Data.ParameterDirection.Input, Value = Id });
                 var datos = DataSource.ExecuteProcedure(command);
                 return true;
             }
@@ -110,15 +109,16 @@ namespace Eosweb.Data
             }
         }
 
-        public static Boolean Modificar(Constantes i) {
+        public static Boolean Modificar(Secundarias i) {
             try
             {
-                var command = new MySqlCommand() { CommandText = "sp_constantes_modificar", CommandType = System.Data.CommandType.StoredProcedure };
+                var command = new MySqlCommand() { CommandText = "sp_secundarias_modificar", CommandType = System.Data.CommandType.StoredProcedure };
                 command.Parameters.Add(new MySqlParameter() { ParameterName = "in_id", Direction = System.Data.ParameterDirection.Input, Value = i.Id });
                 command.Parameters.Add(new MySqlParameter() { ParameterName = "in_A", Direction = System.Data.ParameterDirection.Input, Value = c.A });
                 command.Parameters.Add(new MySqlParameter() { ParameterName = "in_B", Direction = System.Data.ParameterDirection.Input, Value = c.B });
                 command.Parameters.Add(new MySqlParameter() { ParameterName = "in_C", Direction = System.Data.ParameterDirection.Input, Value = c.C });
-                command.Parameters.Add(new MySqlParameter() { ParameterName = "in_D", Direction = System.Data.ParameterDirection.Input, Value = c.D });
+                command.Parameters.Add(new MySqlParameter() { ParameterName = "in_tmin_k", Direction = System.Data.ParameterDirection.Input, Value = c.Tmin_k });
+                command.Parameters.Add(new MySqlParameter() { ParameterName = "in_tmax_k", Direction = System.Data.ParameterDirection.Input, Value = c.Tmax_k });
                 var datos = DataSource.ExecuteProcedure(command);
                 return true;
             }

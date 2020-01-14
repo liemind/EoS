@@ -1,0 +1,134 @@
+using System;
+using System.Collections.Generic;
+using Eosweb.Models;
+using MySql.Data.MySqlClient;
+
+namespace Eosweb.Data
+{
+    public class DataFundamentales
+    {
+        public static Boolean Crear(Fundamentales c) {
+            try
+            {
+                var command = new MySqlCommand() { CommandText = "sp_fundamentales_crear", CommandType = System.Data.CommandType.StoredProcedure };
+                command.Parameters.Add(new MySqlParameter() { ParameterName = "in_tc_k", Direction = System.Data.ParameterDirection.Input, Value = c.Tc_K });
+                command.Parameters.Add(new MySqlParameter() { ParameterName = "in_pc_bar", Direction = System.Data.ParameterDirection.Input, Value = c.Pc_bar });
+                command.Parameters.Add(new MySqlParameter() { ParameterName = "in_zc", Direction = System.Data.ParameterDirection.Input, Value = c.Zc });
+                command.Parameters.Add(new MySqlParameter() { ParameterName = "in_w", Direction = System.Data.ParameterDirection.Input, Value = c.W });
+                var datos = DataSource.ExecuteProcedure(command);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+                return false;
+            }
+        }
+
+        public static List<Fundamentales> LeerTodo() {
+            try
+            {
+                var command = new MySqlCommand() { CommandText = "sp_fundamentales_leer_todo", CommandType = System.Data.CommandType.StoredProcedure };
+                var datos = DataSource.GetDataSet(command);
+
+                List<Fundamentales> c = new List<Fundamentales>();
+                if (datos.Tables[0].Rows.Count > 0)
+                {
+                    foreach (System.Data.DataRow row in datos.Tables[0].Rows)
+                    {
+                        var prodData = row;
+                        var comp = new Fundamentales()
+                        {
+                            Id = Convert.ToInt32(prodData["id"]),
+                            A = Convert.ToDouble(prodData["tc_k"]),
+                            B = Convert.ToDouble(prodData["pc_bar"]),
+                            C = Convert.ToDouble(prodData["zc"]),
+                            D = Convert.ToDouble(prodData["w"])
+                        };
+                        
+                        c.Add(comp);
+                    }
+                }
+                return c;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+            finally
+            {
+
+            }
+            return null;
+        }
+
+        public static Fundamentales Leer(int Id) {
+            try
+            {
+                var command = new MySqlCommand() { CommandText = "sp_leer_fundamentales", CommandType = System.Data.CommandType.StoredProcedure };
+                command.Parameters.Add(new MySqlParameter() { ParameterName = "in_id", Direction = System.Data.ParameterDirection.Input, Value = Id });
+                var datos = DataSource.GetDataSet(command);
+
+                if (datos.Tables[0].Rows.Count > 0)
+                {
+                    var prodData = datos.Tables[0].Rows[0];
+                    var comp = new Fundamentales()
+                    {
+                        A = Convert.ToDouble(prodData["tc_k"]),
+                        B = Convert.ToDouble(prodData["pc_bar"]),
+                        C = Convert.ToDouble(prodData["zc"]),
+                        D = Convert.ToDouble(prodData["w"])
+                    };
+                    comp.Id = Id;
+                    return comp;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+            finally
+            {
+
+            }
+            return null;
+        }
+
+        public static Boolean Eliminar(int Id) {
+            try
+            {
+                var command = new MySqlCommand() { CommandText = "sp_fundamentales_eliminar", CommandType = System.Data.CommandType.StoredProcedure };
+                command.Parameters.Add(new MySqlParameter() { ParameterName = "in_id", Direction = System.Data.ParameterDirection.Input, Value = Id });
+                var datos = DataSource.ExecuteProcedure(command);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+                return false;
+            }
+        }
+
+        public static Boolean Modificar(Fundamentales i) {
+            try
+            {
+                var command = new MySqlCommand() { CommandText = "sp_fundamentales_modificar", CommandType = System.Data.CommandType.StoredProcedure };
+                command.Parameters.Add(new MySqlParameter() { ParameterName = "in_id", Direction = System.Data.ParameterDirection.Input, Value = i.Id });
+                command.Parameters.Add(new MySqlParameter() { ParameterName = "in_tc_k", Direction = System.Data.ParameterDirection.Input, Value = c.Tc_K });
+                command.Parameters.Add(new MySqlParameter() { ParameterName = "in_pc_bar", Direction = System.Data.ParameterDirection.Input, Value = c.Pc_bar });
+                command.Parameters.Add(new MySqlParameter() { ParameterName = "in_zc", Direction = System.Data.ParameterDirection.Input, Value = c.Zc });
+                command.Parameters.Add(new MySqlParameter() { ParameterName = "in_w", Direction = System.Data.ParameterDirection.Input, Value = c.W });
+                var datos = DataSource.ExecuteProcedure(command);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+                return false;
+            }
+        }
+
+
+    }
+}
