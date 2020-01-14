@@ -6,151 +6,98 @@
     <title>@ViewData["Title"] - Eosweb</title>
 
     <environment include="Development">
-
-        <!-- Fontfaces CSS-->
-        <!--<link rel="stylesheet" href="~/css/font-face.css" />-->
-        <link rel="stylesheet" href="~/lib/font-awesome-47/css/font-awesome.min.css" />
-        <link rel="stylesheet" href="~/lib/font-awesome-5/css/fontawesome-all.min.css" />
-
-
-        <!--link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />-->
-
-        <!-- Main CSS-->
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+        <!--Font Awesome-->
+        <link rel="stylesheet" href="~/lib/font-awesome/css/font-awesome.css" />
+        <!--Font Awesome End-->
+        <!--Nprogress-->
+        <link rel="stylesheet" href="~/lib/nprogress/nprogress.css" />
+        <!--End Nprogress-->
+        <!-- jQuery custom content scroller -->
+        <link rel="stylesheet" href="~/lib/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.css" />
+        <!-- End jQuery custom content scroller -->
         <link rel="stylesheet" href="~/css/site.css" />
-
-        <!-- Bootstrap CSS-->
-        <link rel="stylesheet" href="~/css/bootstrap.css" />
-        <link href="~/lib/perfect-scrollbar/perfect-scrollbar.css" rel="stylesheet" media="all">
-
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 
     </environment>
     <environment exclude="Development">
-        <!--
         <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/css/bootstrap.min.css"
               asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
               asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
-        <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />-->
+        <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
     </environment>
 </head>
-<body class="animsition">
-    <div class="page-wrapper">
-        <!-- MENU SIDEBAR-->
-        <aside class="menu-sidebar2">
-            <div class="logo">
-            </div>
-            <div class="menu-sidebar2__content js-scrollbar1">
-                <nav class="navbar-sidebar2">
-                    <ul class="list-unstyled navbar__list">
-                        <li class="active has-sub">
-                            <a class="js-arrow" href="#">
-                                <i class="fas fa-database"></i></i>Base de Datos
-                                <span class="arrow">
-                                    <i class="fas fa-angle-down"></i>
-                                </span>
-                            </a>
-                            <ul class="list-unstyled navbar__sub-list js-sub-list">
-                                <li>
-                                    <a href="index.html">
-                                        <i class="fas fa-tachometer-alt"></i>Dashboard 1</a>
-                                </li>
-                                <li>
-                                    <a href="index2.html">
-                                        <i class="fas fa-tachometer-alt"></i>Dashboard 2</a>
-                                </li>
-                                <li>
-                                    <a href="index3.html">
-                                        <i class="fas fa-tachometer-alt"></i>Dashboard 3</a>
-                                </li>
-                                <li>
-                                    <a href="index4.html">
-                                        <i class="fas fa-tachometer-alt"></i>Dashboard 4</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="inbox.html">
-                                <i class="fas fa-chart-bar"></i>Inbox</a>
-                            <span class="inbox-num">3</span>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
-        </aside>
-        <!-- END MENU SIDEBAR-->
+<body class="nav-md">
+    <div class="container body">
+        <div class="main_container">
+                <div class="col-md-3 left_col menu_fixed">
+                <div class="left_col scroll-view">
+                    <div class="navbar nav_title" style="border: 0;">
+                        <a href="@Url.Action("Index", "Home")" class="site_title">
+                            <i class="fa fa-calendar-o"></i> <span>Plan de Clases</span></a>
+                    </div>
 
-        <!-- PAGE CONTAINER-->
-        <div class="page-container2">
+                    <div class="clearfix"></div>
 
-            <!-- BREADCRUMB-->
-            <section class="au-breadcrumb">
-                <div class="section__content section__content--p30">
-                    <div class="container-fluid">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="au-breadcrumb-content">
-                                    <div class="au-breadcrumb-left">
-                                        <span class="au-breadcrumb-span">You are here:</span>
-                                        <ul class="list-unstyled list-inline au-breadcrumb__list">
-                                            <li class="list-inline-item active">
-                                                <a href="#">Home</a>
-                                            </li>
-                                            <li class="list-inline-item seprate">
-                                                <span>/</span>
-                                            </li>
-                                            <li class="list-inline-item">Dashboard</li>
+                    <br />
+
+                    <!-- sidebar menu -->
+                    <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+                        <div class="menu_section">
+                            <h3>General</h3>
+                            <ul class="nav side-menu">
+                                    <li>
+                                        <a><i class="fa fa-home"></i> General <span class="fa fa-chevron-down"></span></a>
+                                        <ul class="nav child_menu">
+                                            <li>@Html.ActionLink("Competencias", "Index", "Competencias")</li>
+                                            <li>@Html.ActionLink("Aprendizajes", "Index", "Aprendizajes")</li>
+                                            <li>@Html.ActionLink("Saberes", "Index", "Saberes")</li>
+                                            <li>@Html.ActionLink("Usuarios", "Index", "Usuarios")</li>
                                         </ul>
-                                    </div>
-                                    <button class="au-btn au-btn-icon au-btn--green">
-                                        <i class="zmdi zmdi-plus"></i>add item</button>
-                                </div>
-                            </div>
+                                    </li>
+                            </ul>
                         </div>
-                    </div>
-                </div>
-            </section>
-            <!-- END BREADCRUMB-->
 
-
-            <section>
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="copyright">
-                                <p>Copyright © 2018 Colorlib. All rights reserved. Template by <a href="https://colorlib.com">Colorlib</a>.</p>
-                            </div>
-                        </div>
                     </div>
+                    <!-- /sidebar menu -->
                 </div>
-            </section>
-            <!-- END PAGE CONTAINER-->
+            
+            </div>
+
+            <!--content-->
+            @RenderBody()
+            <!-- footer content -->
+        <footer>
+          <div class="pull-right">
+            Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a>
+          </div>
+          <div class="clearfix"></div>
+        </footer>
+        <!-- /footer content -->
         </div>
-
     </div>
 
     <partial name="_CookieConsentPartial" />
 
-    <!--<div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; 2020 - Eosweb</p>
-        </footer>
-    </div>-->
-
     <environment include="Development">
-        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-
-        <script src="~/js/jquery-3.2.1.min.js" asp-append-version="true"></script>
-        <!--<script src="~/lib/jquery/dist/jquery.js"></script>-->
-        <script src="~/lib/bootstrap-41/popper.min.js"></script>
-        <script src="~/lib/bootstrap-41/bootstrap.min.js"></script>
-        <script src="~/lib/perfect-scrollbar/perfect-scrollbar.js"></script>
-        
-        <script src="~/lib/animsition/animsition.min.js"></script>
-
+        <script src="~/lib/jquery/dist/jquery.js"></script>
+        <!--Calendar Scripts-->
+        <script src="~/lib/moment/min/moment.min.js"></script>
+        <script src="~/lib/fullcalendar/dist/fullcalendar.js"></script>
+        <!--End Calendar Scripts-->
+        <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+        <!--Fast Click-->
+        <script src="~/lib/fastclick/lib/fastclick.js"></script>
+        <!--End Fast Click-->
+        <!--Ngropress-->
+        <script src="~/lib/nprogress/nprogress.js"></script>
+        <!--End Nprogress-->
+        <!-- jQuery custom content scroller -->
+        <script src="~/lib/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.js"></script>
+        <!-- Select2 -->
+        <script src="~/lib/select2/dist/js/select2.min.js"></script>
+        <!-- Parsley -->
+        <script src="~/lib/parsleyjs/dist/parsley.min.js"></script>
+        <script src="~/lib/parsleyjs/src/extra/validator/words.js"></script>
         <!-- Datatables -->
         <script src="~/lib/datatables/datatables.net/js/jquery.dataTables.min.js"></script>
         <script src="~/lib/datatables/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
@@ -164,15 +111,20 @@
         <script src="~/lib/datatables/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
         <script src="~/lib/datatables/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
         <script src="~/lib/datatables/datatables.net-scroller/js/dataTables.scroller.min.js"></script>
-
+        <!--Date Time Picker-->
+        <script type="text/javascript" src="~/lib/bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
+        <!--Full Calendar -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.js"></script>
+        <!-- jQuery custom content scroller -->
         <script src="~/js/site.js" asp-append-version="true"></script>
     </environment>
     <environment exclude="Development">
-        <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.3.1.min.js"
+        <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.2.0.min.js"
                 asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
                 asp-fallback-test="window.jQuery"
                 crossorigin="anonymous"
-                integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT">
+                integrity="sha384-K+ctZQ+LL8q6tP7I94W+qzQsfRV2a+AfHIi9k8z8l9ggpc8X+Ytst4yBo/hH+8Fk">
         </script>
         <script src="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/bootstrap.min.js"
                 asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js"
@@ -183,6 +135,6 @@
         <script src="~/js/site.min.js" asp-append-version="true"></script>
     </environment>
 
-    <!--@RenderSection("Scripts", required: false)-->
+    @RenderSection("Scripts", required: false)
 </body>
 </html>
