@@ -33,7 +33,7 @@
                 <div class="left_col scroll-view">
                     <div class="navbar nav_title" style="border: 0;">
                         <a href="@Url.Action("Index", "Home")" class="site_title">
-                            <i class="fa fa-calendar-o"></i> <span>Plan de Clases</span></a>
+                            <i class="fa fa-calendar-o"></i> <span>EoS</span></a>
                     </div>
 
                     <div class="clearfix"></div>
@@ -46,12 +46,11 @@
                             <h3>General</h3>
                             <ul class="nav side-menu">
                                     <li>
-                                        <a><i class="fa fa-home"></i> General <span class="fa fa-chevron-down"></span></a>
+                                        <a><i class="fa fa-database"></i> Base de Datos <span class="fa fa-chevron-down"></span></a>
                                         <ul class="nav child_menu">
-                                            <li>@Html.ActionLink("Competencias", "Index", "Competencias")</li>
-                                            <li>@Html.ActionLink("Aprendizajes", "Index", "Aprendizajes")</li>
-                                            <li>@Html.ActionLink("Saberes", "Index", "Saberes")</li>
-                                            <li>@Html.ActionLink("Usuarios", "Index", "Usuarios")</li>
+                                            <li>@Html.ActionLink("Fundamentales", "Index", "Fundamentales")</li>
+                                            <li>@Html.ActionLink("Secundarias", "Index", "Secundarias")</li>
+                                            <li>@Html.ActionLink("Constantes", "Index", "Constantes")</li>
                                         </ul>
                                     </li>
                             </ul>
