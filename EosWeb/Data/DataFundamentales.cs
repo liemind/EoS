@@ -40,10 +40,10 @@ namespace Eosweb.Data
                         var comp = new Fundamentales()
                         {
                             Id = Convert.ToInt32(prodData["id"]),
-                            A = Convert.ToDouble(prodData["tc_k"]),
-                            B = Convert.ToDouble(prodData["pc_bar"]),
-                            C = Convert.ToDouble(prodData["zc"]),
-                            D = Convert.ToDouble(prodData["w"])
+                            Tc_K = Convert.ToDouble(prodData["tc_k"]),
+                            Pc_bar = Convert.ToDouble(prodData["pc_bar"]),
+                            Zc = Convert.ToDouble(prodData["zc"]),
+                            W = Convert.ToDouble(prodData["w"])
                         };
                         
                         c.Add(comp);
@@ -74,10 +74,10 @@ namespace Eosweb.Data
                     var prodData = datos.Tables[0].Rows[0];
                     var comp = new Fundamentales()
                     {
-                        A = Convert.ToDouble(prodData["tc_k"]),
-                        B = Convert.ToDouble(prodData["pc_bar"]),
-                        C = Convert.ToDouble(prodData["zc"]),
-                        D = Convert.ToDouble(prodData["w"])
+                        Tc_K = Convert.ToDouble(prodData["tc_k"]),
+                        Pc_bar = Convert.ToDouble(prodData["pc_bar"]),
+                        Zc = Convert.ToDouble(prodData["zc"]),
+                        W = Convert.ToDouble(prodData["w"])
                     };
                     comp.Id = Id;
                     return comp;
@@ -110,11 +110,11 @@ namespace Eosweb.Data
             }
         }
 
-        public static Boolean Modificar(Fundamentales i) {
+        public static Boolean Modificar(Fundamentales c) {
             try
             {
                 var command = new MySqlCommand() { CommandText = "sp_fundamentales_modificar", CommandType = System.Data.CommandType.StoredProcedure };
-                command.Parameters.Add(new MySqlParameter() { ParameterName = "in_id", Direction = System.Data.ParameterDirection.Input, Value = i.Id });
+                command.Parameters.Add(new MySqlParameter() { ParameterName = "in_id", Direction = System.Data.ParameterDirection.Input, Value = c.Id });
                 command.Parameters.Add(new MySqlParameter() { ParameterName = "in_tc_k", Direction = System.Data.ParameterDirection.Input, Value = c.Tc_K });
                 command.Parameters.Add(new MySqlParameter() { ParameterName = "in_pc_bar", Direction = System.Data.ParameterDirection.Input, Value = c.Pc_bar });
                 command.Parameters.Add(new MySqlParameter() { ParameterName = "in_zc", Direction = System.Data.ParameterDirection.Input, Value = c.Zc });

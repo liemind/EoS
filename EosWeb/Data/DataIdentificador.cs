@@ -93,7 +93,7 @@ namespace Eosweb.Data
             try
             {
                 var command = new MySqlCommand() { CommandText = "sp_identificador_eliminar", CommandType = System.Data.CommandType.StoredProcedure };
-                command.Parameters.Add(new MySqlParameter() { ParameterName = "in_id", Direction = System.Data.ParameterDirection.Input, Value = codigo });
+                command.Parameters.Add(new MySqlParameter() { ParameterName = "in_id", Direction = System.Data.ParameterDirection.Input, Value = Id });
                 var datos = DataSource.ExecuteProcedure(command);
                 return true;
             }

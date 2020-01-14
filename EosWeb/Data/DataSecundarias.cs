@@ -44,8 +44,8 @@ namespace Eosweb.Data
                             A = Convert.ToDouble(prodData["A"]),
                             B = Convert.ToDouble(prodData["B"]),
                             C = Convert.ToDouble(prodData["C"]),
-                            Tmin_k = Convert.ToDouble(prodData["tmin_k"]),
-                            Tmax_k = Convert.ToDouble(prodData["tmax_k"]),
+                            Tmin_k = Convert.ToInt32(prodData["tmin_k"]),
+                            Tmax_k = Convert.ToInt32(prodData["tmax_k"])
                         };
                         
                         c.Add(comp);
@@ -79,8 +79,8 @@ namespace Eosweb.Data
                         A = Convert.ToDouble(prodData["A"]),
                         B = Convert.ToDouble(prodData["B"]),
                         C = Convert.ToDouble(prodData["C"]),
-                        Tmin_k = Convert.ToDouble(prodData["tmin_k"]),
-                        Tmax_k = Convert.ToDouble(prodData["tmax_k"])
+                        Tmin_k = Convert.ToInt32(prodData["tmin_k"]),
+                        Tmax_k = Convert.ToInt32(prodData["tmax_k"])
                     };
                     comp.Id = Id;
                     return comp;
@@ -109,11 +109,11 @@ namespace Eosweb.Data
             }
         }
 
-        public static Boolean Modificar(Secundarias i) {
+        public static Boolean Modificar(Secundarias c) {
             try
             {
                 var command = new MySqlCommand() { CommandText = "sp_secundarias_modificar", CommandType = System.Data.CommandType.StoredProcedure };
-                command.Parameters.Add(new MySqlParameter() { ParameterName = "in_id", Direction = System.Data.ParameterDirection.Input, Value = i.Id });
+                command.Parameters.Add(new MySqlParameter() { ParameterName = "in_id", Direction = System.Data.ParameterDirection.Input, Value = c.Id });
                 command.Parameters.Add(new MySqlParameter() { ParameterName = "in_A", Direction = System.Data.ParameterDirection.Input, Value = c.A });
                 command.Parameters.Add(new MySqlParameter() { ParameterName = "in_B", Direction = System.Data.ParameterDirection.Input, Value = c.B });
                 command.Parameters.Add(new MySqlParameter() { ParameterName = "in_C", Direction = System.Data.ParameterDirection.Input, Value = c.C });

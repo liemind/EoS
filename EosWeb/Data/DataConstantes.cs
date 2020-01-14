@@ -99,7 +99,7 @@ namespace Eosweb.Data
             try
             {
                 var command = new MySqlCommand() { CommandText = "sp_constantes_eliminar", CommandType = System.Data.CommandType.StoredProcedure };
-                command.Parameters.Add(new MySqlParameter() { ParameterName = "in_id", Direction = System.Data.ParameterDirection.Input, Value = codigo });
+                command.Parameters.Add(new MySqlParameter() { ParameterName = "in_id", Direction = System.Data.ParameterDirection.Input, Value = Id });
                 var datos = DataSource.ExecuteProcedure(command);
                 return true;
             }
@@ -110,11 +110,11 @@ namespace Eosweb.Data
             }
         }
 
-        public static Boolean Modificar(Constantes i) {
+        public static Boolean Modificar(Constantes c) {
             try
             {
                 var command = new MySqlCommand() { CommandText = "sp_constantes_modificar", CommandType = System.Data.CommandType.StoredProcedure };
-                command.Parameters.Add(new MySqlParameter() { ParameterName = "in_id", Direction = System.Data.ParameterDirection.Input, Value = i.Id });
+                command.Parameters.Add(new MySqlParameter() { ParameterName = "in_id", Direction = System.Data.ParameterDirection.Input, Value = c.Id });
                 command.Parameters.Add(new MySqlParameter() { ParameterName = "in_A", Direction = System.Data.ParameterDirection.Input, Value = c.A });
                 command.Parameters.Add(new MySqlParameter() { ParameterName = "in_B", Direction = System.Data.ParameterDirection.Input, Value = c.B });
                 command.Parameters.Add(new MySqlParameter() { ParameterName = "in_C", Direction = System.Data.ParameterDirection.Input, Value = c.C });
