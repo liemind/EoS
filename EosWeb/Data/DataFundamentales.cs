@@ -45,7 +45,10 @@ namespace Eosweb.Data
                             Zc = Convert.ToDouble(prodData["zc"]),
                             W = Convert.ToDouble(prodData["w"])
                         };
-                        
+                        //Inicio Identificador
+                        comp.i = DataIdentificador.Leer(comp.Id);
+                        //Fin Identificador
+
                         c.Add(comp);
                     }
                 }
@@ -80,6 +83,9 @@ namespace Eosweb.Data
                         W = Convert.ToDouble(prodData["w"])
                     };
                     comp.Id = Id;
+                    //Inicio Identificador
+                    comp.i = DataIdentificador.Leer(Id);
+                    //Fin Identificador
                     return comp;
                 }
 

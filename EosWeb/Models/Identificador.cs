@@ -8,6 +8,7 @@ namespace Eosweb.Models
     public class Identificador
     {
         public int Id { get; set; }
+        public string Compuesto {get; set; }
         public string Formula { get; set; }
         public double M { get; set; }
     }

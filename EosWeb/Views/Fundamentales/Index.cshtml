@@ -1,0 +1,158 @@
+@using Eosweb.Models
+@model List<Eosweb.Models.Fundamentales>
+
+@{
+    ViewData["Title"] = "Fundamentales";
+    ViewBag.Title = "Fundamentales";
+}
+<!-- Datatables -->
+<link href="~/lib/select2/dist/css/select2.min.css" rel="stylesheet" />
+<link href="~/lib/datatables/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
+<link href="~/lib/datatables/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" rel="stylesheet">
+<link href="~/lib/datatables/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
+<link href="~/lib/datatables/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
+<link href="~/lib/datatables/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
+
+<div class="right_col" role="main">
+    <div class="">
+        <!--Titulo-->
+        <div class="page-title">
+            <div class="title_left">
+                <h3>@ViewBag.Title</h3>
+            </div>
+        </div>
+        <br />
+        <!--/ Titulo-->
+        <!--Breadcrumb-->
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="@Url.Action("Index", "Home")">Inicio</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Fundamentales</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+        <!--/ Breadcrumb-->
+
+        <div class="clearfix"></div>
+        <!--Contenido -->
+
+        <!--crear un dato-->
+        <div class="">
+            <!--Lista -->
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2><i class="fa fa-th-list"></i> Agregar un dato</h2>
+                        <ul class="nav navbar-right panel_toolbox">
+                            <li></li>
+                            <li></li>
+                            <li><a href=""  class="btn btn-primary" data-title="add" data-toggle="modal" data-target="#add" ><i class="fa fa-plus fa-lg"></i> Identificador</a></li>
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        <!--Content-->
+                        @using (Html.BeginForm("Crear", "Fundamentales", FormMethod.Post, new { enctype = "multipart/form-data", @style = "border:none", data_parley_validate = false }))
+                        {
+                        <div data-parsley-validate>
+                            <table class="table table-striped table-bordered table-responsive" >
+                                <thead>
+                                    <tr>
+                                        <th>Compuesto</th>
+                                        <th>Tc / K</th>
+                                        <th>Pc / bar</th>
+                                        <th>Zc</th>
+                                        <th>w</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td width="30%" >
+                                            <select class="form-control" name="Identificador" required>
+                                            <option value="a">a</option>
+                                            </select>
+                                        </td>
+                                        <td class="text-justify"><input class="form-control col-md-2 col-xs-12" type="number" name=""></td>
+                                        <td class="text-justify"><input class="form-control col-md-2 col-xs-12" type="number" name=""></td>
+                                        <td class="text-justify"><input class="form-control col-md-2 col-xs-12" type="number" name=""></td>
+                                        <td class="text-justify"><input class="form-control col-md-2 col-xs-12" type="number" name=""></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="ln_solid"></div>
+                            <div class="form-group">
+                                <div class="">
+                                <button id="send" type="submit" class="btn btn-success">Agregar Dato</button>
+                            </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+            <!--end Lista-->
+        </div>
+        <!--/end -->
+
+        <div class="">
+            <!--Lista -->
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2><i class="fa fa-th-list"></i> </h2>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        <!--Content-->
+                        <table id="datatable" class="table table-striped table-bordered table-responsive">
+                            <thead>
+                                <tr>
+                                    <th>Compuesto</th>
+                                    <th>Formula</th>
+                                    <th>M</th>
+                                    <th>Tc / K</th>
+                                    <th>Pc / bar</th>
+                                    <th>Zc</th>
+                                    <th>w</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+
+
+                            <tbody>
+                                <tr>
+                                    <td>Compuesto</td>
+                                    <td>CL</td>
+                                    <td>M</td>
+                                    <td class="text-justify">1</td>
+                                    <td class="text-justify">2</td>
+                                    <td class="text-justify">3</td>
+                                    <td class="text-justify">4</td>
+                                    <td></td>
+                                </tr>
+                                @foreach (var f in Model)
+                                {
+                                <tr>
+                                    <td>@f.i.Compuesto</td>
+                                    <td>@f.i.Formula</td>
+                                    <td>@f.i.M</td>
+                                    <td class="text-justify">@f.Tc_K</td>
+                                    <td class="text-justify">@f.Pc_bar</td>
+                                    <td class="text-justify">@f.Zc</td>
+                                    <td class="text-justify">@f.W</td>
+                                </tr>
+                                }
+                            </tbody>
+                        </table>
+                        <!--/ Content-->
+                    </div>
+                </div>
+            </div>
+            <!--end Lista-->
+        </div>
+
+    </div>
+</div>

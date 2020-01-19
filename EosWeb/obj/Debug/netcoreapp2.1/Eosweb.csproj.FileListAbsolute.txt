@@ -30,3 +30,4 @@ C:\Users\Liemind\Documents\Universidad de Talca\2019-2\Diseño y Analisis de Alg
 C:\Users\Liemind\Documents\Universidad de Talca\2019-2\Diseño y Analisis de Algoritmos\EoS\Eosweb\obj\Debug\netcoreapp2.1\Eosweb.dll
 C:\Users\Liemind\Documents\Universidad de Talca\2019-2\Diseño y Analisis de Algoritmos\EoS\Eosweb\obj\Debug\netcoreapp2.1\Eosweb.pdb
 C:\Users\Liemind\Documents\Universidad de Talca\2019-2\Diseño y Analisis de Algoritmos\EoS\Eosweb\obj\Debug\netcoreapp2.1\Eosweb.csproj.CopyComplete
+C:\Users\Liemind\Documents\Universidad de Talca\2019-2\Diseño y Analisis de Algoritmos\EoS\Eosweb\obj\Debug\netcoreapp2.1\Razor\Views\Fundamentales\Index.g.cshtml.cs
