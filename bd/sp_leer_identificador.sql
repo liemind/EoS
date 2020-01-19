@@ -5,7 +5,7 @@ CREATE PROCEDURE sp_leer_identificador
 	in_id int INTEGER
 )
 BEGIN
-	SELECT formula, m
+	SELECT compuesto, formula, m
 	FROM identificador   
 	WHERE id = in_id;
 END

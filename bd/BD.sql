@@ -5,6 +5,7 @@ USE eos;
 
 CREATE TABLE IF NOT EXISTS eos.identificador(
     id int AUTO_INCREMENT,
+    compuesto text,
     formula Text,
     m double,
     PRIMARY KEY(id)
