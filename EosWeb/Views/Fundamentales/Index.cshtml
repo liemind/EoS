@@ -41,7 +41,7 @@
 
         <!--crear un dato-->
         <div class="">
-            <!--Lista -->
+            <!--Form -->
             <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                     <div class="x_title">
@@ -49,7 +49,7 @@
                         <ul class="nav navbar-right panel_toolbox">
                             <li></li>
                             <li></li>
-                            <li><a href=""  class="btn btn-primary" data-title="add" data-toggle="modal" data-target="#add" ><i class="fa fa-plus fa-lg"></i> Identificador</a></li>
+                            <li><a href=""  class="btn btn-primary" data-title="addi" data-toggle="modal" data-target="#addi" ><i class="fa fa-plus fa-lg"></i> Identificador</a></li>
                         </ul>
                         <div class="clearfix"></div>
                     </div>
@@ -62,9 +62,9 @@
                                 <thead>
                                     <tr>
                                         <th>Compuesto</th>
-                                        <th>Tc / K</th>
-                                        <th>Pc / bar</th>
-                                        <th>Zc</th>
+                                        <th>T<small>c</small> / K</th>
+                                        <th>P<small>c</small> / bar</th>
+                                        <th>Z<small>c</small></th>
                                         <th>w</th>
                                     </tr>
                                 </thead>
@@ -72,13 +72,15 @@
                                     <tr>
                                         <td width="30%" >
                                             <select class="form-control" name="Identificador" required>
-                                            <option value="a">a</option>
+                                                @foreach (var id in ViewData["Identificadores"] as IList<Identificador>){
+                                                    <option value="@id.Id">@id.Compuesto</option>
+                                                }
                                             </select>
                                         </td>
-                                        <td class="text-justify"><input class="form-control col-md-2 col-xs-12" type="number" name=""></td>
-                                        <td class="text-justify"><input class="form-control col-md-2 col-xs-12" type="number" name=""></td>
-                                        <td class="text-justify"><input class="form-control col-md-2 col-xs-12" type="number" name=""></td>
-                                        <td class="text-justify"><input class="form-control col-md-2 col-xs-12" type="number" name=""></td>
+                                        <td class="text-justify"><input class="form-control col-md-2 col-xs-12" type="text" name="Tc_K" data-parsley-pattern="([0-9])+|(\,([0-9]+))" data-parsley-trigger="change" required></td>
+                                        <td class="text-justify"><input class="form-control col-md-2 col-xs-12" type="text" name="Pc_bar" data-parsley-pattern="([0-9])+|(\,([0-9]+))" data-parsley-trigger="change" required></td>
+                                        <td class="text-justify"><input class="form-control col-md-2 col-xs-12" type="text" name="Zc" data-parsley-pattern="([0-9])+|(\,([0-9]+))" data-parsley-trigger="change" required></td>
+                                        <td class="text-justify"><input class="form-control col-md-2 col-xs-12" type="text" name="W" data-parsley-pattern="([0-9])+|(\,([0-9]+))" data-parsley-trigger="change" required></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -93,7 +95,7 @@
                     </div>
                 </div>
             </div>
-            <!--end Lista-->
+            <!--end Form-->
         </div>
         <!--/end -->
 
@@ -113,9 +115,9 @@
                                     <th>Compuesto</th>
                                     <th>Formula</th>
                                     <th>M</th>
-                                    <th>Tc / K</th>
-                                    <th>Pc / bar</th>
-                                    <th>Zc</th>
+                                    <th>T<small>c</small> / K</th>
+                                    <th>P<small>c</small> / bar</th>
+                                    <th>Z<small>c</small></th>
                                     <th>w</th>
                                     <th></th>
                                 </tr>
@@ -123,26 +125,20 @@
 
 
                             <tbody>
-                                <tr>
-                                    <td>Compuesto</td>
-                                    <td>CL</td>
-                                    <td>M</td>
-                                    <td class="text-justify">1</td>
-                                    <td class="text-justify">2</td>
-                                    <td class="text-justify">3</td>
-                                    <td class="text-justify">4</td>
-                                    <td></td>
-                                </tr>
                                 @foreach (var f in Model)
                                 {
                                 <tr>
-                                    <td>@f.i.Compuesto</td>
-                                    <td>@f.i.Formula</td>
-                                    <td>@f.i.M</td>
+                                    @{
+                                        var i = f.i;
+                                    }
+                                    <td>@i.Compuesto</td>
+                                    <td>@i.Formula</td>
+                                    <td>@i.M</td>
                                     <td class="text-justify">@f.Tc_K</td>
                                     <td class="text-justify">@f.Pc_bar</td>
                                     <td class="text-justify">@f.Zc</td>
                                     <td class="text-justify">@f.W</td>
+                                    <td width="7%"><a href=""  class="btn btn-round btn-info" data-title="modificar" data-toggle="modal" data-target="#modificar" onclick="Modificar('@f.Id', '@i.Compuesto', '@f.Tc_K', '@f.Pc_bar', '@f.Zc', '@f.W')"><i class="fa fa-pencil"></i></a> <a href=""  class="btn btn-round btn-danger" data-title="eliminar" data-toggle="modal" data-target="#eliminar" onclick="Eliminar('@f.Id')"><i class="fa fa-close"></i></a></td>
                                 </tr>
                                 }
                             </tbody>
@@ -154,5 +150,161 @@
             <!--end Lista-->
         </div>
 
+    </div>
+</div>
+
+<script type="text/javascript">
+    Eliminar = function (id) {
+        document.getElementById("id-eliminar").setAttribute("value", id);
+    };
+
+    Modificar = function (id, nombre, tc_k, pc_bar, zc, w) {
+        document.getElementById("m-name").setAttribute("value", nombre);
+        document.getElementById("m-id").setAttribute("value", id);
+        document.getElementById("m-k").setAttribute("value", tc_k);
+        document.getElementById("m-bar").setAttribute("value", pc_bar);
+        document.getElementById("m-zc").setAttribute("value", zc);
+        document.getElementById("m-w").setAttribute("value", w);
+    };
+</script>
+
+<!--Modal Agregar-->
+<div class="modal fade bd-example-modal-lg" id="addi" tabindex="-1" role="dialog" aria-labelledby="addi">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <h4 class="modal-title"><i class="fa fa-pencil-square-o"></i> Crear Identificador</h4>
+            </div>
+            @using (Html.BeginForm("CrearIdentificador", "Fundamentales", FormMethod.Post, new { enctype = "multipart/form-data", @style = "border:none", data_parley_validate = false }))
+            {
+                <div class="modal-body form-horizontal form-label-left" data-parsley-validate>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Compuesto *:</label>
+                            <div class="col-md-9 col-sm-9 col-xs-9">
+                                <input type="text" class="form-control" name="Compuesto" rows="1"data-parsley-minlength="1" data-parsley-pattern="([a-zA-ZñÑáéíóúÁÉÍÓÚ\s]|(\-)|(\,)|[0-9])+" data-parsley-trigger="change" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Fórmula *:</label>
+                            <div class="col-md-9 col-sm-9 col-xs-9">
+                                <input type="text" class="form-control" name="Formula" rows="1" data-parsley-minlength="1" data-parsley-pattern="([A-Z]+|[0-9])+" data-parsley-trigger="change" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Masa *:</label>
+                            <div class="col-md-9 col-sm-9 col-xs-9">
+                                <textarea class="form-control" name="M" rows="1" data-parsley-pattern="([0-9])+|(\.([0-9]+))" data-parsley-trigger="change" required></textarea>
+                            </div>
+                        </div>
+                        
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success">Crear Identificador</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+<!--Modal Modificar F-->
+<div class="modal fade bd-example-modal-lg" id="modificar" tabindex="-1" role="dialog" aria-labelledby="modificar">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <h4 class="modal-title"><i class="fa fa-pencil-square-o"></i> Modificar</h4>
+            </div>
+            @using (Html.BeginForm("Modificar", "Fundamentales", FormMethod.Post, new { enctype = "multipart/form-data", @style = "border:none", data_parley_validate = false }))
+            {
+                <div class="modal-body form-horizontal form-label-left" data-parsley-validate>
+                        <div class="form-group">
+                            <div class="alert alert-info alert-dismissible fade in" role="alert">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span>
+                                </button>
+                                <i class="fa fa-info-circle fa-lg"></i> Para modificar el dato; edite la casilla con el número actual y/o seleccionar el compuesto que corresponda. Si por el contrario, usted desea que el dato permanezca; no seleccione ningún compuesto y/o borre o mantenga el dato para cada casilla.
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Compuesto *:</label>
+                            <div class="col-md-9 col-sm-9 col-xs-9">
+                                <input type="text" class="form-control" id="m-name" rows="1" data-parsley-trigger="change" readonly>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12"></label>
+                            <div class="col-md-9 col-sm-9 col-xs-9">
+                                <select class="form-control" name="newId">
+                                    @foreach (var id in ViewData["Identificadores"] as IList<Identificador>){
+                                        <option value="@id.Id">@id.Compuesto</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">T<small>c</small> / K *:</label>
+                            <div class="col-md-9 col-sm-9 col-xs-9">
+                                <input type="text" class="form-control" id="m-k" name="Tc_K" data-parsley-pattern="([0-9])+|(\,([0-9]+))" data-parsley-trigger="change">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">P<small>c</small> / bar *:</label>
+                            <div class="col-md-9 col-sm-9 col-xs-9">
+                                <input type="text" class="form-control" id="m-bar" name="Pc_bar" data-parsley-pattern="([0-9])+|(\,([0-9]+))" data-parsley-trigger="change">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Z<small>c</small> *:</label>
+                            <div class="col-md-9 col-sm-9 col-xs-9">
+                                <input type="text" class="form-control" id="m-zc" name="Zc" data-parsley-pattern="([0-9])+|(\,([0-9]+))" data-parsley-trigger="change">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">w *:</label>
+                            <div class="col-md-9 col-sm-9 col-xs-9">
+                                <input type="text" class="form-control" id="m-w" name="W" data-parsley-pattern="([0-9])+|(\,([0-9]+))" data-parsley-trigger="change">
+                            </div>
+                        </div>
+                        
+                </div>
+                <div class="modal-footer">
+                    <input type="hidden" name="Id" id="m-id">
+                    <button type="submit" class="btn btn-success">Modificar</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+<!--Modal Eliminar F-->
+<div class="modal fade bd-example-modal-lg" id="eliminar" tabindex="-1" role="dialog" aria-labelledby="eliminar" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <h4 class="modal-title"><i class="fa fa-close"></i> Eliminar</h4>
+            </div>
+            @using (Html.BeginForm("Eliminar", "Fundamentales", FormMethod.Post, new { @style = "border:none" }))
+            {
+                <div class="modal-body">
+                    <p id="hab-message">¿Está seguro que desea eliminar?</p>
+                </div>
+                <div class="modal-footer">
+                    <input type="hidden" id="id-eliminar" name="Id" value="" />
+                    <button type="submit" class="btn btn-primary">Aceptar</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                </div>
+            }
+        </div>
     </div>
 </div>

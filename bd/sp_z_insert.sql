@@ -282,7 +282,7 @@ INSERT INTO identificador(compuesto, formula, m) VALUES ('1-NONENO','C9H18',126.
 INSERT INTO identificador(compuesto, formula, m) VALUES ('N-NONANO','C9H20',128.259);
 INSERT INTO identificador(compuesto, formula, m) VALUES ('2,2,5-TRIMETILHEXANO','C9H20',128.259);
 INSERT INTO identificador(compuesto, formula, m) VALUES ('NAFTALENO','C10H8',128.174);
-INSERT INTO identificador(compuesto, formula, m) VALUES ('N-BUTILBENCENO','C10H14',134,222);
+INSERT INTO identificador(compuesto, formula, m) VALUES ('N-BUTILBENCENO','C10H14',134.222);
 INSERT INTO identificador(compuesto, formula, m) VALUES ('ISOBUTILBENCENO','C10H14',134.222);
 INSERT INTO identificador(compuesto, formula, m) VALUES ('1,4-DIETILBENCENO','C10H14',134.222);
 INSERT INTO identificador(compuesto, formula, m) VALUES ('1,2,4,5-TETRAMETILBENCENO','C10H14',134.222);
