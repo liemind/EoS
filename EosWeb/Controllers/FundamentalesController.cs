@@ -48,12 +48,67 @@ namespace Eosweb.Controllers
         
         public ActionResult Modificar(int Id, string Tc_K, string Pc_bar, string Zc, string W, int newId) {
 
-            /*if(DataFundamentales.Modificar(f)) {
+            Fundamentales f = DataFundamentales.Leer(Id);
+            Fundamentales new_f = new Fundamentales();
+            double temporal;
+            if(newId != 0) {
+                new_f.Id = newId;
+            }else {
+                new_f.Id = f.Id;
+            }
+
+            if(Tc_K != null) {
+                temporal = convertToDouble(Tc_K);
+                if(temporal != f.Tc_K) {
+                    new_f.Tc_K = temporal;
+                }else {
+                    new_f.Tc_K = f.Tc_K;
+                }
+
+            }else {
+                new_f.Tc_K = f.Tc_K;
+            }
+
+            if(Pc_bar != null) {
+                temporal = convertToDouble(Pc_bar);
+                if(temporal != f.Pc_bar) {
+                    new_f.Pc_bar = temporal;
+                }else {
+                    new_f.Pc_bar = f.Pc_bar;
+                }
+            }else {
+                new_f.Pc_bar = f.Pc_bar;
+            }
+
+            if(Zc != null){
+                temporal = convertToDouble(Zc);
+                if(temporal != f.Zc) {
+                    new_f.Zc = temporal;
+                }else {
+                    new_f.Zc = f.Zc;
+                }
+            }else {
+                new_f.Zc = f.Zc;
+            }
+
+            if(W != null) {
+                temporal = convertToDouble(W);
+                if(temporal != f.W) {
+                    new_f.W = temporal;
+                }else {
+                    new_f.W = f.W;
+                }
+            }else {
+                new_f.W = f.W;
+            }
+
+            if(DataFundamentales.Modificar(new_f)) {
                 //wena
             }
             else {
                 //pta :(
-            }*/
+            }
+            
             return RedirectToAction("Index", "Fundamentales");
         }
 
