@@ -1,9 +1,9 @@
 @using Eosweb.Models
-@model List<Eosweb.Models.Fundamentales>
+@model List<Eosweb.Models.Secundarias>
 
 @{
-    ViewData["Title"] = "Fundamentales";
-    ViewBag.Title = "Fundamentales";
+    ViewData["Title"] = "Secundarias";
+    ViewBag.Title = "Secundarias";
 }
 <!-- Datatables -->
 <link href="~/lib/select2/dist/css/select2.min.css" rel="stylesheet" />
@@ -29,7 +29,7 @@
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="@Url.Action("Index", "Home")">Inicio</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Fundamentales</li>
+                        <li class="breadcrumb-item active" aria-current="page">Secundarias</li>
                     </ol>
                 </nav>
             </div>
@@ -55,17 +55,18 @@
                     </div>
                     <div class="x_content">
                         <!--Content-->
-                        @using (Html.BeginForm("Crear", "Fundamentales", FormMethod.Post, new { enctype = "multipart/form-data", @style = "border:none", data_parley_validate = false }))
+                        @using (Html.BeginForm("Crear", "Secundarias", FormMethod.Post, new { enctype = "multipart/form-data", @style = "border:none", data_parley_validate = false }))
                         {
                         <div data-parsley-validate>
                             <table class="table table-striped table-bordered table-responsive" >
                                 <thead>
                                     <tr>
                                         <th>Compuesto</th>
-                                        <th>T<small>c</small> / K</th>
-                                        <th>P<small>c</small> / bar</th>
-                                        <th>Z<small>c</small></th>
-                                        <th>w</th>
+                                        <th>A</th>
+                                        <th>B</th>
+                                        <th>C</th>
+                                        <th>T<small>min</small> / K</th>
+                                        <th>T<small>max</small> / K</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -77,10 +78,11 @@
                                                 }
                                             </select>
                                         </td>
-                                        <td class="text-justify"><input class="form-control col-md-2 col-xs-12" type="text" name="Tc_K" data-parsley-pattern="([0-9])+|(\,([0-9]+))" data-parsley-trigger="change" required></td>
-                                        <td class="text-justify"><input class="form-control col-md-2 col-xs-12" type="text" name="Pc_bar" data-parsley-pattern="([0-9])+|(\,([0-9]+))" data-parsley-trigger="change" required></td>
-                                        <td class="text-justify"><input class="form-control col-md-2 col-xs-12" type="text" name="Zc" data-parsley-pattern="([0-9])+|(\,([0-9]+))" data-parsley-trigger="change" required></td>
-                                        <td class="text-justify"><input class="form-control col-md-2 col-xs-12" type="text" name="W" data-parsley-pattern="([0-9])+|(\,([0-9]+))" data-parsley-trigger="change" required></td>
+                                        <td class="text-justify"><input class="form-control col-md-2 col-xs-12" type="text" name="A" data-parsley-pattern="([0-9])+|(\,([0-9]+))" data-parsley-trigger="change" required></td>
+                                        <td class="text-justify"><input class="form-control col-md-2 col-xs-12" type="text" name="B" data-parsley-pattern="([0-9])+|(\,([0-9]+))" data-parsley-trigger="change" required></td>
+                                        <td class="text-justify"><input class="form-control col-md-2 col-xs-12" type="text" name="C" data-parsley-pattern="([0-9])+|(\,([0-9]+))" data-parsley-trigger="change" required></td>
+                                        <td class="text-justify"><input class="form-control col-md-2 col-xs-12" type="number" name="Tmin_k" data-parsley-type="integer" data-parsley-minlength="1" data-parsley-trigger="change" required></td>
+                                        <td class="text-justify"><input class="form-control col-md-2 col-xs-12" type="number" name="Tmax_k" data-parsley-type="integer" data-parsley-minlength="1" data-parsley-trigger="change" required></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -115,30 +117,32 @@
                                     <th>Compuesto</th>
                                     <th>Formula</th>
                                     <th>M</th>
-                                    <th>T<small>c</small> / K</th>
-                                    <th>P<small>c</small> / bar</th>
-                                    <th>Z<small>c</small></th>
-                                    <th>w</th>
+                                    <th>A</th>
+                                    <th>B</th>
+                                    <th>C</th>
+                                    <th>T<small>min</small> / K</th>
+                                    <th>T<small>max</small> / K</th>
                                     <th></th>
                                 </tr>
                             </thead>
 
 
                             <tbody>
-                                @foreach (var f in Model)
+                                @foreach (var s in Model)
                                 {
                                 <tr>
                                     @{
-                                        var i = f.i;
+                                        var i = s.i;
                                     }
                                     <td>@i.Compuesto</td>
                                     <td>@i.Formula</td>
                                     <td>@i.M</td>
-                                    <td class="text-justify">@f.Tc_K</td>
-                                    <td class="text-justify">@f.Pc_bar</td>
-                                    <td class="text-justify">@f.Zc</td>
-                                    <td class="text-justify">@f.W</td>
-                                    <td width="7%"><a href=""  class="btn btn-round btn-info" data-title="modificar" data-toggle="modal" data-target="#modificar" onclick="Modificar('@f.Id', '@i.Compuesto', '@f.Tc_K', '@f.Pc_bar', '@f.Zc', '@f.W')"><i class="fa fa-pencil"></i></a> <a href=""  class="btn btn-round btn-danger" data-title="eliminar" data-toggle="modal" data-target="#eliminar" onclick="Eliminar('@f.Id')"><i class="fa fa-close"></i></a></td>
+                                    <td class="text-justify">@s.A</td>
+                                    <td class="text-justify">@s.B</td>
+                                    <td class="text-justify">@s.C</td>
+                                    <td class="text-justify">@s.Tmin_k</td>
+                                    <td class="text-justify">@s.Tmax_k</td>
+                                    <td width="7%"><a href=""  class="btn btn-round btn-info" data-title="modificar" data-toggle="modal" data-target="#modificar" onclick="Modificar('@s.Id', '@i.Compuesto', '@s.A', '@s.B', '@s.C', '@s.Tmin_k', '@s.Tmax_k')"><i class="fa fa-pencil"></i></a> <a href=""  class="btn btn-round btn-danger" data-title="eliminar" data-toggle="modal" data-target="#eliminar" onclick="Eliminar('@s.Id')"><i class="fa fa-close"></i></a></td>
                                 </tr>
                                 }
                             </tbody>
@@ -158,13 +162,14 @@
         document.getElementById("id-eliminar").setAttribute("value", id);
     };
 
-    Modificar = function (id, nombre, tc_k, pc_bar, zc, w) {
+    Modificar = function (id, nombre, A, B, C, tmin, tmax) {
         document.getElementById("m-name").setAttribute("value", nombre);
         document.getElementById("m-id").setAttribute("value", id);
-        document.getElementById("m-k").setAttribute("value", tc_k);
-        document.getElementById("m-bar").setAttribute("value", pc_bar);
-        document.getElementById("m-zc").setAttribute("value", zc);
-        document.getElementById("m-w").setAttribute("value", w);
+        document.getElementById("m-a").setAttribute("value", A);
+        document.getElementById("m-b").setAttribute("value", B);
+        document.getElementById("m-c").setAttribute("value", C);
+        document.getElementById("m-tmin").setAttribute("value", tmin);
+        document.getElementById("m-tmax").setAttribute("value", tmax);
     };
 </script>
 
@@ -221,7 +226,7 @@
                 </button>
                 <h4 class="modal-title"><i class="fa fa-pencil-square-o"></i> Modificar</h4>
             </div>
-            @using (Html.BeginForm("Modificar", "Fundamentales", FormMethod.Post, new { enctype = "multipart/form-data", @style = "border:none", data_parley_validate = false }))
+            @using (Html.BeginForm("Modificar", "Secundarias", FormMethod.Post, new { enctype = "multipart/form-data", @style = "border:none", data_parley_validate = false }))
             {
                 <div class="modal-body form-horizontal form-label-left" data-parsley-validate>
                         <div class="form-group">
@@ -250,27 +255,33 @@
                         </div>
 
                         <div class="form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12">T<small>c</small> / K *:</label>
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">A *:</label>
                             <div class="col-md-9 col-sm-9 col-xs-9">
-                                <input type="text" class="form-control" id="m-k" name="Tc_K" data-parsley-pattern="([0-9])+|(\,([0-9]+))" data-parsley-trigger="change">
+                                <input type="text" class="form-control" id="m-a" name="A" data-parsley-pattern="([0-9])+|(\,([0-9]+))" data-parsley-trigger="change">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12">P<small>c</small> / bar *:</label>
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">B *:</label>
                             <div class="col-md-9 col-sm-9 col-xs-9">
-                                <input type="text" class="form-control" id="m-bar" name="Pc_bar" data-parsley-pattern="([0-9])+|(\,([0-9]+))" data-parsley-trigger="change">
+                                <input type="text" class="form-control" id="m-b" name="B" data-parsley-pattern="([0-9])+|(\,([0-9]+))" data-parsley-trigger="change">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Z<small>c</small> *:</label>
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">C *:</label>
                             <div class="col-md-9 col-sm-9 col-xs-9">
-                                <input type="text" class="form-control" id="m-zc" name="Zc" data-parsley-pattern="([0-9])+|(\,([0-9]+))" data-parsley-trigger="change">
+                                <input type="text" class="form-control" id="m-c" name="C" data-parsley-pattern="([0-9])+|(\,([0-9]+))" data-parsley-trigger="change">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12">w *:</label>
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">T<small>min</small> / K *:</label>
                             <div class="col-md-9 col-sm-9 col-xs-9">
-                                <input type="text" class="form-control" id="m-w" name="W" data-parsley-pattern="([0-9])+|(\,([0-9]+))" data-parsley-trigger="change">
+                                <input type="number" class="form-control" id="m-tmin" name="Tmin_k" data-parsley-type="integer" data-parsley-minlength="1" data-parsley-trigger="change">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">T<small>max</small> / K *:</label>
+                            <div class="col-md-9 col-sm-9 col-xs-9">
+                                <input type="number" class="form-control" id="m-tmax" name="Tmax_k" data-parsley-type="integer" data-parsley-minlength="1" data-parsley-trigger="change">
                             </div>
                         </div>
                         
@@ -295,7 +306,7 @@
                 </button>
                 <h4 class="modal-title"><i class="fa fa-close"></i> Eliminar</h4>
             </div>
-            @using (Html.BeginForm("Eliminar", "Fundamentales", FormMethod.Post, new { @style = "border:none" }))
+            @using (Html.BeginForm("Eliminar", "Secundarias", FormMethod.Post, new { @style = "border:none" }))
             {
                 <div class="modal-body">
                     <p id="hab-message">¿Está seguro que desea eliminar?</p>

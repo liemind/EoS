@@ -7,12 +7,12 @@ using Eosweb.Data;
 
 namespace Eosweb.Controllers
 {
-    public class FundamentalesController : Controller
+    public class ConstantesController : Controller
     {
         public IActionResult Index(){
-            List<Fundamentales> f = DataFundamentales.LeerTodo();
+            List<Constantes> f = DataConstantes.LeerTodo();
             if (f == null) {
-                f = new List<Fundamentales>();
+                f = new List<Constantes>();
             }
 
             List<Identificador> i = DataIdentificador.LeerTodo();
@@ -21,7 +21,7 @@ namespace Eosweb.Controllers
             }
             else {
                 List<Identificador> final_i = new List<Identificador>();
-                foreach (Fundamentales var in f) {
+                foreach (Constantes var in f) {
                     int remove = search(i,var.i);
                     if(remove != -1) {
                         i.RemoveAt(remove);
@@ -34,27 +34,27 @@ namespace Eosweb.Controllers
         }
 
 
-        public ActionResult Crear(int Identificador, string Tc_K, string Pc_bar, string Zc, string W) {
-            Fundamentales f = new Fundamentales();
+        public ActionResult Crear(int Identificador, string A, string B, string C, string D) {
+            Constantes f = new Constantes();
             f.Id = Identificador;
-            f.Tc_K = convertToDouble(Tc_K);
-            f.Pc_bar = convertToDouble(Pc_bar);
-            f.Zc = convertToDouble(Zc);
-            f.W = convertToDouble(W);
+            f.A = convertToDouble(A);
+            f.B = convertToDouble(B);
+            f.C = convertToDouble(C);
+            f.D = convertToDouble(D);
 
-            if(DataFundamentales.Crear(f)) {
+            if(DataConstantes.Crear(f)) {
                 //wena
             }
             else {
                 //pta :(
             }
-            return RedirectToAction("Index", "Fundamentales");
+            return RedirectToAction("Index", "Constantes");
         }
         
-        public ActionResult Modificar(int Id, string Tc_K, string Pc_bar, string Zc, string W, int newId) {
+        public ActionResult Modificar(int Id, string A, string B, string C, string D, int newId) {
 
-            Fundamentales f = DataFundamentales.Leer(Id);
-            Fundamentales new_f = new Fundamentales();
+            Constantes f = DataConstantes.Leer(Id);
+            Constantes new_f = new Constantes();
             double temporal;
             if(newId != 0) {
                 new_f.Id = newId;
@@ -62,77 +62,77 @@ namespace Eosweb.Controllers
                 new_f.Id = f.Id;
             }
 
-            if(Tc_K != null) {
-                temporal = convertToDouble(Tc_K);
-                if(temporal != f.Tc_K) {
-                    new_f.Tc_K = temporal;
+            if(A != null) {
+                temporal = convertToDouble(A);
+                if(temporal != f.A) {
+                    new_f.A = temporal;
                 }else {
-                    new_f.Tc_K = f.Tc_K;
+                    new_f.A = f.A;
                 }
 
             }else {
-                new_f.Tc_K = f.Tc_K;
+                new_f.A = f.A;
             }
 
-            if(Pc_bar != null) {
-                temporal = convertToDouble(Pc_bar);
-                if(temporal != f.Pc_bar) {
-                    new_f.Pc_bar = temporal;
+            if(B != null) {
+                temporal = convertToDouble(B);
+                if(temporal != f.B) {
+                    new_f.B = temporal;
                 }else {
-                    new_f.Pc_bar = f.Pc_bar;
+                    new_f.B = f.B;
                 }
             }else {
-                new_f.Pc_bar = f.Pc_bar;
+                new_f.B = f.B;
             }
 
-            if(Zc != null){
-                temporal = convertToDouble(Zc);
-                if(temporal != f.Zc) {
-                    new_f.Zc = temporal;
+            if(C != null){
+                temporal = convertToDouble(C);
+                if(temporal != f.C) {
+                    new_f.C = temporal;
                 }else {
-                    new_f.Zc = f.Zc;
+                    new_f.C = f.C;
                 }
             }else {
-                new_f.Zc = f.Zc;
+                new_f.C = f.C;
             }
 
-            if(W != null) {
-                temporal = convertToDouble(W);
-                if(temporal != f.W) {
-                    new_f.W = temporal;
+            if(D != null) {
+                temporal = convertToDouble(D);
+                if(temporal != f.D) {
+                    new_f.D = temporal;
                 }else {
-                    new_f.W = f.W;
+                    new_f.D = f.D;
                 }
             }else {
-                new_f.W = f.W;
+                new_f.D = f.D;
             }
 
-            if(DataFundamentales.Modificar(new_f)) {
+            if(DataConstantes.Modificar(new_f)) {
                 //wena
             }
             else {
                 //pta :(
             }
             
-            return RedirectToAction("Index", "Fundamentales");
+            return RedirectToAction("Index", "Constantes");
         }
 
         public ActionResult Eliminar(int Id) {
 
-            if(DataFundamentales.Eliminar(Id)) {
+            if(DataConstantes.Eliminar(Id)) {
                 //wena
             }
             else {
                 //pta :(
             }
-            return RedirectToAction("Index", "Fundamentales");
+            return RedirectToAction("Index", "Constantes");
         }
 
-        public ActionResult CrearIdentificador(string Compuesto, string Formula, string M) {
+        public ActionResult CrearIdentificador(string Compuesto, string Formula, string Masa) {
             Identificador identificador = new Identificador();
             identificador.Compuesto = Compuesto;
             identificador.Formula = Formula;
-            identificador.M = convertToDouble(M);
+            identificador.M = convertToDouble(Masa);
 
             if(DataIdentificador.Crear(identificador)) {
                 //wena
@@ -140,7 +140,7 @@ namespace Eosweb.Controllers
             else {
                 //pta :(
             }
-            return RedirectToAction("Index", "Fundamentales");
+            return RedirectToAction("Index", "Constantes");
         }
 
         public int search(List<Identificador> list, Identificador value) {
@@ -163,10 +163,11 @@ namespace Eosweb.Controllers
             }
             else {
                 final_s = s;
-            }
-            
+            }            
             return Convert.ToDouble(final_s);
         }
+
+
 
 
     }

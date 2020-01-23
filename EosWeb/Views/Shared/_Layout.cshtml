@@ -48,9 +48,16 @@
                                     <li>
                                         <a><i class="fa fa-database"></i> Base de Datos <span class="fa fa-chevron-down"></span></a>
                                         <ul class="nav child_menu">
+                                            <li>@Html.ActionLink("Identificador", "Index", "Identificador")</li>
                                             <li>@Html.ActionLink("Fundamentales", "Index", "Fundamentales")</li>
                                             <li>@Html.ActionLink("Secundarias", "Index", "Secundarias")</li>
                                             <li>@Html.ActionLink("Constantes", "Index", "Constantes")</li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <a><i class="fa fa-calculator"></i> Correlaciones <span class="fa fa-chevron-down"></span></a>
+                                        <ul class="nav child_menu">
+                                            <li>@Html.ActionLink("Correlaciones", "Index", "Correlaciones")</li>
                                         </ul>
                                     </li>
                             </ul>
@@ -67,7 +74,7 @@
             <!-- footer content -->
         <footer>
           <div class="pull-right">
-            Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a>
+            Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a>. Desarrollado por Daniela Paredes
           </div>
           <div class="clearfix"></div>
         </footer>

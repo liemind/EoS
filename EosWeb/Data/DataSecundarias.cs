@@ -47,6 +47,10 @@ namespace Eosweb.Data
                             Tmin_k = Convert.ToInt32(prodData["tmin_k"]),
                             Tmax_k = Convert.ToInt32(prodData["tmax_k"])
                         };
+
+                        //Inicio Identificador
+                        comp.i = DataIdentificador.Leer(comp.Id);
+                        //Fin Identificador
                         
                         c.Add(comp);
                     }
@@ -83,6 +87,11 @@ namespace Eosweb.Data
                         Tmax_k = Convert.ToInt32(prodData["tmax_k"])
                     };
                     comp.Id = Id;
+                    
+                    //Inicio Identificador
+                    comp.i = DataIdentificador.Leer(comp.Id);
+                    //Fin Identificador
+
                     return comp;
                 }
 
