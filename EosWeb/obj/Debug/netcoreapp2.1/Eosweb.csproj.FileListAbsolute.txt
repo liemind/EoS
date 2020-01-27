@@ -34,3 +34,4 @@ C:\Users\Liemind\Documents\Universidad de Talca\2019-2\Diseño y Analisis de Alg
 C:\Users\Liemind\Documents\Universidad de Talca\2019-2\Diseño y Analisis de Algoritmos\EoS\Eosweb\obj\Debug\netcoreapp2.1\Razor\Views\Constantes\Index.g.cshtml.cs
 C:\Users\Liemind\Documents\Universidad de Talca\2019-2\Diseño y Analisis de Algoritmos\EoS\Eosweb\obj\Debug\netcoreapp2.1\Razor\Views\Identificador\Index.g.cshtml.cs
 C:\Users\Liemind\Documents\Universidad de Talca\2019-2\Diseño y Analisis de Algoritmos\EoS\Eosweb\obj\Debug\netcoreapp2.1\Razor\Views\Secundarias\Index.g.cshtml.cs
+C:\Users\Liemind\Documents\Universidad de Talca\2019-2\Diseño y Analisis de Algoritmos\EoS\Eosweb\obj\Debug\netcoreapp2.1\Razor\Views\Correlaciones\Index.g.cshtml.cs
