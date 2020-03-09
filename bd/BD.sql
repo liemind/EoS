@@ -41,3 +41,8 @@ CREATE TABLE IF NOT EXISTS eos.constantes(
     PRIMARY KEY(id),
     FOREIGN KEY(id) REFERENCES identificador(id) ON DELETE CASCADE ON UPDATE CASCADE
 );
+
+CREATE TABLE IF NOT EXISTS eos.r(
+    id int AUTO_INCREMENT,
+    
+);
