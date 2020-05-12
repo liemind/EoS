@@ -33,7 +33,6 @@ namespace Eosweb.Controllers
             return View(f);
         }
 
-
         public ActionResult Crear(int Identificador, string Tc_K, string Pc_bar, string Zc, string W) {
             Fundamentales f = new Fundamentales();
             f.Id = Identificador;
