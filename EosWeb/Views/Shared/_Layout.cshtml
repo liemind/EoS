@@ -1,0 +1,146 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Eosweb</title>
+
+    <environment include="Development">
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+        <!--Font Awesome-->
+        <link rel="stylesheet" href="~/lib/font-awesome/css/font-awesome.css" />
+        <!--Font Awesome End-->
+        <!--Nprogress-->
+        <link rel="stylesheet" href="~/lib/nprogress/nprogress.css" />
+        <!--End Nprogress-->
+        <!-- jQuery custom content scroller -->
+        <link rel="stylesheet" href="~/lib/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.css" />
+        <!-- End jQuery custom content scroller -->
+        <link rel="stylesheet" href="~/css/site.css" />
+
+    </environment>
+    <environment exclude="Development">
+        <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/css/bootstrap.min.css"
+              asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
+              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
+        <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
+    </environment>
+</head>
+<body class="nav-md">
+    <div class="container body">
+        <div class="main_container">
+                <div class="col-md-3 left_col menu_fixed">
+                <div class="left_col scroll-view">
+                    <div class="navbar nav_title" style="border: 0;">
+                        <a href="@Url.Action("Index", "Home")" class="site_title">
+                            <i class="fa fa-calendar-o"></i> <span>EoS</span></a>
+                    </div>
+
+                    <div class="clearfix"></div>
+
+                    <br />
+
+                    <!-- sidebar menu -->
+                    <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+                        <div class="menu_section">
+                            <h3>General</h3>
+                            <ul class="nav side-menu">
+                                    <li>
+                                        <a><i class="fa fa-database"></i> Base de Datos <span class="fa fa-chevron-down"></span></a>
+                                        <ul class="nav child_menu">
+                                            <li>@Html.ActionLink("Identificador", "Index", "Identificador")</li>
+                                            <li>@Html.ActionLink("Fundamentales", "Index", "Fundamentales")</li>
+                                            <li>@Html.ActionLink("Secundarias", "Index", "Secundarias")</li>
+                                            <li>@Html.ActionLink("Constantes", "Index", "Constantes")</li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <a><i class="fa fa-calculator"></i> Correlaciones <span class="fa fa-chevron-down"></span></a>
+                                        <ul class="nav child_menu">
+                                            <li>@Html.ActionLink("Correlaciones", "Index", "Correlaciones")</li>
+                                        </ul>
+                                    </li>
+                            </ul>
+                        </div>
+
+                    </div>
+                    <!-- /sidebar menu -->
+                </div>
+            
+            </div>
+
+            <!--content-->
+            @RenderBody()
+            <!-- footer content -->
+        <footer>
+          <div class="pull-right">
+            Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a>. Desarrollado por Daniela Paredes
+          </div>
+          <div class="clearfix"></div>
+        </footer>
+        <!-- /footer content -->
+        </div>
+    </div>
+
+    <partial name="_CookieConsentPartial" />
+
+    <environment include="Development">
+        <script src="~/lib/jquery/dist/jquery.js"></script>
+        <!--Calendar Scripts-->
+        <script src="~/lib/moment/min/moment.min.js"></script>
+        <script src="~/lib/fullcalendar/dist/fullcalendar.js"></script>
+        <!--End Calendar Scripts-->
+        <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+        <!--Fast Click-->
+        <script src="~/lib/fastclick/lib/fastclick.js"></script>
+        <!--End Fast Click-->
+        <!--Ngropress-->
+        <script src="~/lib/nprogress/nprogress.js"></script>
+        <!--End Nprogress-->
+        <!-- jQuery custom content scroller -->
+        <script src="~/lib/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.js"></script>
+        <!-- Select2 -->
+        <script src="~/lib/select2/dist/js/select2.min.js"></script>
+        <!-- Parsley -->
+        <script src="~/lib/parsleyjs/dist/parsley.min.js"></script>
+        <script src="~/lib/parsleyjs/src/extra/validator/words.js"></script>
+        <!-- Datatables -->
+        <script src="~/lib/datatables/datatables.net/js/jquery.dataTables.min.js"></script>
+        <script src="~/lib/datatables/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+        <script src="~/lib/datatables/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+        <script src="~/lib/datatables/datatables.net-buttons-bs/js/buttons.bootstrap.min.js"></script>
+        <script src="~/lib/datatables/datatables.net-buttons/js/buttons.flash.min.js"></script>
+        <script src="~/lib/datatables/datatables.net-buttons/js/buttons.html5.min.js"></script>
+        <script src="~/lib/datatables/datatables.net-buttons/js/buttons.print.min.js"></script>
+        <script src="~/lib/datatables/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js"></script>
+        <script src="~/lib/datatables/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
+        <script src="~/lib/datatables/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+        <script src="~/lib/datatables/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
+        <script src="~/lib/datatables/datatables.net-scroller/js/dataTables.scroller.min.js"></script>
+        <!--Date Time Picker-->
+        <script type="text/javascript" src="~/lib/bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
+        <!--Full Calendar -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.js"></script>
+        <!-- jQuery custom content scroller -->
+        <script src="~/js/site.js" asp-append-version="true"></script>
+    </environment>
+    <environment exclude="Development">
+        <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.2.0.min.js"
+                asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+                asp-fallback-test="window.jQuery"
+                crossorigin="anonymous"
+                integrity="sha384-K+ctZQ+LL8q6tP7I94W+qzQsfRV2a+AfHIi9k8z8l9ggpc8X+Ytst4yBo/hH+8Fk">
+        </script>
+        <script src="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/bootstrap.min.js"
+                asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js"
+                asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
+                crossorigin="anonymous"
+                integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa">
+        </script>
+        <script src="~/js/site.min.js" asp-append-version="true"></script>
+    </environment>
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,79 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\Users\\elyna\\Documents\\Universidad de Talca\\2019-2\\Diseño y Analisis de Algoritmos\\EoS\\EosWeb\\Eosweb.csproj": {}
+  },
+  "projects": {
+    "C:\\Users\\elyna\\Documents\\Universidad de Talca\\2019-2\\Diseño y Analisis de Algoritmos\\EoS\\EosWeb\\Eosweb.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\elyna\\Documents\\Universidad de Talca\\2019-2\\Diseño y Analisis de Algoritmos\\EoS\\EosWeb\\Eosweb.csproj",
+        "projectName": "Eosweb",
+        "projectPath": "C:\\Users\\elyna\\Documents\\Universidad de Talca\\2019-2\\Diseño y Analisis de Algoritmos\\EoS\\EosWeb\\Eosweb.csproj",
+        "packagesPath": "C:\\Users\\elyna\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\elyna\\Documents\\Universidad de Talca\\2019-2\\Diseño y Analisis de Algoritmos\\EoS\\EosWeb\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\elyna\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp2.1"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp2.1": {
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp2.1": {
+          "dependencies": {
+            "Microsoft.AspNetCore.App": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.1.1, )",
+              "autoReferenced": true
+            },
+            "Microsoft.AspNetCore.Razor.Design": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.1.2, )"
+            },
+            "Microsoft.NETCore.App": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.1.0, )",
+              "autoReferenced": true
+            },
+            "MySql.Data": {
+              "target": "Package",
+              "version": "[8.0.19, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.201\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

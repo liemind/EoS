@@ -11,6 +11,7 @@ namespace Eosweb.Data
             try
             {
                 var command = new MySqlCommand() { CommandText = "sp_fundamentales_crear", CommandType = System.Data.CommandType.StoredProcedure };
+                command.Parameters.Add(new MySqlParameter() { ParameterName = "in_id", Direction = System.Data.ParameterDirection.Input, Value = c.Id});
                 command.Parameters.Add(new MySqlParameter() { ParameterName = "in_tc_k", Direction = System.Data.ParameterDirection.Input, Value = c.Tc_K });
                 command.Parameters.Add(new MySqlParameter() { ParameterName = "in_pc_bar", Direction = System.Data.ParameterDirection.Input, Value = c.Pc_bar });
                 command.Parameters.Add(new MySqlParameter() { ParameterName = "in_zc", Direction = System.Data.ParameterDirection.Input, Value = c.Zc });
@@ -45,7 +46,10 @@ namespace Eosweb.Data
                             Zc = Convert.ToDouble(prodData["zc"]),
                             W = Convert.ToDouble(prodData["w"])
                         };
-                        
+                        //Inicio Identificador
+                        comp.i = DataIdentificador.Leer(comp.Id);
+                        //Fin Identificador
+
                         c.Add(comp);
                     }
                 }
@@ -80,6 +84,9 @@ namespace Eosweb.Data
                         W = Convert.ToDouble(prodData["w"])
                     };
                     comp.Id = Id;
+                    //Inicio Identificador
+                    comp.i = DataIdentificador.Leer(Id);
+                    //Fin Identificador
                     return comp;
                 }
 

@@ -11,6 +11,7 @@ namespace Eosweb.Data
             try
             {
                 var command = new MySqlCommand() { CommandText = "sp_identificador_crear", CommandType = System.Data.CommandType.StoredProcedure };
+                command.Parameters.Add(new MySqlParameter() { ParameterName = "in_compuesto", Direction = System.Data.ParameterDirection.Input, Value = i.Compuesto });
                 command.Parameters.Add(new MySqlParameter() { ParameterName = "in_formula", Direction = System.Data.ParameterDirection.Input, Value = i.Formula });
                 command.Parameters.Add(new MySqlParameter() { ParameterName = "in_m", Direction = System.Data.ParameterDirection.Input, Value = i.M });
                 var datos = DataSource.ExecuteProcedure(command);
@@ -38,6 +39,7 @@ namespace Eosweb.Data
                         var comp = new Identificador()
                         {
                             Id = Convert.ToInt32(prodData["id"]),
+                            Compuesto = prodData["compuesto"].ToString(),
                             Formula = prodData["formula"].ToString(),
                             M = Convert.ToDouble(prodData["m"])
                         };
@@ -70,6 +72,7 @@ namespace Eosweb.Data
                     var prodData = datos.Tables[0].Rows[0];
                     var comp = new Identificador()
                     {
+                        Compuesto = prodData["compuesto"].ToString(),
                         Formula = prodData["formula"].ToString(),
                         M = Convert.ToDouble(prodData["m"])
                     };
@@ -109,6 +112,7 @@ namespace Eosweb.Data
             {
                 var command = new MySqlCommand() { CommandText = "sp_identificador_modificar", CommandType = System.Data.CommandType.StoredProcedure };
                 command.Parameters.Add(new MySqlParameter() { ParameterName = "in_id", Direction = System.Data.ParameterDirection.Input, Value = i.Id });
+                command.Parameters.Add(new MySqlParameter() { ParameterName = "in_compuesto", Direction = System.Data.ParameterDirection.Input, Value = i.Compuesto });
                 command.Parameters.Add(new MySqlParameter() { ParameterName = "in_formula", Direction = System.Data.ParameterDirection.Input, Value = i.Formula });
                 command.Parameters.Add(new MySqlParameter() { ParameterName = "in_m", Direction = System.Data.ParameterDirection.Input, Value = i.M });
                 var datos = DataSource.ExecuteProcedure(command);

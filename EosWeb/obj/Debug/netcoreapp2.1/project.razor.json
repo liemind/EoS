@@ -1,5 +1,5 @@
 {
-  "FilePath": "c:\\Users\\Liemind\\Documents\\Universidad de Talca\\2019-2\\Diseño y Analisis de Algoritmos\\EoS\\Eosweb\\Eosweb.csproj",
+  "FilePath": "c:\\Users\\elyna\\Documents\\Universidad de Talca\\2019-2\\Diseño y Analisis de Algoritmos\\EoS\\EosWeb\\Eosweb.csproj",
   "Configuration": {
     "ConfigurationName": "MVC-2.1",
     "LanguageVersion": "2.1",
@@ -2875,6 +2875,82 @@
     "CSharpLanguageVersion": 703
   },
   "RootNamespace": "Eosweb",
-  "Documents": [],
+  "Documents": [
+    {
+      "FilePath": "c:\\Users\\elyna\\Documents\\Universidad de Talca\\2019-2\\Diseño y Analisis de Algoritmos\\EoS\\EosWeb\\Views\\Home\\Privacy.cshtml",
+      "TargetPath": "Views\\Home\\Privacy.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\elyna\\Documents\\Universidad de Talca\\2019-2\\Diseño y Analisis de Algoritmos\\EoS\\EosWeb\\Views\\Home\\Index.cshtml",
+      "TargetPath": "Views\\Home\\Index.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\elyna\\Documents\\Universidad de Talca\\2019-2\\Diseño y Analisis de Algoritmos\\EoS\\EosWeb\\Views\\Correlaciones\\Index.cshtml",
+      "TargetPath": "Views\\Correlaciones\\Index.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\elyna\\Documents\\Universidad de Talca\\2019-2\\Diseño y Analisis de Algoritmos\\EoS\\EosWeb\\Views\\Home\\About.cshtml",
+      "TargetPath": "Views\\Home\\About.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\elyna\\Documents\\Universidad de Talca\\2019-2\\Diseño y Analisis de Algoritmos\\EoS\\EosWeb\\Views\\Home\\Contact.cshtml",
+      "TargetPath": "Views\\Home\\Contact.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\elyna\\Documents\\Universidad de Talca\\2019-2\\Diseño y Analisis de Algoritmos\\EoS\\EosWeb\\Views\\Shared\\_CookieConsentPartial.cshtml",
+      "TargetPath": "Views\\Shared\\_CookieConsentPartial.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\elyna\\Documents\\Universidad de Talca\\2019-2\\Diseño y Analisis de Algoritmos\\EoS\\EosWeb\\Views\\Secundarias\\Index.cshtml",
+      "TargetPath": "Views\\Secundarias\\Index.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\elyna\\Documents\\Universidad de Talca\\2019-2\\Diseño y Analisis de Algoritmos\\EoS\\EosWeb\\Views\\Shared\\_ValidationScriptsPartial.cshtml",
+      "TargetPath": "Views\\Shared\\_ValidationScriptsPartial.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\elyna\\Documents\\Universidad de Talca\\2019-2\\Diseño y Analisis de Algoritmos\\EoS\\EosWeb\\Views\\Identificador\\Index.cshtml",
+      "TargetPath": "Views\\Identificador\\Index.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\elyna\\Documents\\Universidad de Talca\\2019-2\\Diseño y Analisis de Algoritmos\\EoS\\EosWeb\\Views\\_ViewStart.cshtml",
+      "TargetPath": "Views\\_ViewStart.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\elyna\\Documents\\Universidad de Talca\\2019-2\\Diseño y Analisis de Algoritmos\\EoS\\EosWeb\\Views\\Shared\\Error.cshtml",
+      "TargetPath": "Views\\Shared\\Error.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\elyna\\Documents\\Universidad de Talca\\2019-2\\Diseño y Analisis de Algoritmos\\EoS\\EosWeb\\Views\\Fundamentales\\Index.cshtml",
+      "TargetPath": "Views\\Fundamentales\\Index.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\elyna\\Documents\\Universidad de Talca\\2019-2\\Diseño y Analisis de Algoritmos\\EoS\\EosWeb\\Views\\_ViewImports.cshtml",
+      "TargetPath": "Views\\_ViewImports.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\elyna\\Documents\\Universidad de Talca\\2019-2\\Diseño y Analisis de Algoritmos\\EoS\\EosWeb\\Views\\Constantes\\Index.cshtml",
+      "TargetPath": "Views\\Constantes\\Index.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\elyna\\Documents\\Universidad de Talca\\2019-2\\Diseño y Analisis de Algoritmos\\EoS\\EosWeb\\Views\\Shared\\_Layout.cshtml",
+      "TargetPath": "Views\\Shared\\_Layout.cshtml",
+      "FileKind": "mvc"
+    }
+  ],
   "SerializationFormat": "0.2"
 }
