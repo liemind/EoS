@@ -10,6 +10,7 @@
         <!--Font Awesome-->
         <link rel="stylesheet" href="~/lib/font-awesome/css/font-awesome.css" />
         <!--Font Awesome End-->
+         <link href="https://fonts.googleapis.com/css2?family=Dosis&display=swap" rel="stylesheet">
         <!--Nprogress-->
         <link rel="stylesheet" href="~/lib/nprogress/nprogress.css" />
         <!--End Nprogress-->
@@ -29,7 +30,7 @@
 <body class="nav-md">
     <div class="container body">
         <div class="main_container">
-                <div class="col-md-3 left_col menu_fixed">
+            <div class="col-md-3 left_col menu_fixed">
                 <div class="left_col scroll-view">
                     <div class="navbar nav_title" style="border: 0;">
                         <a href="@Url.Action("Index", "Home")" class="site_title">
@@ -65,9 +66,36 @@
 
                     </div>
                     <!-- /sidebar menu -->
-                </div>
-            
+                </div> 
             </div>
+
+            <!-- top navigation -->
+                <div class="top_nav">
+                        <div class="nav_menu">
+                            <nav>
+                                <div class="nav toggle">
+                                    <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+                                </div>
+
+                                <ul class="nav navbar-nav navbar-right">
+                                    <li class="">
+                                        <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                            <img src="http://placehold.it/100x100" alt="">Bienvenido @ViewBag.NombreUsuario
+                                            <span class=" fa fa-angle-down"></span>
+                                        </a>
+                                        <ul class="dropdown-menu dropdown-usermenu pull-right">
+                                            <li>@Html.ActionLink("Perfil", "Perfil", "Usuarios", new { Rut  = @ViewBag.IdUsuario})</li>
+                                            <li>@Html.ActionLink("Configurar", "Configuracion", "Usuarios", new { Rut  = @ViewBag.IdUsuario})</li>
+                                            <li><a href="">Ayuda</a></li>
+                                            <li><a href="@Url.Action("CerrarSesion", "Home")"><i class="fa fa-sign-out pull-right"></i>Cerrar Sesión</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+
+                </div>
+            <!-- /top navigation -->
 
             <!--content-->
             @RenderBody()

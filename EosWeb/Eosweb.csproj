@@ -8,6 +8,8 @@
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
     <PackageReference Include="MySql.Data" Version="8.0.19" />
+    <PackageReference Include="wkhtmltopdf.x64" Version="0.12.5" />
+    <PackageReference Include="DinkToPdf" Version="1.0.7" />
   </ItemGroup>
 
 </Project>

@@ -24,10 +24,12 @@
     ".NETCoreApp,Version=v2.1": {
       "Eosweb/1.0.0": {
         "dependencies": {
+          "DinkToPdf": "1.0.7",
           "Microsoft.AspNetCore.App": "2.1.1",
           "Microsoft.AspNetCore.Razor.Design": "2.1.2",
           "Microsoft.NETCore.App": "2.1.0",
-          "MySql.Data": "8.0.19"
+          "MySql.Data": "8.0.19",
+          "wkhtmltopdf.x64": "0.12.5"
         },
         "runtime": {
           "Eosweb.dll": {}
@@ -50,6 +52,26 @@
         },
         "compile": {
           "lib/netstandard2.0/BouncyCastle.Crypto.dll": {}
+        }
+      },
+      "DinkToPdf/1.0.7": {
+        "dependencies": {
+          "NETStandard.Library": "2.0.3",
+          "System.Collections.Concurrent": "4.3.0",
+          "System.Globalization": "4.3.0",
+          "System.Reflection.TypeExtensions": "4.3.0",
+          "System.Runtime": "4.3.0",
+          "System.Runtime.InteropServices": "4.3.0",
+          "System.Threading.Thread": "4.3.0"
+        },
+        "runtime": {
+          "lib/netstandard1.6/DinkToPdf.dll": {
+            "assemblyVersion": "1.0.7.0",
+            "fileVersion": "1.0.7.0"
+          }
+        },
+        "compile": {
+          "lib/netstandard1.6/DinkToPdf.dll": {}
         }
       },
       "Google.Protobuf/3.6.1": {
@@ -314,6 +336,7 @@
           "ref/netstandard1.3/System.Xml.XPath.XmlDocument.dll": {}
         }
       },
+      "wkhtmltopdf.x64/0.12.5": {},
       "Microsoft.AspNet.WebApi.Client/5.2.6": {
         "dependencies": {
           "Newtonsoft.Json": "11.0.2",
@@ -3422,6 +3445,13 @@
       "path": "bouncycastle.netcore/1.8.3",
       "hashPath": "bouncycastle.netcore.1.8.3.nupkg.sha512"
     },
+    "DinkToPdf/1.0.7": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-aRpCvsK9dFeu3iXpzUI3c4DZtT62GTiQI+TrNamashRWSqg8jKThCzliPNMr7xifKYz2FslY2IgsKJJwBj0mjQ==",
+      "path": "dinktopdf/1.0.7",
+      "hashPath": "dinktopdf.1.0.7.nupkg.sha512"
+    },
     "Google.Protobuf/3.6.1": {
       "type": "package",
       "serviceable": true,
@@ -3540,6 +3570,13 @@
       "sha512": "sha512-Zm2BdeanuncYs3NhCj4c9e1x3EXFzFBVv2wPEc/Dj4ZbI9R8ecLSR5frAsx4zJCPBtKQreQ7Q/KxJEohJZbfzA==",
       "path": "system.xml.xpath.xmldocument/4.0.1",
       "hashPath": "system.xml.xpath.xmldocument.4.0.1.nupkg.sha512"
+    },
+    "wkhtmltopdf.x64/0.12.5": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-ZxumKhx3saS8T8lue+S/M1RIAvGy4VsPonEoV5cz2nTK9fseqy6WRM8oC7bXEDa+l8hzFxpeZegaUvQFQ2p8hQ==",
+      "path": "wkhtmltopdf.x64/0.12.5",
+      "hashPath": "wkhtmltopdf.x64.0.12.5.nupkg.sha512"
     },
     "Microsoft.AspNet.WebApi.Client/5.2.6": {
       "type": "package",
