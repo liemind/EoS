@@ -1,10 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "t142ym02HQocw16SVW0/mdfbqN+0dMNN8k5IbPLk608l1a2aCjlcsZqg8heCnBpV+WAB5cgQ6Iunh0oifF8fZQ==",
+  "dgSpecHash": "sxgXvBazeFJedUPReN8ULmD/ymfnAXA97xWrxynVoVPp6uwdYH85nt/HT8HUN54gc2olFLHz044Ko8tONbWpMQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\elyna\\Documents\\Universidad de Talca\\2019-2\\Diseño y Analisis de Algoritmos\\EoS\\EosWeb\\Eosweb.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\elyna\\.nuget\\packages\\bouncycastle.netcore\\1.8.3\\bouncycastle.netcore.1.8.3.nupkg.sha512",
+    "C:\\Users\\elyna\\.nuget\\packages\\dinktopdf\\1.0.7\\dinktopdf.1.0.7.nupkg.sha512",
     "C:\\Users\\elyna\\.nuget\\packages\\google.protobuf\\3.6.1\\google.protobuf.3.6.1.nupkg.sha512",
     "C:\\Users\\elyna\\.nuget\\packages\\microsoft.aspnet.webapi.client\\5.2.6\\microsoft.aspnet.webapi.client.5.2.6.nupkg.sha512",
     "C:\\Users\\elyna\\.nuget\\packages\\microsoft.aspnetcore\\2.1.1\\microsoft.aspnetcore.2.1.1.nupkg.sha512",
@@ -293,7 +294,8 @@
     "C:\\Users\\elyna\\.nuget\\packages\\system.xml.xmlserializer\\4.3.0\\system.xml.xmlserializer.4.3.0.nupkg.sha512",
     "C:\\Users\\elyna\\.nuget\\packages\\system.xml.xpath\\4.3.0\\system.xml.xpath.4.3.0.nupkg.sha512",
     "C:\\Users\\elyna\\.nuget\\packages\\system.xml.xpath.xdocument\\4.3.0\\system.xml.xpath.xdocument.4.3.0.nupkg.sha512",
-    "C:\\Users\\elyna\\.nuget\\packages\\system.xml.xpath.xmldocument\\4.0.1\\system.xml.xpath.xmldocument.4.0.1.nupkg.sha512"
+    "C:\\Users\\elyna\\.nuget\\packages\\system.xml.xpath.xmldocument\\4.0.1\\system.xml.xpath.xmldocument.4.0.1.nupkg.sha512",
+    "C:\\Users\\elyna\\.nuget\\packages\\wkhtmltopdf.x64\\0.12.5\\wkhtmltopdf.x64.0.12.5.nupkg.sha512"
   ],
   "logs": []
 }

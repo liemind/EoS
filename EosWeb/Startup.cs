@@ -9,6 +9,10 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.FileProviders;
+using DinkToPdf;
+using DinkToPdf.Contracts;
+using System.IO;
 
 namespace Eosweb
 {
@@ -31,6 +35,20 @@ namespace Eosweb
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
+            services.AddDistributedMemoryCache();
+
+            services.AddSession(options =>
+            {
+                // Set a short timeout for easy testing.
+                options.IdleTimeout = TimeSpan.FromMinutes(60);
+                options.Cookie.HttpOnly = true;
+            });
+
+            services.AddSingleton<IFileProvider>(
+                new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot"))
+            );
+
+            services.AddSingleton(typeof(IConverter), new SynchronizedConverter(new PdfTools()));
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
