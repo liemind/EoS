@@ -3,7 +3,8 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Eosweb</title>
+    <link rel="shortcut icon" href="~/images/icon.svg">
+    <title>EOS3 | @ViewData["Title"]</title>
 
     <environment include="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
@@ -33,8 +34,7 @@
             <div class="col-md-3 left_col menu_fixed">
                 <div class="left_col scroll-view">
                     <div class="navbar nav_title" style="border: 0;">
-                        <a href="@Url.Action("Index", "Home")" class="site_title">
-                            <i class="fa fa-calendar-o"></i> <span>EoS</span></a>
+                        <a href="@Url.Action("Index", "Home")" class="site_title"><img src="~/images/eoslogo.png" style="width: 50%;"></a>
                     </div>
 
                     <div class="clearfix"></div>
@@ -44,6 +44,17 @@
                     <!-- sidebar menu -->
                     <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
                         <div class="menu_section">
+                            <h3>Administrativo</h3>
+                            <ul class="nav side-menu">
+                                <li>
+                                    <a><i class="fa fa-users"></i> Usuarios <span class="fa fa-chevron-down"></span></a>
+                                    <ul class="nav child_menu">
+                                        <li>@Html.ActionLink("Registrados", "Index", "Home")</li>
+                                        <li>@Html.ActionLink("Grupos", "Index", "Home")</li>
+                                        <li>@Html.ActionLink("Llaves", "Index", "Home")</li>
+                                    </ul>
+                                </li>
+                            </ul>
                             <h3>General</h3>
                             <ul class="nav side-menu">
                                     <li>
@@ -78,18 +89,9 @@
                                 </div>
 
                                 <ul class="nav navbar-nav navbar-right">
-                                    <li class="">
-                                        <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                                            <img src="http://placehold.it/100x100" alt="">Bienvenido @ViewBag.NombreUsuario
-                                            <span class=" fa fa-angle-down"></span>
-                                        </a>
-                                        <ul class="dropdown-menu dropdown-usermenu pull-right">
-                                            <li>@Html.ActionLink("Perfil", "Perfil", "Usuarios", new { Rut  = @ViewBag.IdUsuario})</li>
-                                            <li>@Html.ActionLink("Configurar", "Configuracion", "Usuarios", new { Rut  = @ViewBag.IdUsuario})</li>
-                                            <li><a href="">Ayuda</a></li>
-                                            <li><a href="@Url.Action("CerrarSesion", "Home")"><i class="fa fa-sign-out pull-right"></i>Cerrar Sesión</a></li>
-                                        </ul>
-                                    </li>
+                                    <li class=""><a href="@Url.Action("CerrarSesion", "Home")"><i class="fa fa-sign-out" style="font: 15px!important"></i>Cerrar Sesión</a></li>
+                                    <li class=""><a href="@Url.Action("CerrarSesion", "Home")" style="color: #f69b2e!important">Iniciar Sesión</a></li>
+                                    <li class=""><a href="@Url.Action("CerrarSesion", "Home")">Perfil</a></li>
                                 </ul>
                             </nav>
                         </div>

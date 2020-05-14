@@ -2932,6 +2932,11 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "c:\\Users\\elyna\\Documents\\Universidad de Talca\\2019-2\\Diseño y Analisis de Algoritmos\\EoS\\EosWeb\\Views\\Home\\Perfil.cshtml",
+      "TargetPath": "Views\\Home\\Perfil.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "c:\\Users\\elyna\\Documents\\Universidad de Talca\\2019-2\\Diseño y Analisis de Algoritmos\\EoS\\EosWeb\\Views\\Fundamentales\\Index.cshtml",
       "TargetPath": "Views\\Fundamentales\\Index.cshtml",
       "FileKind": "mvc"
