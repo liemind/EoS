@@ -8,10 +8,10 @@ line: #191919
     --bg: #f7f7f7;
     --blanco: #ffffff;
     --negro: #272727;
-    --contraste: #0cc;
-    --contraste_oscuro: #018a8b;
-    --amarillo: #f69b2e;
-    --amarillo_oscuro: #b67424;
+    --contraste: #bd1622;
+    --contraste_oscuro: #911019;
+    --secundario: #6c6767;
+    --secundario_oscuro: #504d4d;
 }
 
 html, body {
@@ -610,7 +610,7 @@ body .container.body .right_col {
 .top_nav .nav .open > a,
 .top_nav .nav .open > a:focus,
 .top_nav .nav .open > a:hover {
-    border-bottom: solid 3px var(--amarillo);
+    border-bottom: solid 3px var(--secundario);
     transition: all 0.3s linear 0s;
 }
 
@@ -2946,8 +2946,8 @@ a.btn-danger {
     }
 
 .btn-warning {
-    background: var(--amarillo);
-    border: 1px solid var(--amarillo);
+    background: var(--secundario);
+    border: 1px solid var(--secundario);
 }
 
 .btn-warning:hover,
@@ -2955,7 +2955,7 @@ a.btn-danger {
     .btn-warning:active,
     .btn-warning.active,
     .open .dropdown-toggle.btn-warning {
-        background: var(--amarillo_oscuro)!important;
+        background: var(--secundario_oscuro)!important;
     }
 
 .btn-dark {
