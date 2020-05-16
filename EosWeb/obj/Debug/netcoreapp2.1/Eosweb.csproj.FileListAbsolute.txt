@@ -76,3 +76,4 @@ C:\Users\elyna\Documents\Universidad de Talca\2019-2\Diseño y Analisis de Algor
 C:\Users\elyna\Documents\Universidad de Talca\2019-2\Diseño y Analisis de Algoritmos\EoS\EosWeb\obj\Debug\netcoreapp2.1\Eosweb.Views.pdb
 C:\Users\elyna\Documents\Universidad de Talca\2019-2\Diseño y Analisis de Algoritmos\EoS\EosWeb\obj\Debug\netcoreapp2.1\Eosweb.genruntimeconfig.cache
 C:\Users\elyna\Documents\Universidad de Talca\2019-2\Diseño y Analisis de Algoritmos\EoS\EosWeb\obj\Debug\netcoreapp2.1\Eosweb.csproj.CopyComplete
+C:\Users\elyna\Documents\Universidad de Talca\2019-2\Diseño y Analisis de Algoritmos\EoS\EosWeb\obj\Debug\netcoreapp2.1\Razor\Views\Home\Perfil.cshtml.g.cs
