@@ -10,6 +10,21 @@ namespace Eosweb.Controllers
 {
     public class UsuariosController : Controller
     {
+        public IActionResult Index()
+        {
+            return View();
+        }
+
+        public IActionResult Acciones()
+        {
+            return View();
+        }
+
+        public IActionResult Grupos()
+        {
+            return View();
+        }
+
         
     }
 }
