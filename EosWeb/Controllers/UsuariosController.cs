@@ -12,7 +12,14 @@ namespace Eosweb.Controllers
     {
         public IActionResult Index()
         {
+
             return View();
+        }
+
+        public ActionResult Crear(String Rut, String Nombre, String Correo, String Tipo) {
+            
+            
+            return RedirectToAction("Index", "Usuarios");
         }
 
         public IActionResult Acciones()
