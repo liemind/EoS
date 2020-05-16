@@ -22,6 +22,15 @@ namespace Eosweb.Controllers
     {
         public IActionResult Index()
         {
+            if (Sesion() == true) {
+                String Rut = HttpContext.Session.GetString(Global.SessionKeyName);
+                ViewData["Sesion"] = true;
+                Usuario u = DataUsuario.LeerUno(Rut);
+                    //poned acá más datos de usuario en caso de necesitarlos
+                    ViewData["Tipo"] = u.Tipo;
+                    ViewData["NombreUsuario"] = u.Nombre;
+                    ViewData["IdUsuario"] = u.Rut;
+            }
             return View();
         }
 
@@ -41,10 +50,21 @@ namespace Eosweb.Controllers
 
         public IActionResult Perfil() {
             //ver si inicio sesion
+            if (Sesion() == true) {
+                String Rut = HttpContext.Session.GetString(Global.SessionKeyName);
+                ViewData["Sesion"] = true;
+                Usuario u = DataUsuario.LeerUno(Rut);
+                    //poned acá más datos de usuario en caso de necesitarlos
+                    ViewData["Tipo"] = u.Tipo;
+                    ViewData["NombreUsuario"] = u.Nombre;
+                    ViewData["IdUsuario"] = u.Rut;
 
-            //cargar el grupo actual
-            //cargar grupos anteriores
-            return View();
+                    //cargar el grupo actual
+                    //cargar grupos anteriores
+
+                    return View();
+            }
+            return RedirectToAction("Invitado", "Home");
         }
 
         /***************
@@ -55,7 +75,7 @@ namespace Eosweb.Controllers
             return RedirectToAction("Perfil", "Home");
         }
 
-        public ActionResult UnirseAGrupo(string llave, int id) {
+        public ActionResult UnirseAGrupo(string Llave, int Id) {
             return RedirectToAction("Perfil", "Home");
         }
 

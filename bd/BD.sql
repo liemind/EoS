@@ -61,6 +61,7 @@ CREATE TABLE IF NOT EXISTS eos.grupo(
     id int AUTO_INCREMENT,
     llave varchar(9) NOT NULL,
     descripcion text NOT NULL,
+    integrantes int NOT NULL,
     estado int NOT NULL,
     PRIMARY KEY(id)
 );
