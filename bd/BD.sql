@@ -51,6 +51,7 @@ CREATE TABLE IF NOT EXISTS eos.usuario(
     rut varchar(8),
     nombre text NOT NULL,
     correoElectronico text NOT NULL,
+    tipo int NOT NULL,
     password text NOT NULL,
     estado int NOT NULL,
     PRIMARY KEY(id)
@@ -58,7 +59,8 @@ CREATE TABLE IF NOT EXISTS eos.usuario(
 
 CREATE TABLE IF NOT EXISTS eos.grupo(
     id int AUTO_INCREMENT,
-    llave text NOT NULL,
+    llave varchar(9) NOT NULL,
+    descripcion text NOT NULL,
     estado int NOT NULL,
     PRIMARY KEY(id)
 );

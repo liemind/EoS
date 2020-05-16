@@ -29,6 +29,26 @@ namespace Eosweb.Controllers
             return View();
         }
 
+        public IActionResult Perfil() {
+            //ver si inicio sesion
+
+            //cargar el grupo actual
+            //cargar grupos anteriores
+            return View();
+        }
+
+        /***************
+        * Relacionado a perfil
+        ***************/
+
+        public ActionResult CambiarPass(string anterior, string nuevo, int id) {
+            return RedirectToAction("Perfil", "Home");
+        }
+
+        public ActionResult UnirseAGrupo(string llave, int id) {
+            return RedirectToAction("Perfil", "Home");
+        }
+
         public IActionResult Privacy()
         {
             return View();

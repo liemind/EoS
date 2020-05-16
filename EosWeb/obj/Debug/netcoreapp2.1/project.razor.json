@@ -2877,6 +2877,11 @@
   "RootNamespace": "Eosweb",
   "Documents": [
     {
+      "FilePath": "c:\\Users\\elyna\\Documents\\Universidad de Talca\\2019-2\\Diseño y Analisis de Algoritmos\\EoS\\EosWeb\\Views\\Usuarios\\Grupos.cshtml",
+      "TargetPath": "Views\\Usuarios\\Grupos.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "c:\\Users\\elyna\\Documents\\Universidad de Talca\\2019-2\\Diseño y Analisis de Algoritmos\\EoS\\EosWeb\\Views\\Home\\Privacy.cshtml",
       "TargetPath": "Views\\Home\\Privacy.cshtml",
       "FileKind": "mvc"
@@ -2884,6 +2889,11 @@
     {
       "FilePath": "c:\\Users\\elyna\\Documents\\Universidad de Talca\\2019-2\\Diseño y Analisis de Algoritmos\\EoS\\EosWeb\\Views\\Home\\Index.cshtml",
       "TargetPath": "Views\\Home\\Index.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\elyna\\Documents\\Universidad de Talca\\2019-2\\Diseño y Analisis de Algoritmos\\EoS\\EosWeb\\Views\\Usuarios\\Acciones.cshtml",
+      "TargetPath": "Views\\Usuarios\\Acciones.cshtml",
       "FileKind": "mvc"
     },
     {
@@ -2929,6 +2939,16 @@
     {
       "FilePath": "c:\\Users\\elyna\\Documents\\Universidad de Talca\\2019-2\\Diseño y Analisis de Algoritmos\\EoS\\EosWeb\\Views\\Shared\\Error.cshtml",
       "TargetPath": "Views\\Shared\\Error.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\elyna\\Documents\\Universidad de Talca\\2019-2\\Diseño y Analisis de Algoritmos\\EoS\\EosWeb\\Views\\Usuarios\\Index.cshtml",
+      "TargetPath": "Views\\Usuarios\\Index.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\elyna\\Documents\\Universidad de Talca\\2019-2\\Diseño y Analisis de Algoritmos\\EoS\\EosWeb\\Views\\Home\\Perfil.cshtml",
+      "TargetPath": "Views\\Home\\Perfil.cshtml",
       "FileKind": "mvc"
     },
     {

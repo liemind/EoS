@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Eosweb</title>
+    <title>EOS3 | @ViewData["Title"]</title>
 
     <environment include="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
@@ -84,7 +84,7 @@
                                             <span class=" fa fa-angle-down"></span>
                                         </a>
                                         <ul class="dropdown-menu dropdown-usermenu pull-right">
-                                            <li>@Html.ActionLink("Perfil", "Perfil", "Usuarios", new { Rut  = @ViewBag.IdUsuario})</li>
+                                            <li>@Html.ActionLink("Perfil", "Perfil", "Home")</li>
                                             <li>@Html.ActionLink("Configurar", "Configuracion", "Usuarios", new { Rut  = @ViewBag.IdUsuario})</li>
                                             <li><a href="">Ayuda</a></li>
                                             <li><a href="@Url.Action("CerrarSesion", "Home")"><i class="fa fa-sign-out pull-right"></i>Cerrar Sesión</a></li>
@@ -93,7 +93,6 @@
                                 </ul>
                             </nav>
                         </div>
-
                 </div>
             <!-- /top navigation -->
 
