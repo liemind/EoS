@@ -1,2 +1,4 @@
-
-bd/loadAll.bat
+# Base de datos
+bd/
+# public
+Eospublic/
