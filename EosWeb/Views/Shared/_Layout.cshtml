@@ -92,9 +92,13 @@
                                 </div>
 
                                 <ul class="nav navbar-nav navbar-right">
+                                    @if(ViewBag.Sesion != null && ViewBag.Sesion) 
+                                    {
                                     <li class=""><a href="@Url.Action("CerrarSesion", "Home")"><i class="fa fa-sign-out" style="font: 15px!important"></i>Cerrar Sesión</a></li>
-                                    <li class=""><a href="@Url.Action("CerrarSesion", "Home")" style="color: #bd1622!important">Iniciar Sesión</a></li>
-                                    <li class=""><a href="@Url.Action("CerrarSesion", "Home")">Perfil</a></li>
+                                    <li class=""><a href="@Url.Action("Perfil", "Home")">Perfil</a></li>
+                                    } else {
+                                    <li class=""><a href="@Url.Action("Invitado", "Home")" style="color: #bd1622!important">Iniciar Sesión</a></li>
+                                    }
                                 </ul>
                             </nav>
                         </div>
