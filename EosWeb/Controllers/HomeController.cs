@@ -31,7 +31,14 @@ namespace Eosweb.Controllers
                     ViewData["NombreUsuario"] = u.Nombre;
                     ViewData["IdUsuario"] = u.Rut;
             }
-            return View();
+            List<Noticia> n = new List<Noticia>();
+            n = DataNoticia.LeerCinco();
+
+            if (n == null) {
+                n = new List<Noticia>();
+            }
+
+            return View(n);
         }
 
         public IActionResult About()

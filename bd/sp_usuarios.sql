@@ -22,6 +22,19 @@ BEGIN
 END
 $$
 
+/*Leer uno*/
+DROP PROCEDURE IF EXISTS sp_leer_usuario_id   $$
+CREATE PROCEDURE sp_leer_usuario_id
+(
+    in_id INTEGER
+)
+BEGIN
+    SELECT id, rut, nombre, correoElectronico, tipo, estado
+    FROM usuario   
+    WHERE id = in_id;
+END
+$$
+
 /*Habilitar y deshabilitar competencia*/
 DROP PROCEDURE IF EXISTS sp_habilitar_deshabilitar_usuario $$
 CREATE PROCEDURE sp_habilitar_deshabilitar_usuario
@@ -44,7 +57,6 @@ CREATE PROCEDURE sp_verificar_pass
 (
     in_rut INTEGER,
     in_pass TEXT
-    
 )
 BEGIN
     Select usuario.password
@@ -91,7 +103,6 @@ CREATE PROCEDURE sp_verificar_pass
 (
     in_rut INTEGER,
     in_pass TEXT
-    
 )
 BEGIN
     Select usuario.password

@@ -48,7 +48,7 @@ CREATE TABLE IF NOT EXISTS eos.r(
 
 CREATE TABLE IF NOT EXISTS eos.usuario(
     id int AUTO_INCREMENT,
-    rut varchar(8),
+    rut int,
     nombre text NOT NULL,
     correoElectronico text NOT NULL,
     tipo int NOT NULL,
@@ -72,4 +72,15 @@ CREATE TABLE IF NOT EXISTS eos.usuariogrupo(
     PRIMARY KEY(idUsuario, idGrupo),
     FOREIGN KEY(idUsuario) REFERENCES usuario(id) ON DELETE CASCADE ON UPDATE CASCADE,
     FOREIGN KEY(idGrupo) REFERENCES grupo(id) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+
+CREATE TABLE IF NOT EXISTS eos.noticia(
+    id int AUTO_INCREMENT,
+    titulo text NOT NULL,
+    cuerpo text NOT NULL,
+    fecha DATETIME NOT NULL,
+    autor int NOT NULL,
+    PRIMARY KEY(id),
+    FOREIGN KEY(AUTOR) REFERENCES usuario(id) ON DELETE CASCADE ON UPDATE CASCADE
 );

@@ -21,8 +21,48 @@ namespace Eosweb.Controllers
                     ViewData["NombreUsuario"] = u.Nombre;
                     ViewData["IdUsuario"] = u.Rut;
             }
-            return View();
+            List<Noticia> n = new List<Noticia>();
+            n = DataNoticia.LeerTodo();
+
+            if (n == null) {
+                n = new List<Noticia>();
+            }
+
+            return View(n);
         }
+
+        //Ver noticia
+        public IActionResult Noticia(int Id)
+        {
+            Noticia n = DataNoticia.LeerUno(Id);
+            return View(n);
+        }
+
+        //Crear Noticia
+        public ActionResult Crear(string Titulo, string Cuerpo)
+        {
+            if (Sesion() == true) {
+                String Rut = HttpContext.Session.GetString(Global.SessionKeyName);
+                Noticia noticia = new Noticia();
+                noticia.titulo = Titulo;
+                noticia.cuerpo = Cuerpo;
+                noticia.autor = DataUsuario.LeerUno(Rut);
+                noticia.fecha = DateTime.Now;
+
+                //crear noticia
+                if(DataNoticia.Crear(noticia)) {
+                    //se creo
+                }
+
+                return RedirectToAction("Index", "Noticia");
+            }
+            return RedirectToAction("Invitado", "Home");
+        }
+        
+
+        //Editar noticia
+
+        //Eliminar noticia
 
         /********
         * SESION

@@ -79,6 +79,7 @@ namespace Eosweb.Data
                     var prodData = datos.Tables[0].Rows[0];
                     var comp = new Usuario()
                     {
+                        Id = Convert.ToInt32(prodData["id"]),
                         Rut = prodData["rut"].ToString(),
                         Nombre = prodData["nombre"].ToString(),
                         CorreoElectronico = prodData["correoElectronico"].ToString()
@@ -117,6 +118,57 @@ namespace Eosweb.Data
 
         }
 
+        public static Usuario LeerPorId(int Id) {
+            try
+            {
+                var command = new MySqlCommand() { CommandText = "sp_leer_usuario_id", CommandType = System.Data.CommandType.StoredProcedure };
+                command.Parameters.Add(new MySqlParameter() { ParameterName = "in_id", Direction = System.Data.ParameterDirection.Input, Value = Id });
+                var datos = DataSource.GetDataSet(command);
+                int estado = 1;
+                int tipo = 1;
+
+                if (datos.Tables[0].Rows.Count > 0)
+                {
+                    var prodData = datos.Tables[0].Rows[0];
+                    var comp = new Usuario()
+                    {
+                        Id = Convert.ToInt32(prodData["id"]),
+                        Rut = prodData["rut"].ToString(),
+                        Nombre = prodData["nombre"].ToString(),
+                        CorreoElectronico = prodData["correoElectronico"].ToString()
+                    };
+                    estado = Convert.ToInt32(prodData["estado"]);
+                    if (estado == 1)
+                    {
+                        comp.Estado = "Habilitado";
+                    }
+                    else
+                    {
+                        comp.Estado = "Deshabilitado";
+                    }
+                    tipo = Convert.ToInt32(prodData["tipo"]);
+                    if (tipo == 1)
+                    {
+                        comp.Tipo = "Administrador";
+                    }
+                    else
+                    {
+                        comp.Tipo = "Alumno";
+                    }
+                    return comp;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+            finally
+            {
+
+            }
+            return null;
+        }
         public static Boolean HabilitarDeshabilitar(String rut, int EstadoActual)
         {
             int estado;

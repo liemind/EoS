@@ -802,7 +802,7 @@ h3,
 
 a {
     color: var(--contraste);
-    text-decoration: none
+    text-decoration: none;
 }
 
     a,
@@ -818,7 +818,7 @@ a {
     .btn.focus,
     .btn:active.focus,
     .btn.active.focus {
-        outline: 0
+        outline: 0;
     }
 
         a:hover,
@@ -957,7 +957,7 @@ a {
 
 .nav.child_menu li li a:hover,
 .nav.child_menu li li a.active {
-    color: #fff
+    color: var(--blanco);
 }
 
 .nav > li > a {
@@ -2929,7 +2929,7 @@ a.btn-success,
 a.btn-primary,
 a.btn-warning,
 a.btn-danger {
-    color: #fff
+    color: var(--blanco);
 }
 
 .btn-success {
@@ -2959,7 +2959,7 @@ a.btn-danger {
     }
 
 .btn-dark {
-    color: #E9EDEF;
+    color: var(--blanco);
     background-color: #4B5F71;
     border-color: #364B5F
 }
@@ -2969,9 +2969,21 @@ a.btn-danger {
     .btn-dark:active,
     .btn-dark.active,
     .open .dropdown-toggle.btn-dark {
-        color: #FFFFFF;
         background-color: #394D5F;
         border-color: #394D5F
+    }
+
+.btn-primary {
+        background-color: #337ab7;
+        border-color: #337ab7
+}
+
+    .btn-primary:hover,
+    .btn-primary:focus,
+    .btn-primary:active,
+    .btn-primary.active,
+    .open .dropdown-toggle.btn-primary {
+        background: #2b69a0!important;
     }
 
 .btn-round {
@@ -4034,7 +4046,7 @@ ul.project_files li {
 .tabs-left > li.active > a:hover,
 .tabs-left > li.active > a:focus {
     border-bottom-color: #F7F7F7;
-    border-right-color: transparent
+    border-right-color: transparent;
 }
 
 .tabs-right > li.active > a,
