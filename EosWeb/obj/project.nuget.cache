@@ -1,11 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "sxgXvBazeFJedUPReN8ULmD/ymfnAXA97xWrxynVoVPp6uwdYH85nt/HT8HUN54gc2olFLHz044Ko8tONbWpMQ==",
+  "dgSpecHash": "xm7lTbnPqbJ6CG/lZ3t1/a29aK5XtjGrRNcFY0eV+qbxFysKKT/7PQ1/z/m17miYS5lILr6BM8BAMmvCbsuOhw==",
   "success": true,
   "projectFilePath": "C:\\Users\\elyna\\Documents\\Universidad de Talca\\2019-2\\Diseño y Analisis de Algoritmos\\EoS\\EosWeb\\Eosweb.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\elyna\\.nuget\\packages\\bouncycastle.netcore\\1.8.3\\bouncycastle.netcore.1.8.3.nupkg.sha512",
     "C:\\Users\\elyna\\.nuget\\packages\\dinktopdf\\1.0.7\\dinktopdf.1.0.7.nupkg.sha512",
+    "C:\\Users\\elyna\\.nuget\\packages\\exceldatareader\\3.6.0\\exceldatareader.3.6.0.nupkg.sha512",
     "C:\\Users\\elyna\\.nuget\\packages\\google.protobuf\\3.6.1\\google.protobuf.3.6.1.nupkg.sha512",
     "C:\\Users\\elyna\\.nuget\\packages\\microsoft.aspnet.webapi.client\\5.2.6\\microsoft.aspnet.webapi.client.5.2.6.nupkg.sha512",
     "C:\\Users\\elyna\\.nuget\\packages\\microsoft.aspnetcore\\2.1.1\\microsoft.aspnetcore.2.1.1.nupkg.sha512",

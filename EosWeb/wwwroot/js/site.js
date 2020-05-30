@@ -10,7 +10,6 @@
 
 $(document).ready(function () {
     init_sidebar();
-    //init_parsley();
     init_daterangepicker();
     init_daterangepicker_right();
     init_daterangepicker_single_call();
@@ -18,7 +17,7 @@ $(document).ready(function () {
     init_select2();
     init_validator();
     init_DataTables();
-    init_calendar();
+    init_wysiwyg();
 });
 
 
@@ -108,52 +107,6 @@ function init_sidebar() {
     }
 };
 // /Sidebar
-
-/* PARSLEY */
-function init_parsley() {
-
-    if (typeof (parsley) === 'undefined') { return; }
-    console.log('init_parsley');
-
-    $/*.listen*/('parsley:field:validate', function () {
-        validateFront();
-    });
-    $('#demo-form .btn').on('click', function () {
-        $('#demo-form').parsley().validate();
-        validateFront();
-    });
-    var validateFront = function () {
-        if (true === $('#demo-form').parsley().isValid()) {
-            $('.bs-callout-info').removeClass('hidden');
-            $('.bs-callout-warning').addClass('hidden');
-        } else {
-            $('.bs-callout-info').addClass('hidden');
-            $('.bs-callout-warning').removeClass('hidden');
-        }
-    };
-
-    $/*.listen*/('parsley:field:validate', function () {
-        validateFront();
-    });
-    $('#demo-form2 .btn').on('click', function () {
-        $('#demo-form2').parsley().validate();
-        validateFront();
-    });
-    var validateFront = function () {
-        if (true === $('#demo-form2').parsley().isValid()) {
-            $('.bs-callout-info').removeClass('hidden');
-            $('.bs-callout-warning').addClass('hidden');
-        } else {
-            $('.bs-callout-info').addClass('hidden');
-            $('.bs-callout-warning').removeClass('hidden');
-        }
-    };
-
-    try {
-        hljs.initHighlightingOnLoad();
-    } catch (err) { }
-
-};
 
 /* DATERANGEPICKER */
 function init_daterangepicker() {
@@ -504,104 +457,74 @@ function init_DataTables() {
 
 };
 
-/* CALENDAR */
-function init_calendar() {
+/* WYSIWYG EDITOR */
+function init_wysiwyg() {
 
-    if (typeof ($.fn.fullCalendar) === 'undefined') { return; }
-    console.log('init_calendar');
+    if (typeof ($.fn.wysiwyg) === 'undefined') { return; }
+    console.log('init_wysiwyg');
 
-    var date = new Date(),
-        d = date.getDate(),
-        m = date.getMonth(),
-        y = date.getFullYear(),
-        started,
-        categoryClass;
-
-    var calendar = $('#calendar').fullCalendar({
-        header: {
-            left: 'prev,next today',
-            center: 'title',
-            right: 'month,agendaWeek,agendaDay,listMonth'
-        },
-        selectable: true,
-        selectHelper: true,
-        select: function (start, end, allDay) {
-            $('#fc_create').click();
-
-            started = start;
-            ended = end;
-
-            $(".antosubmit").on("click", function () {
-                var title = $("#title").val();
-                if (end) {
-                    ended = end;
-                }
-
-                categoryClass = $("#event_type").val();
-
-                if (title) {
-                    calendar.fullCalendar('renderEvent', {
-                        title: title,
-                        start: started,
-                        end: end,
-                        allDay: allDay
-                    },
-                        true // make the event "stick"
-                    );
-                }
-
-                $('#title').val('');
-
-                calendar.fullCalendar('unselect');
-
-                $('.antoclose').click();
-
-                return false;
-            });
-        },
-        eventClick: function (calEvent, jsEvent, view) {
-            $('#fc_edit').click();
-            $('#title2').val(calEvent.title);
-
-            categoryClass = $("#event_type").val();
-
-            $(".antosubmit2").on("click", function () {
-                calEvent.title = $("#title2").val();
-
-                calendar.fullCalendar('updateEvent', calEvent);
-                $('.antoclose2').click();
+    function init_ToolbarBootstrapBindings() {
+        var fonts = ['Serif', 'Sans', 'Arial', 'Arial Black', 'Courier',
+            'Courier New', 'Comic Sans MS', 'Helvetica', 'Impact', 'Lucida Grande', 'Lucida Sans', 'Tahoma', 'Times',
+            'Times New Roman', 'Verdana'],
+            fontTarget = $('[title=Font]').siblings('.dropdown-menu');
+        $.each(fonts, function (idx, fontName) {
+            fontTarget.append($('<li><a data-edit="fontName ' + fontName + '" style="font-family:\'' + fontName + '\'">' + fontName + '</a></li>'));
+        });
+        $('a[title]').tooltip({
+            container: 'body'
+        });
+        $('.dropdown-menu input').click(function () {
+            return false;
+        })
+            .change(function () {
+                $(this).parent('.dropdown-menu').siblings('.dropdown-toggle').dropdown('toggle');
+            })
+            .keydown('esc', function () {
+                this.value = '';
+                $(this).change();
             });
 
-            calendar.fullCalendar('unselect');
-        },
-        editable: true,
-        events: [{
-            title: 'All Day Event',
-            start: new Date(y, m, 1)
-        }, {
-            title: 'Long Event',
-            start: new Date(y, m, d - 5),
-            end: new Date(y, m, d - 2)
-        }, {
-            title: 'Meeting',
-            start: new Date(y, m, d, 10, 30),
-            allDay: false
-        }, {
-            title: 'Lunch',
-            start: new Date(y, m, d + 14, 12, 0),
-            end: new Date(y, m, d, 14, 0),
-            allDay: false
-        }, {
-            title: 'Birthday Party',
-            start: new Date(y, m, d + 1, 19, 0),
-            end: new Date(y, m, d + 1, 22, 30),
-            allDay: false
-        }, {
-            title: 'Click for Google',
-            start: new Date(y, m, 28),
-            end: new Date(y, m, 29),
-            url: 'http://google.com/'
-        }]
+        $('[data-role=magic-overlay]').each(function () {
+            var overlay = $(this),
+                target = $(overlay.data('target'));
+            overlay.css('opacity', 0).css('position', 'absolute').offset(target.offset()).width(target.outerWidth()).height(target.outerHeight());
+        });
+
+        if ("onwebkitspeechchange" in document.createElement("input")) {
+            var editorOffset = $('#editor').offset();
+
+            $('.voiceBtn').css('position', 'absolute').offset({
+                top: editorOffset.top,
+                left: editorOffset.left + $('#editor').innerWidth() - 35
+            });
+        } else {
+            $('.voiceBtn').hide();
+        }
+    }
+
+    function showErrorAlert(reason, detail) {
+        var msg = '';
+        if (reason === 'unsupported-file-type') {
+            msg = "Unsupported format " + detail;
+        } else {
+            console.log("error uploading file", reason, detail);
+        }
+        $('<div class="alert"> <button type="button" class="close" data-dismiss="alert">&times;</button>' +
+            '<strong>File upload error</strong> ' + msg + ' </div>').prependTo('#alerts');
+    }
+
+    $('.editor-wrapper').each(function () {
+        var id = $(this).attr('id');	//editor-one
+
+        $(this).wysiwyg({
+            toolbarSelector: '[data-target="#' + id + '"]',
+            fileUploadError: showErrorAlert
+        });
     });
+
+
+    window.prettyPrint;
+    prettyPrint();
 
 };

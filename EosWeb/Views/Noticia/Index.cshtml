@@ -1,0 +1,196 @@
+@using Eosweb.Models
+@model List<Eosweb.Models.Noticia>
+
+@{
+    ViewData["Title"] = "Noticias";
+    ViewBag.Title = "Noticias";
+}
+
+<!-- bootstrap-wysiwyg -->
+<link href="~/lib/google-code-prettify/bin/prettify.min.css" rel="stylesheet">
+
+<div class="right_col" role="main">
+    <div class="">
+        <!--Titulo-->
+        <div class="page-title">
+            <div class="title_left">
+                <h3>@ViewBag.Title</h3>
+            </div>
+        </div>
+        <br />
+        <!--/ Titulo-->
+        <!--Breadcrumb-->
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="@Url.Action("Index", "Home")">Inicio</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Noticias</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+        <!--/ Breadcrumb-->
+
+        <div class="clearfix"></div>
+        <!--Contenido -->
+        <div class="">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2><i class="fa fa-th-list"></i> </h2>
+                        @if(@ViewBag.Tipo == "Administrador") {
+                            <ul class="nav navbar-right panel_toolbox">
+                                <li></li>
+                                <li></li>
+                                <li><a href=""  class="btn btn-primary" data-title="add" data-toggle="modal" data-target="#add" ><i class="fa fa-plus fa-lg"></i> Noticia</a></li>
+                            </ul>
+                        }
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        <!--Content-->
+                            <ul class="list-unstyled timeline widget">
+                                @foreach (var noticia in Model)
+                                {
+                                <li>
+                                    @{
+                                        var autor = noticia.autor;
+                                    }
+                                    <div class="block">
+                                    <div class="block_content">
+                                        <h2 class="title">
+                                                        <a href="@Url.Action("Noticia", "Noticia", new { Id  = @noticia.id})">@noticia.titulo</a>
+                                                    </h2>
+                                        <div class="byline">
+                                        @noticia.fecha por <span class="badge badge-danger">@autor.Nombre</span>
+                                        </div>
+                                    </div>
+                                    </div>
+                                </li>
+                                }
+                            </ul>
+                        <!--Content-->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--Contenido -->
+    </div>
+</div>
+
+<script type="text/javascript">
+    VerNoticia= function (id, titulo, cuerpo, fecha, autor) {
+            document.getElementById("fecha-not").innerHTML= fecha;
+        };
+</script>
+
+<!--Modal Crear -->
+<div class="modal fade bd-example-modal-lg" id="add" tabindex="-1" role="dialog" aria-labelledby="add">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <h4 class="modal-title"><i class="fa fa-pencil-square-o"></i> Nueva Noticia</h4>
+            </div>
+            @using (Html.BeginForm("Crear", "Noticia", FormMethod.Post, new { enctype = "multipart/form-data", @style = "border:none", data_parley_validate = false }))
+            {
+                <div class="modal-body form-horizontal form-label-left" data-parsley-validate>
+                        <div class="form-group">
+                            <div class="alert alert-info alert-dismissible fade in" role="alert">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span>
+                                </button>
+                                <i class="fa fa-info-circle fa-lg"></i> ¡Ten en cuenta que la fecha de la publicación se establecerá en cuanto la publiques! :)
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Título *:</label>
+                            <div class="col-md-9 col-sm-9 col-xs-9">
+                                <input type="text" class="form-control" name="Titulo" rows="1" data-parsley-length="[4, 20]" data-parsley-minwords="1" placeholder="Ejemplo: ¡Avances!" data-parsley-trigger="change" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-12 col-sm-12 col-xs-12">Cuerpo *:</label>
+                            <!--Noticia-->
+                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                    <div id="alerts"></div>
+                                    <div class="btn-toolbar editor" data-role="editor-toolbar" data-target="#editor-one">
+                                        <div class="btn-group">
+                                            <a class="btn dropdown-toggle" data-toggle="dropdown" title="Font Size"><i class="fa fa-text-height"></i>&nbsp;<b class="caret"></b></a>
+                                            <ul class="dropdown-menu">
+                                                <li>
+                                                <a data-edit="fontSize 5">
+                                                    <p style="font-size:17px">Grande</p>
+                                                </a>
+                                                </li>
+                                                <li>
+                                                <a data-edit="fontSize 2">
+                                                    <p style="font-size:13px">Normal</p>
+                                                </a>
+                                                </li>
+                                                <li>
+                                                <a data-edit="fontSize 1">
+                                                    <p style="font-size:11px">Pequeño</p>
+                                                </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+
+                                        <div class="btn-group">
+                                        <a class="btn" data-edit="bold" title="Bold (Ctrl/Cmd+B)"><i class="fa fa-bold"></i></a>
+                                        <a class="btn" data-edit="italic" title="Italic (Ctrl/Cmd+I)"><i class="fa fa-italic"></i></a>
+                                        <a class="btn" data-edit="strikethrough" title="Strikethrough"><i class="fa fa-strikethrough"></i></a>
+                                        <a class="btn" data-edit="underline" title="Underline (Ctrl/Cmd+U)"><i class="fa fa-underline"></i></a>
+                                        </div>
+
+                                        <div class="btn-group">
+                                        <a class="btn" data-edit="insertunorderedlist" title="Bullet list"><i class="fa fa-list-ul"></i></a>
+                                        <a class="btn" data-edit="insertorderedlist" title="Number list"><i class="fa fa-list-ol"></i></a>
+                                        <a class="btn" data-edit="outdent" title="Reduce indent (Shift+Tab)"><i class="fa fa-dedent"></i></a>
+                                        <a class="btn" data-edit="indent" title="Indent (Tab)"><i class="fa fa-indent"></i></a>
+                                        </div>
+
+                                        <div class="btn-group">
+                                        <a class="btn" data-edit="justifyleft" title="Align Left (Ctrl/Cmd+L)"><i class="fa fa-align-left"></i></a>
+                                        <a class="btn" data-edit="justifycenter" title="Center (Ctrl/Cmd+E)"><i class="fa fa-align-center"></i></a>
+                                        <a class="btn" data-edit="justifyright" title="Align Right (Ctrl/Cmd+R)"><i class="fa fa-align-right"></i></a>
+                                        <a class="btn" data-edit="justifyfull" title="Justify (Ctrl/Cmd+J)"><i class="fa fa-align-justify"></i></a>
+                                        </div>
+
+                                        <div class="btn-group">
+                                        <a class="btn" data-edit="undo" title="Undo (Ctrl/Cmd+Z)"><i class="fa fa-undo"></i></a>
+                                        <a class="btn" data-edit="redo" title="Redo (Ctrl/Cmd+Y)"><i class="fa fa-repeat"></i></a>
+                                        </div>
+                                    </div>
+                                    <div id="editor-one" class="editor-wrapper" placeholder="Ejemplo: Se agregó contenido nuevo" ></div>
+                                    <textarea name="descr" id="descr" style="display:none;"></textarea>
+                                </div>
+                            <!--end noticia-->
+                        </div>
+                        
+                </div>
+                <div class="modal-footer">
+                    <input type="hidden" name="Cuerpo" id="cuerpo-pub">
+                    <button type="submit" id="button-publicar" class="btn btn-success">Publicar</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            $('#button-publicar').click(function () {
+                //Open modal dialog for edit event
+                var v = document.getElementById("editor-one");
+                var finalvar = v.innerHTML;
+                document.getElementById('cuerpo-pub').setAttribute("value", finalvar);
+            });
+
+        });
+    </script>
+}

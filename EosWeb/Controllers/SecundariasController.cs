@@ -4,33 +4,44 @@ using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using Eosweb.Models;
 using Eosweb.Data;
+using Microsoft.AspNetCore.Http;
 
 namespace Eosweb.Controllers
 {
     public class SecundariasController : Controller
     {
         public IActionResult Index(){
+            if (Sesion() == true) {
+                String Rut = HttpContext.Session.GetString(Global.SessionKeyName);
+                ViewData["Sesion"] = true;
+                Usuario u = DataUsuario.LeerUno(Rut);
+                //poned acá más datos de usuario en caso de necesitarlos
+                ViewData["Tipo"] = u.Tipo;
+                ViewData["NombreUsuario"] = u.Nombre;
+                ViewData["IdUsuario"] = u.Rut;
+            }
+            
             List<Secundarias> f = DataSecundarias.LeerTodo();
-            if (f == null) {
-                f = new List<Secundarias>();
-            }
+                if (f == null) {
+                    f = new List<Secundarias>();
+                }
 
-            List<Identificador> i = DataIdentificador.LeerTodo();
-            if (i == null) {
-                i = new List<Identificador>();
-            }
-            else {
-                List<Identificador> final_i = new List<Identificador>();
-                foreach (Secundarias var in f) {
-                    int remove = search(i,var.i);
-                    if(remove != -1) {
-                        i.RemoveAt(remove);
+                List<Identificador> i = DataIdentificador.LeerTodo();
+                if (i == null) {
+                    i = new List<Identificador>();
+                }
+                else {
+                    List<Identificador> final_i = new List<Identificador>();
+                    foreach (Secundarias var in f) {
+                        int remove = search(i,var.i);
+                        if(remove != -1) {
+                            i.RemoveAt(remove);
+                        }
                     }
                 }
-            }
 
-            ViewData["Identificadores"] = i;
-            return View(f);
+                ViewData["Identificadores"] = i;
+                return View(f);
         }
 
 
@@ -177,6 +188,19 @@ namespace Eosweb.Controllers
             return Convert.ToDouble(final_s);
         }
 
-
+        /********
+        * SESION
+        ********/
+        public Boolean Sesion() {
+            Boolean exist = string.IsNullOrEmpty(HttpContext.Session.GetString(Global.SessionKeyName));
+            if (exist) 
+            {
+                return false;
+            }
+            else 
+            {
+                return true;
+            }
+        }
     }
 }

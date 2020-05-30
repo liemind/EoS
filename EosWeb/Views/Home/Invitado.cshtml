@@ -1,0 +1,61 @@
+@{
+    ViewData["Title"] = "Iniciar Sesión";
+}
+
+<div class="right_col" role="main">
+    <div class="">
+        <!--Titulo-->
+        <div class="page-title">
+            <div class="title_left">
+                <h3>@ViewBag.Title</h3>
+            </div>
+        </div>
+        <br />
+        <!--/ Titulo-->
+        <div class="clearfix"></div>
+        <!--Contenido -->
+        <div class="">
+            <div class="col-md-4 col-sm-4 col-xs-12"></div>
+            <div class="col-md-4 col-sm-4 col-xs-12 align-items-center">
+                <div class="x_panel">
+                        <div class="x_title-login-form">
+                            <h2><i class="fa fa-calendar-o"></i> Iniciar Sesión <small>Eos3</small></h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content"  data-parsley-validate>
+                            <!--Content-->
+                            <section class="login_content">
+                                @using (Html.BeginForm("IniciarSesion", "Home", FormMethod.Post,  new { enctype = "multipart/form-data" }))
+                                {
+                                    <div class="form-horizontal text-login-label form-label-left" data-parsley-validate>
+                                        <div class="form-group">
+                                            <label class="control-label col-md-12 col-sm-12 col-xs-12">Nombre de Usuario :</label>
+                                            <div class="col-md-12 col-sm-12 col-xs-10">
+                                            <input type="text" class="form-control" name="Rut" placeholder="Ingrese Rut sin digito verificador ni puntos."  data-parsley-pattern="\d{0,1}\d\d\d\d\d\d\d" data-parsley-trigger="change" required/>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-md-12 col-sm-12 col-xs-12">Contraseña :</label>
+                                            <div class="col-md-12 col-sm-12 col-xs-10">
+                                                <input type="password" class="form-control" name="Pass" placeholder="Ingrese Contraseña" required/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="ln_solid"></div>
+                                    <div>
+                                        <button class="btn btn-primary" type="submit">Login</button>
+                                    </div>
+                                    <div>
+                                        <a href="#" data-title="email" data-toggle="modal" data-target="#email">¿Perdiste tu Contraseña?</a>
+                                    </div>
+                                }
+                            </section>
+                            <!--/ Content-->
+                        </div>
+                    </div>
+            </div>
+            <div class="col-md-4 col-sm-4 col-xs-12"></div>
+        </div>
+        <!--Contenido -->
+    </div>
+</div>

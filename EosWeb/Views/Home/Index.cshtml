@@ -1,19 +1,90 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@using Eosweb.Models
+@model List<Eosweb.Models.Noticia>
+
+@{
+    ViewData["Title"] = "¡Bienvenido a EOS3!";
 }
 
 <!-- page content -->
 <div class="right_col" role="main">
     <div class="">
-        <!--Titulo-->
-        <div class="page-title">
-            <div class="title_left">
-                <h3>@ViewBag.Title</h3>
-            </div>
-        </div>
-        <br />
-        <!--/ Titulo-->
+        <!--Contenido -->
 
+        <!--jumbotron-->
+        <div class="">
+            <!--Form -->
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2><i class="fa fa-th-list"></i></h2>
+                        <ul class="nav navbar-right panel_toolbox">
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        <!--Content-->
+                        <div class="jumbotron">
+                            <h1>@ViewBag.Title</h1>
+                            <p>EOS3 es un laboratorio virtual que modela ecuaciones cúbicas de estado y aproxima propiedades con datos mínimos. </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--end Form-->
+        </div>
+        <!--/end -->
+
+
+        <!--timeline-->
+        <div class="">
+            <!--Form -->
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2><i class="fa fa-th-list"></i></h2>
+                        <ul class="nav navbar-right panel_toolbox">
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        <!--Content-->
+                        <ul class="list-unstyled timeline">
+                        @foreach (var noticia in Model)
+                        {
+                            <li>
+                                <div class="block">
+                                    <div class="tags">
+                                    <a href="" class="tag">
+                                        <span><i class="fa fa-exclamation"></i></span>
+                                    </a>
+                                    </div>
+                                    <div class="block_content">
+                                    <h2 class="title">
+                                                    <a href="@Url.Action("Noticia", "Noticia", new { Id  = @noticia.id})">@noticia.titulo</a>
+                                    </h2>
+                                    <div class="byline">
+                                        @noticia.fecha por <span class="badge badge-danger">@noticia.autor.Nombre</span>
+                                    </div>
+                                    </div>
+                                </div>
+                            </li>
+                        }
+                    </ul>
+                        <!--Content-->
+                    </div>
+                </div>
+            </div>
+            <!--end Form-->
+        </div>
+        <!--/end -->
     </div>
 </div>
 <!-- /page content -->
+

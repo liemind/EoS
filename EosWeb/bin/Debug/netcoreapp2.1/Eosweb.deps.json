@@ -25,6 +25,7 @@
       "Eosweb/1.0.0": {
         "dependencies": {
           "DinkToPdf": "1.0.7",
+          "ExcelDataReader": "3.6.0",
           "Microsoft.AspNetCore.App": "2.1.1",
           "Microsoft.AspNetCore.Razor.Design": "2.1.2",
           "Microsoft.NETCore.App": "2.1.0",
@@ -72,6 +73,17 @@
         },
         "compile": {
           "lib/netstandard1.6/DinkToPdf.dll": {}
+        }
+      },
+      "ExcelDataReader/3.6.0": {
+        "runtime": {
+          "lib/netstandard2.0/ExcelDataReader.dll": {
+            "assemblyVersion": "3.6.0.0",
+            "fileVersion": "3.6.0.0"
+          }
+        },
+        "compile": {
+          "lib/netstandard2.0/ExcelDataReader.dll": {}
         }
       },
       "Google.Protobuf/3.6.1": {
@@ -3451,6 +3463,13 @@
       "sha512": "sha512-aRpCvsK9dFeu3iXpzUI3c4DZtT62GTiQI+TrNamashRWSqg8jKThCzliPNMr7xifKYz2FslY2IgsKJJwBj0mjQ==",
       "path": "dinktopdf/1.0.7",
       "hashPath": "dinktopdf.1.0.7.nupkg.sha512"
+    },
+    "ExcelDataReader/3.6.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-eXyxTwG7EEWpgQX3juZ2KcndqTqm/ydx9GXS2lUiMJU54U4h5eXdygRtVgINv0t60ezPWEb+lL7uM7Q+wm5BBA==",
+      "path": "exceldatareader/3.6.0",
+      "hashPath": "exceldatareader.3.6.0.nupkg.sha512"
     },
     "Google.Protobuf/3.6.1": {
       "type": "package",
