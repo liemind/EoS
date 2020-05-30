@@ -47,14 +47,17 @@
                             <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
                                 <li role="presentation" class="active"><a href="#tab_content1" id="home-tab" role="tab" data-toggle="tab" aria-expanded="true">Identificador</a>
                                 </li>
-                                <li role="presentation" class=""><a href="#tab_content2" role="tab" id="profile-tab" data-toggle="tab" aria-expanded="false">Antoine</a>
+                                <li role="presentation" class=""><a href="#tab_content2" role="tab" id="antoine-tab" data-toggle="tab" aria-expanded="false">Antoine</a>
                                 </li>
-                                <li role="presentation" class=""><a href="#tab_content3" role="tab" id="profile-tab2" data-toggle="tab" aria-expanded="false">Riedel y Watson</a>
+                                <li role="presentation" class=""><a href="#tab_content3" role="tab" id="riedel-tab" data-toggle="tab" aria-expanded="false">Riedel y Watson</a>
+                                </li>
+                                <li role="presentation" class=""><a href="#tab_content4" role="tab" id="racket-tab" data-toggle="tab" aria-expanded="false">Racket</a>
                                 </li>
                             </ul>
                             <div id="myTabContent" class="tab-content">
-                                <!-- tab 1-->
                                 <div role="tabpanel" class="tab-pane fade active in" id="tab_content1" aria-labelledby="home-tab">
+                                <!-- tab 1-->
+                                    @if(@ViewBag.Compuesto == null){
                                     <!--aviso -->
                                     <div class="alert alert-info alert-dismissible fade in" role="alert">
                                         <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span>
@@ -62,6 +65,7 @@
                                         <i class="fa fa-info-circle fa-lg"></i> Seleccione un compuesto para comenzar con los cálculos.
                                     </div>
                                     <!--end aviso-->
+                                    }
 
                                     <!--form -->
                                     @using (Html.BeginForm("SeleccionarCompuesto", "Correlaciones", FormMethod.Post, new { enctype = "multipart/form-data", @style = "border:none", data_parley_validate = false })) {
@@ -121,7 +125,7 @@
                                     
                                 <!-- fin tab -->
                                 </div>
-                                <div role="tabpanel" class="tab-pane fade" id="tab_content2" aria-labelledby="profile-tab">
+                                <div role="tabpanel" class="tab-pane fade" id="tab_content2" aria-labelledby="antoine-tab">
                                 <!-- tab 2 -->
                                     @if(@ViewBag.idCompuesto != null) {
                                         <!-- start accordion -->
@@ -140,10 +144,10 @@
                                                             <tbody>
                                                             <tr>
                                                                 @if(@ViewBag.T != null){ 
-                                                                    <td class="text-justify"><input type="number" data-parsley-type="integer" class="form-control" name="T" min="@ViewBag.Tmax_k" max="@ViewBag.Tc_K" placeholder="Ingrese una temperatura entre @ViewBag.Tmax_k y @ViewBag.Tmin_k (kelvin)" data-parsley-pattern="([0-9])+|(\,([0-9]+))" value="@ViewBag.T"></td>
+                                                                    <td class="text-justify"><input type="number" data-parsley-type="integer" class="form-control" name="T" min="@ViewBag.Tmax_k" max="@ViewBag.Tc_K" placeholder="Ingrese una temperatura entre @ViewBag.Tmax_k (kelvin) y @ViewBag.Tmin_k (kelvin)" data-parsley-pattern="([0-9])+|(\,([0-9]+))" value="@ViewBag.T"></td>
                                                                 }
                                                                 else {
-                                                                    <td class="text-justify"><input type="number" data-parsley-type="integer" class="form-control" min="@ViewBag.Tmax_k" max="@ViewBag.Tc_K" placeholder="Ingrese una temperatura entre @ViewBag.Tmax_k y @ViewBag.Tmin_k (kelvin)" data-parsley-pattern="([0-9])+|(\,([0-9]+))" name="T" value="" required></td>
+                                                                    <td class="text-justify"><input type="number" data-parsley-type="integer" class="form-control" min="@ViewBag.Tmax_k" max="@ViewBag.Tc_K" placeholder="Ingrese una temperatura entre @ViewBag.Tmax_k (kelvin) y @ViewBag.Tmin_k (kelvin)" data-parsley-pattern="([0-9])+|(\,([0-9]+))" name="T" value="" required></td>
                                                                 }
                                                                 <td class="text-justify" width="5%"><button id="send" type="submit" class="btn btn-success">Calcular</button></td>
                                                             </tr>
@@ -151,6 +155,10 @@
                                                         </table>
                                                     </div>
                                                     <input type="hidden" class="form-control" name="IdCompuesto" value="@ViewBag.idCompuesto">
+                                                    <input type="hidden" class="form-control" name="Snv" value="@ViewBag.Snv">
+                                                    <input type="hidden" class="form-control" name="V" value="@ViewBag.V">
+                                                    <input type="hidden" class="form-control" name="T3" value="@ViewBag.T3">
+
                                                     }
                                                     <!-- end form -->
 
@@ -273,8 +281,8 @@
                                     }
                                 <!-- fin tab -->
                                 </div>
-                                <div role="tabpanel" class="tab-pane fade" id="tab_content3" aria-labelledby="profile-tab">
-                                <!-- tab -->
+                                <div role="tabpanel" class="tab-pane fade" id="tab_content3" aria-labelledby="riedel-tab">
+                                <!-- tab 3-->
                                     @if(@ViewBag.idCompuesto != null) {
                                         <!-- start accordion -->
                                         <div class="accordion" id="accordion2" role="tablist" aria-multiselectable="true">
@@ -326,10 +334,10 @@
                                                                 <tbody>
                                                                 <tr>
                                                                     @if(@ViewBag.T2 != null){ 
-                                                                        <td class="text-justify"><input type="number" data-parsley-type="integer" class="form-control" name="T2" min="@ViewBag.Tmax_k" max="@ViewBag.Tc_K" placeholder="Ingrese una temperatura entre @ViewBag.Tmax_k y @ViewBag.Tmin_k (kelvin)" data-parsley-pattern="([0-9])+|(\,([0-9]+))" value="@ViewBag.T2"></td>
+                                                                        <td class="text-justify"><input type="number" data-parsley-type="integer" class="form-control" name="T2" min="@ViewBag.Tmax_k" max="@ViewBag.Tc_K" placeholder="Ingrese una temperatura entre @ViewBag.Tmax_k (kelvin) y @ViewBag.Tmin_k (kelvin)" data-parsley-pattern="([0-9])+|(\,([0-9]+))" value="@ViewBag.T2"></td>
                                                                     }
                                                                     else {
-                                                                        <td class="text-justify"><input type="number" data-parsley-type="integer" class="form-control" min="@ViewBag.Tmax_k" max="@ViewBag.Tc_K" placeholder="Ingrese una temperatura entre @ViewBag.Tmax_k y @ViewBag.Tmin_k (kelvin)" data-parsley-pattern="([0-9])+|(\,([0-9]+))" name="T2" value="" required></td>
+                                                                        <td class="text-justify"><input type="number" data-parsley-type="integer" class="form-control" min="@ViewBag.Tmax_k" max="@ViewBag.Tc_K" placeholder="Ingrese una temperatura entre @ViewBag.Tmax_k (kelvin) y @ViewBag.Tmin_k (kelvin)" data-parsley-pattern="([0-9])+|(\,([0-9]+))" name="T2" value="" required></td>
                                                                     }
                                                                     <td class="text-justify" width="5%"><button id="send" type="submit" class="btn btn-success">Calcular</button></td>
                                                                 </tr>
@@ -344,6 +352,8 @@
                                                         <input type="hidden" class="form-control" name="R" value="@ViewBag.R">
                                                         <input type="hidden" class="form-control" name="En" value="@ViewBag.En">
                                                         <input type="hidden" class="form-control" name="Snv" value="@ViewBag.Snv">
+                                                        <input type="hidden" class="form-control" name="V" value="@ViewBag.V">
+                                                        <input type="hidden" class="form-control" name="T3" value="@ViewBag.T3">
                                                         }
                                                         <!-- end form -->
 
@@ -392,9 +402,23 @@
                                                 <div class="panel-body">
                                                     <!-- Content tab 3 -->
                                                         @if(@ViewBag.T != null) {
+                                                            <center> Imagen Formula </center>
+                                                            <div class="clearfix"></div>
                                                             
-
-
+                                                            <div>
+                                                                <table class="table table-striped table-bordered table-responsive">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <th>Entropia normal de vaporización</th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        <tr>
+                                                                            <td class="text-justify alert-success"><input type="text" class="form-control" name="" value="@ViewBag.Snv" readonly></td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
                                                         }
                                                         else {
                                                             <!--aviso -->
@@ -417,9 +441,23 @@
                                                 <div class="panel-body">
                                                     <!-- Content tab 4 -->
                                                         @if(@ViewBag.T != null) {
+                                                            <center> Imagen Formula </center>
+                                                            <div class="clearfix"></div>
                                                             
-
-
+                                                            <div>
+                                                                <table class="table table-striped table-bordered table-responsive">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <th>Entropia de vaporización</th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        <tr>
+                                                                            <td class="text-justify alert-success"><input type="text" class="form-control" name="" value="@ViewBag.Sv" readonly></td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
                                                         }
                                                         else {
                                                             <!--aviso -->
@@ -448,6 +486,68 @@
                                         </div>
                                         <!--end aviso-->
                                     }
+                                <!-- fin tab -->
+                                </div>
+                                <div role="tabpanel" class="tab-pane fade" id="tab_content4" aria-labelledby="racket-tab">
+                                <!-- tab 4-->
+                                    @if(@ViewBag.idCompuesto != null) {
+                                    <!--form -->
+                                        @using (Html.BeginForm("TemperaturaRacket", "Correlaciones", FormMethod.Post, new { enctype = "multipart/form-data", @style = "border:none", data_parley_validate = false })) {
+                                        <div data-parsley-validate>
+                                            <table class="table table-striped table-bordered table-responsive">
+                                            <tbody>
+                                                <tr>
+                                                @if(@ViewBag.T != null){ 
+                                                    <td class="text-justify"><input type="number" data-parsley-type="integer" class="form-control" name="T3" min="@ViewBag.Tmax_k" max="@ViewBag.Tc_K" placeholder="Ingrese una temperatura entre @ViewBag.Tmax_k (kelvin) y @ViewBag.Tmin_k (kelvin)" data-parsley-pattern="([0-9])+|(\,([0-9]+))" value="@ViewBag.T3"></td>
+                                                }
+                                                else {
+                                                    <td class="text-justify"><input type="number" data-parsley-type="integer" class="form-control" min="@ViewBag.Tmax_k" max="@ViewBag.Tc_K" placeholder="Ingrese una temperatura entre @ViewBag.Tmax_k (kelvin) y @ViewBag.Tmin_k (kelvin)" data-parsley-pattern="([0-9])+|(\,([0-9]+))" name="T3" value="" required></td>
+                                                }
+                                                    <td class="text-justify" width="5%"><button id="send" type="submit" class="btn btn-success">Calcular</button></td>
+                                                </tr>
+                                            </tbody>
+                                            </table>
+                                        </div>
+                                        <input type="hidden" class="form-control" name="IdCompuesto" value="@ViewBag.idCompuesto">
+                                        <input type="hidden" class="form-control" name="T" value="@ViewBag.T">
+                                        <input type="hidden" class="form-control" name="T" value="@ViewBag.T2">
+                                        <input type="hidden" class="form-control" name="Ps" value="@ViewBag.Ps">
+                                        <input type="hidden" class="form-control" name="Te" value="@ViewBag.Te">
+                                        <input type="hidden" class="form-control" name="Tne" value="@ViewBag.Tne">
+                                        <input type="hidden" class="form-control" name="R" value="@ViewBag.R">
+                                        <input type="hidden" class="form-control" name="En" value="@ViewBag.En">
+                                        <input type="hidden" class="form-control" name="Snv" value="@ViewBag.Snv">
+                                        <input type="hidden" class="form-control" name="V" value="@ViewBag.V">
+                                        }
+                                    <!-- end form -->
+
+                                    <center> Imagen Formula </center>
+                                    <div class="clearfix"></div>
+                                    <div>
+                                        <table class="table table-striped table-bordered table-responsive">
+                                        <thead>
+                                            <tr>
+                                                <th>Volumen del líquido saturado (m^3/mol)</th>
+                                            </tr>
+                                        </thead>
+                                                <tbody>
+                                                    <tr>
+                                                    <td class="text-justify alert-success"><input type="text" class="form-control" name="" value="@ViewBag.V" readonly></td>
+                                                    </tr>
+                                                </tbody>
+                                        </table>
+                                    </div>
+                                    }
+                                    else {
+                                        <!--aviso -->
+                                        <div class="alert alert-danger alert-dismissible fade in" role="alert">
+                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span>
+                                            </button>
+                                            <i class="fa fa-info-circle fa-lg"></i> <strong>Debe</strong> seleccionar un compuesto para comenzar con los cálculos.
+                                        </div>
+                                        <!--end aviso-->    
+                                    }
+                                    
                                 <!-- fin tab -->
                                 </div>
                             </div>

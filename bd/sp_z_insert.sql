@@ -913,3 +913,8 @@ INSERT INTO constantes(id, A, B, C, D) VALUES (14,3.47,0.00145,0,12100);
 
 /*Usuarios*/
 INSERT INTO usuario(rut,nombre,correoElectronico,tipo,password,estado) VALUES ('9999999', 'admin', 'admin@eos.cl', 1, 'kkwwGwKSbeigSz7RFJ5NMQ==', 1);
+
+
+/*otras constantes*/
+INSERT INTO otrasconstantes(nombre, valor) VALUES ('r', 8.3144703523);
+INSERT INTO otrasconstantes(nombre, valor) VALUES ('a', 0.2857);

@@ -18,6 +18,7 @@ namespace Eosweb.Controllers
         // E : Entalpia de vaporisacion
         // Snv : Entropia normal de vaporisacion
         // Sv : Entropia de vaporisacion
+        // V: Volumen del liquido saturado
 
         public IActionResult Index(){
             Identificador iden = new Identificador();
@@ -42,6 +43,9 @@ namespace Eosweb.Controllers
             if (TempData.ContainsKey("E")) ViewBag.E = TempData["E"];
             if (TempData.ContainsKey("Snv")) ViewBag.Snv = TempData["Snv"];
             if (TempData.ContainsKey("Sv")) ViewBag.Sv = TempData["Sv"];
+
+            if (TempData.ContainsKey("T3")) ViewBag.T3 = TempData["T3"];
+            if (TempData.ContainsKey("V")) ViewBag.V = TempData["V"];
 
             
             List<Identificador> i = DataIdentificador.LeerTodo();
@@ -86,11 +90,14 @@ namespace Eosweb.Controllers
             TempData.Remove("Ps");
             TempData.Remove("En");
             TempData.Remove("R");
+            TempData.Remove("V");
+            TempData.Remove("T2");
+            TempData.Remove("T3");
 
             return RedirectToAction("Index", "Correlaciones");
         }
 
-        public ActionResult SeleccionarTemperatura(int T, int IdCompuesto) {
+        public ActionResult SeleccionarTemperatura(int T, int IdCompuesto, string Sv, string V, string T3) {
             TempData["idCompuesto"] = IdCompuesto;
             Identificador i = DataIdentificador.Leer(IdCompuesto);
             TempData["Compuesto"] = i.Compuesto;
@@ -121,6 +128,17 @@ namespace Eosweb.Controllers
                 TempData["Tne"] = Tne;
 
                 //Riedel
+                if(Sv != null) {
+                    TempData["Sv"] = convertToDouble(Sv);
+                }
+
+                //Racket
+                if(T3 != null) {
+                    TempData["T3"] = convertToDouble(T3);
+                }
+                if(V != null) {
+                    TempData["V"] = convertToDouble(V);
+                }
 
                 //Entalpia normal
                 double R = 8.3144703523;
@@ -131,12 +149,13 @@ namespace Eosweb.Controllers
                 //Entropia normal de vaporisacion
                 double Snv = En/Tne;
                 TempData["Snv"] = Snv;
+
             }
 
             return RedirectToAction("Index", "Correlaciones");
         }
 
-        public ActionResult TemperaturaRiedel(int T2, int IdCompuesto, int T, string Ps, string Te, string Tne, string R, string En, string Snv) {
+        public ActionResult TemperaturaRiedel(int T2, int IdCompuesto, int T, string Ps, string Te, string Tne, string R, string En, string Snv, string V, string T3) {
             TempData["idCompuesto"] = IdCompuesto;
             Identificador i = DataIdentificador.Leer(IdCompuesto);
             TempData["Compuesto"] = i.Compuesto;
@@ -152,38 +171,98 @@ namespace Eosweb.Controllers
             else {
                 //si hace algo
                 TempData["T"] = T;
+                TempData["T2"] = T2;
 
                 //Presion de Saturacion
-                TempData["Ps"] = convertToDouble(Ps);
-
+                if(Ps != null) {
+                    TempData["Ps"] = convertToDouble(Ps);
+                }
+            
                 //Temperatura de ebullición
-                TempData["Te"] = convertToDouble(Te);
+                if(Te != null) {
+                    TempData["Te"] = convertToDouble(Te);
+                }
 
                 //Temperatura normal de ebullición
-                TempData["Tne"] = convertToDouble(Tne);
+                if(Tne != null) {
+                    TempData["Tne"] = convertToDouble(Tne);
+                }
 
                 //Riedel
                 //Entalpia normal de ebullicion
-                TempData["En"] = convertToDouble(En);
-                TempData["R"] = convertToDouble(R);
+                if(En != null) {
+                    TempData["En"] = convertToDouble(En);
+                }
+                if(R != null) {
+                    TempData["R"] = convertToDouble(R);
+                }
 
                 //Entalpia
-                double E = convertToDouble(En) * Math.Pow(((1-T2/f.Tc_K)/(1-convertToDouble(Tne)/f.Tc_K)),0.38);
+                double e1= ((1-T2)/f.Tc_K);
+                double e2= ((1-convertToDouble(Tne))/f.Tc_K);
+                double e3= Math.Pow((e1/e2),0.38);
+                double e4 = convertToDouble(En);
+                double E = e4 * e3;
                 TempData["E"] = E;
 
                 //Entropia normal
-                TempData["Snv"] = convertToDouble(Snv);
+                if(Snv != null) {
+                    TempData["Snv"] = convertToDouble(Snv);
+                }
 
                 //Entropia vaporisacion
                 double Sv = E / T2;
                 TempData["Sv"] = Sv;
 
-
+                //Racket
+                if(T3 != null) {
+                    TempData["T3"] = convertToDouble(T3);
+                }
+                if(V != null) {
+                    TempData["V"] = convertToDouble(V);
+                }
             }
 
             return RedirectToAction("Index", "Correlaciones");
         }
 
+        public ActionResult TemperaturaRacket(int T3, int IdCompuesto, int T2, int T, string Ps, string Te, string Tne, string R, string En, string Snv){
+            TempData["idCompuesto"] = IdCompuesto;
+            Identificador i = DataIdentificador.Leer(IdCompuesto);
+            TempData["Compuesto"] = i.Compuesto;
+            TempData["Formula"] = i.Formula;
+            TempData["M"] = i.M;
+            Fundamentales f = DataFundamentales.Leer(IdCompuesto);
+            Secundarias s = DataSecundarias.Leer(IdCompuesto);
+
+            if(T3 < s.Tmax_k || T3 > f.Tc_K) {
+
+            }
+            else {
+                TempData["T3"] = T3;
+                //constantes
+                double r = convertToDouble(R);
+                double a = 0.2857;
+                
+                //racket
+                    //temperatura reducida
+                    double tr = f.Pc_bar/f.Tc_K;
+                    //(1-Tr)^a
+                    double tra = Math.Pow(1-tr,a);
+                    //vc
+                    //(zcxRxTC/pC)10^5
+                    double Vc = f.Zc * r * f.Tc_K / f.Pc_bar / Math.Pow(10,5);
+                    
+                //Volumen del liquido saturado
+                double V = tra * Vc;
+                TempData["V"] = V;
+
+                
+
+            }
+
+            return RedirectToAction("Index", "Correlaciones");
+        }
 
         public int search(List<Identificador> list, Identificador value) {
             int i = 0;
@@ -210,7 +289,11 @@ namespace Eosweb.Controllers
             return Convert.ToDouble(final_s);
         }
 
+        public void inicializar() {
+            if (TempData.ContainsKey("idCompuesto")) ViewBag.idCompuesto = TempData["idCompuesto"];
+            
 
+        }
 
     }
     
