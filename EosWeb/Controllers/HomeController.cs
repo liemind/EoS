@@ -227,5 +227,23 @@ namespace Eosweb.Controllers
         }
 
 
+        /***************
+        * Correos
+        ***************/
+
+        public static void Send(string to, string Subject, string body)
+        {
+            MailMessage o = new MailMessage(Global.Email, to, Subject, body);
+            o.IsBodyHtml = true;
+
+            NetworkCredential netCred = new NetworkCredential(Global.Email, Global.Pass);
+            SmtpClient cliente = new SmtpClient("smtp.gmail.com", 587);
+            cliente.EnableSsl = true;
+            cliente.DeliveryMethod = SmtpDeliveryMethod.Network;
+            cliente.UseDefaultCredentials = false;
+            cliente.Credentials = netCred;
+            cliente.Send(o);
+        }
+
     }
 }
