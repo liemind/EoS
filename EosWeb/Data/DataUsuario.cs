@@ -253,7 +253,6 @@ namespace Eosweb.Data
                 command.Parameters.Add(new MySqlParameter() { ParameterName = "in_correoElectronico", Direction = System.Data.ParameterDirection.Input, Value = usuario.CorreoElectronico });
                 command.Parameters.Add(new MySqlParameter() { ParameterName = "in_tipo", Direction = System.Data.ParameterDirection.Input, Value = tipo });
                 var datos = DataSource.ExecuteProcedure(command);
-
                 return true;
             }
             catch (Exception ex)
@@ -263,6 +262,20 @@ namespace Eosweb.Data
             }
         }
 
-        
+        public static Boolean CambiarPass(string rut, string pass) {
+            try
+            {
+                var command = new MySqlCommand() { CommandText = "sp_cambiar_pass_usuario", CommandType = System.Data.CommandType.StoredProcedure };
+                command.Parameters.Add(new MySqlParameter() { ParameterName = "in_rut", Direction = System.Data.ParameterDirection.Input, Value = rut });
+                command.Parameters.Add(new MySqlParameter() { ParameterName = "in_password", Direction = System.Data.ParameterDirection.Input, Value = pass });
+                var datos = DataSource.ExecuteProcedure(command);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+                return false;
+            }
+        }
     }
 }

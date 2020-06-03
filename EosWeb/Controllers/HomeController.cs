@@ -78,8 +78,32 @@ namespace Eosweb.Controllers
         * PERFIL
         ***************/
 
-        public ActionResult CambiarPass(string anterior, string nuevo, int id) {
-            return RedirectToAction("Perfil", "Home");
+        public ActionResult CambiarPass(string anterior, string nuevo) {
+            //ver si inicio sesion
+            if (Sesion() == true) {
+                String Rut = HttpContext.Session.GetString(Global.SessionKeyName);
+                ViewData["Sesion"] = true;
+                Usuario u = DataUsuario.LeerUno(Rut);
+
+                //encripto la pass
+                String EPass = Encriptar(anterior);
+                if(DataHome.VerificarPass(Rut, EPass)) {
+                    String newPass = Encriptar(nuevo);
+                    //cambiar pass
+                    if(DataUsuario.CambiarPass(u.Rut,newPass)) {
+                        //se cambio
+                    }
+                    else {
+                        //no se cambio
+                    }
+                    return RedirectToAction("Perfil", "Home");
+                }
+                else {
+                    //la pass está mal
+                }
+                    
+            }
+            return RedirectToAction("Invitado", "Home");
         }
 
         public ActionResult UnirseAGrupo(string Llave, int Id) {
@@ -230,6 +254,12 @@ namespace Eosweb.Controllers
         /***************
         * Correos
         ***************/
+
+        public void CorreoCambioPass(Usuario u) {
+            string body = "<html><head><style type='text/css'>body{color:#777;font-family:'Helvetica Neue',Roboto,Arial,'Droid Sans',sans-serif;font-size:13px;font-weight:400;line-height:1.471;background-color:#f7f7f7}.bg{margin:0 auto;width:500px;border:1px solid #e6e9ed;background-color:#fff}.image{background-color:#272727;padding-top:20px;padding-bottom:20px}.image>center>img{width:30%;text-align:center}.content{padding:10px}h2{font-size:18px!important;font-weight:400!important;color:#272727;border-bottom:2px solid #e6e9ed;margin-bottom:10px}.footer{text-align:center;padding-top:10px;padding-bottom:5px}a{font-weight:600!important;color:#337ab7}td{background-color:#e6e9ed}table,td,th{border:1px solid #ddd;padding:8px;line-height:1.42857143;vertical-align:top;border-collapse:collapse}</style></head><body><div class='bg'><div class='image'><center><img src='https://i.imgur.com/HrMODiU.png'></center></div><div class='content'><h2>¡Reinicio de Contraseña!</h2><p>¡Hola "+u.Nombre+"!. Si recibes este correo electrónico es porque has cambiado la contraseña en <b>EOS3</b>. Para acceder a ella basta con entrar al <a href='http://168.232.165.145/'>enlace</a> de la plataforma e ingresar tus credenciales:</p><center><table><tr><th>Nombre de usuario</th><td>tu rut sin puntos ni digito verificador</td></tr><tr><th>Contraseña</th><td>Tu nueva contraseña</td></tr></table></center><p>Si tienes problemas con tu cuenta, no dudes en consultar al administrador del curso.</p><p>Atentamente,<br><i>El equipo de EOS3</i></p></div><div class='footer'><a href='#'>Dar de baja</a> | <a href='https://www.utalca.cl/'>Universidad de Talca</a> | <a href='#'>Ayuda</a></div></div></body> </html>";
+
+            HomeController.Send(u.CorreoElectronico, "¡Bienvenido a Eos3!", body);
+        }
 
         public static void Send(string to, string Subject, string body)
         {
