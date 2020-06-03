@@ -9,10 +9,7 @@ CREATE PROCEDURE sp_constantes_modificar
     in_D double
 )
 BEGIN
-
 	UPDATE constantes
-	SET 
-		`A` = in_A, `B` = in_B, `C` = in_C, `D` = in_D WHERE `id` = in_id;
-
+	SET `A` = in_A, `B` = in_B, `C` = in_C, `D` = in_D WHERE `id` = in_id;
 END
 $$

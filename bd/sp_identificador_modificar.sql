@@ -10,8 +10,6 @@ CREATE PROCEDURE sp_identificador_modificar
 BEGIN
 
 	UPDATE identificador
-	SET 
-		`formula` = in_formula, `compuesto` = in_compuesto, `m` = in_m WHERE `id` = in_id;
-
+	SET `formula` = in_formula, `compuesto` = in_compuesto, `m` = in_m WHERE `id` = in_id;
 END
 $$

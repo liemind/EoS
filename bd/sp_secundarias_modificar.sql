@@ -12,8 +12,7 @@ CREATE PROCEDURE sp_secundarias_modificar
 BEGIN
 
 	UPDATE secundarias
-	SET 
-		`A` = in_A, `B` = in_B, `C` = in_C, `tmin_k` = in_tmin_k, `tmax_k` = in_tmax_k WHERE `id` = in_id;
+	SET `A` = in_A, `B` = in_B, `C` = in_C, `tmin_k` = in_tmin_k, `tmax_k` = in_tmax_k WHERE `id` = in_id;
 
 END
 $$

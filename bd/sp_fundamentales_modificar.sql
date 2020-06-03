@@ -11,8 +11,6 @@ CREATE PROCEDURE sp_fundamentales_modificar
 BEGIN
 
 	UPDATE fundamentales
-	SET 
-		`tc_k` = in_tc_k, `pc_bar` = in_pc_bar, `zc` = in_zc, `w` = in_w WHERE `id` = in_id;
-
+	SET `tc_k` = in_tc_k, `pc_bar` = in_pc_bar, `zc` = in_zc, `w` = in_w WHERE `id` = in_id;
 END
 $$
