@@ -22,6 +22,8 @@ namespace Eosweb.Controllers
     {
         public IActionResult Index()
         {
+            if (TempData.ContainsKey("Notificacion")) ViewBag.Notificacion = TempData["Notificacion"];
+
             if (Sesion() == true) {
                 String Rut = HttpContext.Session.GetString(Global.SessionKeyName);
                 ViewData["Sesion"] = true;
@@ -209,8 +211,10 @@ namespace Eosweb.Controllers
         ***************/
         public IActionResult Invitado()
         {
+            if (TempData.ContainsKey("Notificacion")) ViewBag.Notificacion = TempData["Notificacion"];
             return View();
         }
+        
         public Boolean Sesion() {
             
             Boolean exist = string.IsNullOrEmpty(HttpContext.Session.GetString(Global.SessionKeyName));
@@ -225,11 +229,11 @@ namespace Eosweb.Controllers
         }
 
         public IActionResult IniciarSesion(String Rut, String Pass) {
-            //if (TempData.ContainsKey("Notificacion")) ViewBag.Notificacion = TempData["Notificacion"];
+            if (TempData.ContainsKey("Notificacion")) ViewBag.Notificacion = TempData["Notificacion"];
 
             string[] w = Rut.Split(".");
             if(w.Length > 1) {
-                //TempData["notificacion"] = "No pudo iniciar sesión debido a que su id de usuario no es correcto.";
+                TempData["notificacion"] = "No pudo iniciar sesión debido a que su id de usuario no es correcto.";
             }
             else {
                 //encripto la pass
@@ -239,7 +243,7 @@ namespace Eosweb.Controllers
                     return RedirectToAction("Index", "Home");
                 }
                 else {
-                    //TempData["notificacion"] = "No pudo iniciar sesión debido a que su contraseña no es correcta.";
+                    TempData["notificacion"] = "No pudo iniciar sesión debido a que su contraseña no es correcta.";
                 }
             }
             return RedirectToAction("Invitado", "Home");
