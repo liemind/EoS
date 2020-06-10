@@ -106,6 +106,14 @@
                 </div>
             <!-- /top navigation -->
 
+            <!--Notificaciones-->
+            @if (ViewBag.Notificacion != null)
+            {   
+                @Html.Partial("_Notificacion")
+            }       
+            <!--Notificaciones-->
+
+
             <!--content-->
             @RenderBody()
             <!-- footer content -->

@@ -11,6 +11,7 @@ namespace Eosweb.Controllers
     public class SecundariasController : Controller
     {
         public IActionResult Index(){
+            if (TempData.ContainsKey("Notificacion")) ViewBag.Notificacion = TempData["Notificacion"];
             if (Sesion() == true) {
                 String Rut = HttpContext.Session.GetString(Global.SessionKeyName);
                 ViewData["Sesion"] = true;
