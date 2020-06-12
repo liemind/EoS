@@ -219,7 +219,7 @@ namespace Eosweb.Controllers
                     return RedirectToAction("Index", "Home");
                 }
                 else {
-                    TempData["notificacion"] = "No pudo iniciar sesión debido a que su contraseña no es correcta.";
+                    TempData["notificacion"] = "No pudo iniciar sesión debido a que su contraseña no es correcta."+Pass;
                 }
             }
             return RedirectToAction("Invitado", "Home");
