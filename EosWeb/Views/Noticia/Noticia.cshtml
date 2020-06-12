@@ -38,6 +38,13 @@
                 <div class="x_panel">
                     <div class="x_title">
                         <h2><i class="fa fa-th-list"></i> @Model.titulo</h2>
+                        @if(@ViewBag.Tipo == "Administrador") {
+                            <ul class="nav navbar-right panel_toolbox">
+                                <li></li>
+                                <li></li>
+                                <li><a href=""  class="btn btn-primary" data-title="add" data-toggle="modal" data-target="#add" ><i class="fa fa-edit fa-lg"></i> Modificar</a></li>
+                            </ul>
+                        }
                         <div class="clearfix"></div>
                     </div>
                     <div class="x_content">
