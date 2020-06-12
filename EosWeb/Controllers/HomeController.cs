@@ -214,12 +214,15 @@ namespace Eosweb.Controllers
             else {
                 //encripto la pass
                 String EPass = Encriptar(Pass);
-                if(DataHome.VerificarPass(Rut, EPass)) {
+                string[] arr = DataHome.VerificarPass(Rut, EPass);
+                //if(DataHome.VerificarPass(Rut, EPass)) {
+                if(arr[0].Equals("1")) {
                     HttpContext.Session.SetString(Global.SessionKeyName, Rut);
                     return RedirectToAction("Index", "Home");
                 }
                 else {
-                    TempData["notificacion"] = "No pudo iniciar sesión debido a que su contraseña no es correcta."+Pass;
+                    //TempData["notificacion"] = "No pudo iniciar sesión debido a que su contraseña no es correcta."+Pass;
+                    TempData["notificacion"] = arr[1];
                 }
             }
             return RedirectToAction("Invitado", "Home");

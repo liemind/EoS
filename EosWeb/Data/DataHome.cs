@@ -9,8 +9,9 @@ namespace Eosweb.Data
 {
     public class DataHome
     {
-        public static Boolean VerificarPass(string Rut, string Pass)
+        public static string[] VerificarPass(string Rut, string Pass)
         {
+            string[] arr = new string[2];
             try
             {
                 var command = new MySqlCommand() { CommandText = "sp_verificar_pass", CommandType = System.Data.CommandType.StoredProcedure };
@@ -23,10 +24,9 @@ namespace Eosweb.Data
                     var prodData = datos.Tables[0].Rows[0];
                     String PassBD = prodData["password"].ToString();
                     if(PassBD == Pass) {
-                        return true;
-                    }
-                    else {
-                        return false;
+                        arr[0] = "1";
+                        arr[1] = "Las pass coinciden";
+                        return arr;
                     }
                 }
 
@@ -34,13 +34,18 @@ namespace Eosweb.Data
             catch (Exception ex)
             {
                 Console.WriteLine(ex.ToString());
-                return false;
+                arr[0] = "0";
+                arr[1] = ex.ToString();
+                return arr;
+                //return false;
             }
             finally
             {
 
             }
-            return false;
+            arr[0] = "0";
+            arr[1] = "Las pass no coinciden";
+            return arr;
 
         }
     
