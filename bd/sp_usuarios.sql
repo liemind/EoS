@@ -44,7 +44,7 @@ CREATE PROCEDURE sp_habilitar_deshabilitar_usuario
     
 )
 BEGIN
-    UPDATE Usuario
+    UPDATE usuario
     SET estado = in_estado
     WHERE rut = in_rut;
 END
@@ -60,7 +60,7 @@ CREATE PROCEDURE sp_verificar_pass
 )
 BEGIN
     Select usuario.password
-    FROM Usuario
+    FROM usuario
     WHERE usuario.rut = in_rut AND usuario.password = in_pass;
 END
 $$
@@ -76,7 +76,7 @@ CREATE PROCEDURE sp_modificar_usuario
     in_matricula INTEGER
 )
 BEGIN
-    UPDATE Usuario
+    UPDATE usuario
     SET nombre = in_nombre, correoelectronico = in_correoElectronico, tipo = in_tipo, matricula = in_matricula
     WHERE rut = in_rut;
 END
@@ -94,19 +94,5 @@ BEGIN
     UPDATE usuario
     SET password = in_password
     WHERE rut = in_rut;
-END
-$$
-
-/*Verificar Pass*/
-DROP PROCEDURE IF EXISTS sp_verificar_pass $$
-CREATE PROCEDURE sp_verificar_pass
-(
-    in_rut INTEGER,
-    in_pass TEXT
-)
-BEGIN
-    Select usuario.password
-    FROM Usuario
-    WHERE usuario.rut = in_rut AND usuario.password = in_pass;
 END
 $$

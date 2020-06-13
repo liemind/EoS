@@ -9,7 +9,7 @@ namespace Eosweb.Data
 {
     public class DataHome
     {
-        public static string[] VerificarPass(string Rut, string Pass)
+        public static Boolean VerificarPass(string Rut, string Pass)
         {
             string[] arr = new string[2];
             try
@@ -24,9 +24,7 @@ namespace Eosweb.Data
                     var prodData = datos.Tables[0].Rows[0];
                     String PassBD = prodData["password"].ToString();
                     if(PassBD == Pass) {
-                        arr[0] = "1";
-                        arr[1] = "Las pass coinciden";
-                        return arr;
+                        return true;
                     }
                 }
 
@@ -34,18 +32,13 @@ namespace Eosweb.Data
             catch (Exception ex)
             {
                 Console.WriteLine(ex.ToString());
-                arr[0] = "0";
-                arr[1] = ex.ToString();
-                return arr;
-                //return false;
+                return false;
             }
             finally
             {
 
             }
-            arr[0] = "0";
-            arr[1] = "Las pass no coinciden";
-            return arr;
+            return false;
 
         }
     
@@ -58,7 +51,6 @@ namespace Eosweb.Data
                 var datos = DataSource.GetDataSet(command);
 
                 return true;
-
             }
             catch (Exception ex)
             {
