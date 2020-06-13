@@ -208,7 +208,7 @@ namespace Eosweb.Controllers
             if (TempData.ContainsKey("Notificacion")) ViewBag.Notificacion = TempData["Notificacion"];
 
             string[] w = Rut.Split(".");
-            if(w.Length > 1) {
+            if(w.Length > 1 || w == null) {
                 TempData["notificacion"] = "No pudo iniciar sesión debido a que su id de usuario no es correcto.";
             }
             else {
