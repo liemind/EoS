@@ -1,5 +1,5 @@
 @using Eosweb.Models
-
+@model List<Eosweb.Models.Log>
 @{
     ViewData["Title"] = "Acciones";
     ViewBag.Title = "Acciones";
@@ -40,66 +40,6 @@
         <div class="clearfix"></div>
         <!--Contenido -->
 
-        <!--crear un dato-->
-        <div class="">
-            <!--Form -->
-            <div class="col-md-12 col-sm-12 col-xs-12">
-                <div class="x_panel">
-                    <div class="x_title">
-                        <h2><i class="fa fa-th-list"></i> Agregar un dato</h2>
-                        <ul class="nav navbar-right panel_toolbox">
-                            <li></li>
-                            <li></li>
-                            <li><a href=""  class="btn btn-primary" data-title="addi" data-toggle="modal" data-target="#addi" ><i class="fa fa-plus fa-lg"></i> Identificador</a></li>
-                        </ul>
-                        <div class="clearfix"></div>
-                    </div>
-                    <div class="x_content">
-                        <!--Content-->
-                        @using (Html.BeginForm("Crear", "Fundamentales", FormMethod.Post, new { enctype = "multipart/form-data", @style = "border:none", data_parley_validate = false }))
-                        {
-                        <div data-parsley-validate>
-                            <table class="table table-striped table-bordered table-responsive" >
-                                <thead>
-                                    <tr>
-                                        <th>Compuesto</th>
-                                        <th>T<small>c</small> / K</th>
-                                        <th>P<small>c</small> / bar</th>
-                                        <th>Z<small>c</small></th>
-                                        <th>w</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td width="30%" >
-                                            <select class="form-control" name="Identificador" required>
-                                                @foreach (var id in ViewData["Identificadores"] as IList<Identificador>){
-                                                    <option value="@id.Id">@id.Compuesto</option>
-                                                }
-                                            </select>
-                                        </td>
-                                        <td class="text-justify"><input class="form-control col-md-2 col-xs-12" type="text" name="Tc_K" data-parsley-pattern="([0-9])+|(\,([0-9]+))" data-parsley-trigger="change" required></td>
-                                        <td class="text-justify"><input class="form-control col-md-2 col-xs-12" type="text" name="Pc_bar" data-parsley-pattern="([0-9])+|(\,([0-9]+))" data-parsley-trigger="change" required></td>
-                                        <td class="text-justify"><input class="form-control col-md-2 col-xs-12" type="text" name="Zc" data-parsley-pattern="([0-9])+|(\,([0-9]+))" data-parsley-trigger="change" required></td>
-                                        <td class="text-justify"><input class="form-control col-md-2 col-xs-12" type="text" name="W" data-parsley-pattern="([0-9])+|(\,([0-9]+))" data-parsley-trigger="change" required></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        <div class="ln_solid"></div>
-                            <div class="form-group">
-                                <div class="">
-                                <button id="send" type="submit" class="btn btn-success">Agregar Dato</button>
-                            </div>
-                            </div>
-                        }
-                    </div>
-                </div>
-            </div>
-            <!--end Form-->
-        </div>
-        <!--/end -->
-
         <div class="">
             <!--Lista -->
             <div class="col-md-12 col-sm-12 col-xs-12">
@@ -113,33 +53,20 @@
                         <table id="datatable" class="table table-striped table-bordered table-responsive">
                             <thead>
                                 <tr>
-                                    <th>Compuesto</th>
-                                    <th>Formula</th>
-                                    <th>M</th>
-                                    <th>T<small>c</small> / K</th>
-                                    <th>P<small>c</small> / bar</th>
-                                    <th>Z<small>c</small></th>
-                                    <th>w</th>
+                                    <th>Fecha y Hora</th>
+                                    <th>Autor</th>
                                     <th></th>
                                 </tr>
                             </thead>
 
 
                             <tbody>
-                                @foreach (var f in Model)
+                                @foreach (var d in Model)
                                 {
                                 <tr>
-                                    @{
-                                        var i = f.i;
-                                    }
-                                    <td>@i.Compuesto</td>
-                                    <td>@i.Formula</td>
-                                    <td>@i.M</td>
-                                    <td class="text-justify">@f.Tc_K</td>
-                                    <td class="text-justify">@f.Pc_bar</td>
-                                    <td class="text-justify">@f.Zc</td>
-                                    <td class="text-justify">@f.W</td>
-                                    <td width="7%"><a href=""  class="btn btn-round btn-info" data-title="modificar" data-toggle="modal" data-target="#modificar" onclick="Modificar('@f.Id', '@i.Compuesto', '@f.Tc_K', '@f.Pc_bar', '@f.Zc', '@f.W')"><i class="fa fa-pencil"></i></a> <a href=""  class="btn btn-round btn-danger" data-title="eliminar" data-toggle="modal" data-target="#eliminar" onclick="Eliminar('@f.Id')"><i class="fa fa-close"></i></a></td>
+                                    <td>@d.fecha</td>
+                                    <td>@d.autor.Rut</td>
+                                    <td width="30%">@d.accion</td>
                                 </tr>
                                 }
                             </tbody>
