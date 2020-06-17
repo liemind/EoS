@@ -59,10 +59,10 @@ namespace Eosweb.Controllers
 
                 if(DataFundamentales.Crear(f)) {
                     TempData["Notificacion"] = "La operación fue realizada correctamente.";
-                        // INICIO LOG
-                        Usuario u = DataUsuario.LeerUno(RutSesion);
-                        HomeController.crearLog(u, "Usuario "+u.Nombre+" creó un dato fundamental.");
-                        // FIN LOG
+                    // INICIO LOG
+                    Usuario u = DataUsuario.LeerUno(RutSesion);
+                    HomeController.crearLog(u, "Usuario "+u.Nombre+" creó un dato fundamental.");
+                    // FIN LOG
                 }
                 else {
                     //pta :(
