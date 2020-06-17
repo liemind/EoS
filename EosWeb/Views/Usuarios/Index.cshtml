@@ -126,19 +126,17 @@
                                         <td>@i.Nombre</td>
                                         <td>@i.CorreoElectronico</td>
                                         <td>@i.Tipo</td>
-                                        <td width="7%">
-                                            <!--Button group -->
-                                                <div class="btn-group" role="group">
-                                                    <button id="btnGroupDrop1" type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                    Dropdown
-                                                    </button>
-                                                    <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-                                                    <a class="dropdown-item" href="#">Dropdown link</a>
-                                                    <a class="dropdown-item" href="#">Dropdown link</a>
-                                                    </div>
-                                                </div>
-                                            <!--Button group -->
-                                        </td>
+                                        @if(i.Rut == ViewBag.IdUsuario) {
+                                            <td width="7%"><button type="button" class="btn btn-info btn-round" data-toggle="tooltip" data-placement="top" title="Recuperar contraseña" disabled><i class="fa fa-refresh"></i></button> <button type="button" class="btn btn-danger btn-round" data-toggle="tooltip" data-placement="top" title="Desactivar" disabled><i class="fa fa-close"></i></button></td>
+                                        }
+                                        else if(i.Estado == "Habilitado")
+                                        {
+                                            <td width="7%"><a href=""  class="btn btn-round btn-info" data-title="reiniciar" data-toggle="modal" data-target="#reiniciar" onclick="Reiniciar('@i.Rut', '@i.Nombre')" data-toggle="tooltip" data-placement="top" title="Recuperar contraseña"><i class="fa fa-refresh"></i></a> <a href=""  class="btn btn-round btn-danger" data-title="hab-deshab" data-toggle="modal" data-target="#hab-deshab" onclick="HabDeshabMessaje('@i.Rut', '1')" data-toggle="tooltip" data-placement="top" title="Desactivar usuario"><i class="fa fa-close"></i></a></td>
+                                        }
+                                        else {
+                                            <td width="7%"><a href=""  class="btn btn-round btn-info" data-title="reiniciar" data-toggle="modal" data-target="#reiniciar" onclick="Reiniciar('@i.Rut', '@i.Nombre')" data-toggle="tooltip" data-placement="top" title="Recuperar contraseña"><i class="fa fa-refresh"></i></a> <a href=""  class="btn btn-round btn-danger" data-title="hab-deshab" data-toggle="modal" data-target="#hab-deshab" onclick="HabDeshabMessaje('@i.Rut', '0')" data-toggle="tooltip" data-placement="top" title="Activar usuario"><i class="fa fa-check"></i></a></td>
+                                        }
+                                        
                                     </tr>
                                 }
                             </tbody>
@@ -150,5 +148,78 @@
             <!--end Lista-->
         </div>
 
+    </div>
+</div>
+
+<script type="text/javascript">
+            HabDeshabMessaje = function (idcomp, numero) {
+                document.getElementById("idhabilitar").setAttribute("value", idcomp);
+                if (numero == 1) {
+                    document.getElementById("habdesabtitle").innerHTML = "<i class='fa fa-eye-slash'></i> Deshabilitar Usuario";
+                    document.getElementById("hab-message").innerHTML = "¿Está seguro de que desea deshabilitar al usuario?";
+                    document.getElementById("idcode").setAttribute("value", 1);
+                }
+                else {
+                    document.getElementById("habdesabtitle").innerHTML = "<i class='fa fa-eye'></i> Habilitar Usuario";
+                    document.getElementById("hab-message").innerHTML = "¿Está seguro de que desea habilitar al usuario?";
+                    document.getElementById("idcode").setAttribute("value", 0);
+                }
+            };
+
+            Reiniciar = function(rut, nombre) {
+                document.getElementById("reiniciar-title").innerHTML = "<i class='fa fa-eye-slash'></i> Reiniciar contraseña";
+                    document.getElementById("reiniciar-message").innerHTML = "¿Está seguro de que desea reiniciar la contraseña de "+nombre+"?";
+                    document.getElementById("reiniciar-rut").setAttribute("value", rut);
+            }
+</script>
+
+<!--Modal Deshabilitar/Habilitar-->
+<div class="modal fade" id="hab-deshab" tabindex="-1" role="dialog" aria-labelledby="hab-deshab" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <h4 id="habdesabtitle" class="modal-title">~</h4>
+            </div>
+            @using (Html.BeginForm("HabilitarDeshabilitar", "Usuarios", FormMethod.Post, new { @style = "border:none" }))
+            {
+                <div class="modal-body">
+                    <p id="hab-message"></p>
+                </div>
+                <div class="modal-footer">
+                    <input type="hidden" id="idhabilitar" name="Rut" value="" />
+                    <input type="hidden" id="idcode" name="EstadoActual" value="" />
+                    <button type="submit" class="btn btn-primary">Aceptar</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+<!--Modal Reiniciar-->
+<div class="modal fade" id="reiniciar" tabindex="-1" role="dialog" aria-labelledby="reiniciar" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <h4 id="reiniciar-title" class="modal-title">~</h4>
+            </div>
+            @using (Html.BeginForm("ReiniciarPass", "Usuarios", FormMethod.Post, new { @style = "border:none" }))
+            {
+                <div class="modal-body">
+                    <p id="reiniciar-message"></p>
+                </div>
+                <div class="modal-footer">
+                    <input type="hidden" id="reiniciar-rut" name="Rut" value="" />
+                    <button type="submit" class="btn btn-primary">Aceptar</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                </div>
+            }
+        </div>
     </div>
 </div>

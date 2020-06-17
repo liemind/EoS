@@ -65,7 +65,7 @@ using Eosweb.Models;
             WriteLiteral("\r\n<!-- bootstrap-wysiwyg -->\r\n");
             EndContext();
             BeginContext(167, 78, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("link", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "e5aaf81dab664172b08b41b13a6c53b7", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("link", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "7190602d0b0e4b0abf61f2d147cd2514", async() => {
             }
             );
             __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
