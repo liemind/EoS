@@ -21,6 +21,7 @@ namespace Eosweb.Controllers
         // V: Volumen del liquido saturado
 
         public IActionResult Index(){
+            if (TempData.ContainsKey("Notificacion")) ViewBag.Notificacion = TempData["Notificacion"];
             Identificador iden = new Identificador();
 
             if (TempData.ContainsKey("idCompuesto")) {

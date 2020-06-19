@@ -12,6 +12,7 @@ namespace Eosweb.Controllers
     public class IdentificadorController : Controller
     {
         public IActionResult Index(){
+            if (TempData.ContainsKey("Notificacion")) ViewBag.Notificacion = TempData["Notificacion"];
             if (Sesion() == true) {
                 String Rut = HttpContext.Session.GetString(Global.SessionKeyName);
                 ViewData["Sesion"] = true;
@@ -31,80 +32,101 @@ namespace Eosweb.Controllers
 
 
         public ActionResult Crear(string Compuesto, string Formula, string M) {
-            Identificador identificador = new Identificador();
-            identificador.Compuesto = Compuesto;
-            identificador.Formula = Formula;
-            identificador.M = convertToDouble(M);
+            if (Sesion() == true) {
+                String RutSesion = HttpContext.Session.GetString(Global.SessionKeyName);
+                Identificador identificador = new Identificador();
+                identificador.Compuesto = Compuesto;
+                identificador.Formula = Formula;
+                identificador.M = convertToDouble(M);
 
-            if(DataIdentificador.Crear(identificador)) {
-                //wena
-            }
-            else {
-                //pta :(
+                if(DataIdentificador.Crear(identificador)) {
+                    //wena
+                    TempData["Notificacion"] = "La operación fue realizada correctamente.";
+                    // INICIO LOG
+                    Usuario u = DataUsuario.LeerUno(RutSesion);
+                    HomeController.crearLog(u, "Usuario "+u.Nombre+" creó un identificador.");
+                    // FIN LOG
+                }
+                else {
+                    //pta :(
+                    TempData["Notificacion"] = "La operación no pudo ser realizada. Inténtelo nuevamente o contacte al administrador.";
+                }
             }
             return RedirectToAction("Index", "Identificador");
         }
 
         public ActionResult Modificar(int Id, string Compuesto, string Formula, string M) {
+            if (Sesion() == true) {
+                String RutSesion = HttpContext.Session.GetString(Global.SessionKeyName);
+                Identificador f = DataIdentificador.Leer(Id);
+                Identificador new_f = new Identificador();
+                double temporal;
+                
+                new_f.Id = f.Id;
 
-            Identificador f = DataIdentificador.Leer(Id);
-            Identificador new_f = new Identificador();
-            double temporal;
-            
-            new_f.Id = f.Id;
+                if(Compuesto != null) {
+                    if(Compuesto != f.Compuesto) {
+                        new_f.Compuesto = Compuesto;
+                    }else {
+                        new_f.Compuesto = f.Compuesto;
+                    }
 
-            if(Compuesto != null) {
-                if(Compuesto != f.Compuesto) {
-                    new_f.Compuesto = Compuesto;
                 }else {
                     new_f.Compuesto = f.Compuesto;
                 }
 
-            }else {
-                new_f.Compuesto = f.Compuesto;
-            }
+                if(Formula != null) {
+                    if(Formula != f.Formula) {
+                        new_f.Formula = Formula;
+                    }else {
+                        new_f.Formula = f.Formula;
+                    }
 
-            if(Formula != null) {
-                if(Formula != f.Formula) {
-                    new_f.Formula = Formula;
                 }else {
                     new_f.Formula = f.Formula;
                 }
 
-            }else {
-                new_f.Formula = f.Formula;
-            }
-
-            if(M != null){
-                temporal = convertToDouble(M);
-                if(temporal != f.M) {
-                    new_f.M = temporal;
+                if(M != null){
+                    temporal = convertToDouble(M);
+                    if(temporal != f.M) {
+                        new_f.M = temporal;
+                    }else {
+                        new_f.M = f.M;
+                    }
                 }else {
                     new_f.M = f.M;
                 }
-            }else {
-                new_f.M = f.M;
-            }
 
-            if(DataIdentificador.Modificar(new_f)) {
-                //wena
+                if(DataIdentificador.Modificar(new_f)) {
+                    TempData["Notificacion"] = "La operación fue realizada correctamente.";
+                    // INICIO LOG
+                    Usuario u = DataUsuario.LeerUno(RutSesion);
+                    HomeController.crearLog(u, "Usuario "+u.Nombre+" modificó un dato indicador.");
+                }
+                else {
+                    //pta :(
+                    TempData["Notificacion"] = "La operación no pudo ser realizada. Inténtelo nuevamente o contacte al administrador.";    
+                }
             }
-            else {
-                //pta :(
-            }
-            
             return RedirectToAction("Index", "Identificador");
         }
 
 
 
         public ActionResult Eliminar(int Id) {
-
-            if(DataIdentificador.Eliminar(Id)) {
-                //wena
-            }
-            else {
-                //pta :(
+            if (Sesion() == true) {
+                String RutSesion = HttpContext.Session.GetString(Global.SessionKeyName);
+                if(DataIdentificador.Eliminar(Id)) {
+                    TempData["Notificacion"] = "La operación fue realizada correctamente.";
+                    // INICIO LOG
+                    Usuario u = DataUsuario.LeerUno(RutSesion);
+                    HomeController.crearLog(u, "Usuario "+u.Nombre+" eliminó un dato identificador.");
+                    // FIN LOG
+                }
+                else {
+                    //pta :(
+                    TempData["Notificacion"] = "La operación no pudo ser realizada. Inténtelo nuevamente o contacte al administrador.";
+                }
             }
             return RedirectToAction("Index", "Identificador");
         }

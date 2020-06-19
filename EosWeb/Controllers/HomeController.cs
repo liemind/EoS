@@ -58,6 +58,8 @@ namespace Eosweb.Controllers
         }
 
         public IActionResult Perfil() {
+            if (TempData.ContainsKey("Notificacion")) ViewBag.Notificacion = TempData["Notificacion"];
+
             //ver si inicio sesion
             if (Sesion() == true) {
                 String Rut = HttpContext.Session.GetString(Global.SessionKeyName);
@@ -241,19 +243,25 @@ namespace Eosweb.Controllers
                 TempData["notificacion"] = "No pudo iniciar sesión debido a que su id de usuario no es correcto.";
             }
             else {
-                //encripto la pass
-                String EPass = Encriptar(Pass);
-                if(DataHome.VerificarPass(Rut, EPass)) {
-                    HttpContext.Session.SetString(Global.SessionKeyName, Rut);
-                    // INICIO LOG
-                    Usuario u = DataUsuario.LeerUno(Rut);
-                    crearLog(u, "Usuario "+u.Nombre+" inició sesión.");
-                    // FIN LOG
-                    return RedirectToAction("Index", "Home");
+                Usuario u = DataUsuario.LeerUno(Rut);
+                if(u.Estado == "Habilitado") {
+                    //encripto la pass
+                    String EPass = Encriptar(Pass);
+                    if(DataHome.VerificarPass(Rut, EPass)) {
+                        HttpContext.Session.SetString(Global.SessionKeyName, Rut);
+                        // INICIO LOG
+                        crearLog(u, "Usuario "+u.Nombre+" inició sesión.");
+                        // FIN LOG
+                        return RedirectToAction("Index", "Home");
+                    }
+                    else {
+                        TempData["notificacion"] = "No pudo iniciar sesión debido a que su contraseña no es correcta.";
+                    }
                 }
                 else {
-                    TempData["notificacion"] = "No pudo iniciar sesión debido a que su contraseña no es correcta.";
+                    TempData["notificacion"] = "No pudo iniciar sesión debido a que su cuenta se encuentra bloqueada. Para más información, contacte con el administrador.";
                 }
+                
             }
             return RedirectToAction("Invitado", "Home");
         }
@@ -265,7 +273,7 @@ namespace Eosweb.Controllers
             crearLog(u, "Usuario "+u.Nombre+" cerró sesión.");
             // FIN LOG
             HttpContext.Session.Clear();
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Invitado", "Home");
         }
 
 
@@ -274,7 +282,7 @@ namespace Eosweb.Controllers
         ***************/
 
         public void CorreoCambioPass(Usuario u) {
-            string body = "<html><head><style type='text/css'>body{color:#777;font-family:'Helvetica Neue',Roboto,Arial,'Droid Sans',sans-serif;font-size:13px;font-weight:400;line-height:1.471;background-color:#f7f7f7}.bg{margin:0 auto;width:500px;border:1px solid #e6e9ed;background-color:#fff}.image{background-color:#272727;padding-top:20px;padding-bottom:20px}.image>center>img{width:30%;text-align:center}.content{padding:10px}h2{font-size:18px!important;font-weight:400!important;color:#272727;border-bottom:2px solid #e6e9ed;margin-bottom:10px}.footer{text-align:center;padding-top:10px;padding-bottom:5px}a{font-weight:600!important;color:#337ab7}td{background-color:#e6e9ed}table,td,th{border:1px solid #ddd;padding:8px;line-height:1.42857143;vertical-align:top;border-collapse:collapse}</style></head><body><div class='bg'><div class='image'><center><img src='https://i.imgur.com/HrMODiU.png'></center></div><div class='content'><h2>¡Reinicio de Contraseña!</h2><p>¡Hola "+u.Nombre+"!. Si recibes este correo electrónico es porque has cambiado la contraseña en <b>EOS3</b>. Para acceder a ella basta con entrar al <a href='http://168.232.165.145/'>enlace</a> de la plataforma e ingresar tus credenciales:</p><center><table><tr><th>Nombre de usuario</th><td>tu rut sin puntos ni digito verificador</td></tr><tr><th>Contraseña</th><td>Tu nueva contraseña</td></tr></table></center><p>Si tienes problemas con tu cuenta, no dudes en consultar al administrador del curso.</p><p>Atentamente,<br><i>El equipo de EOS3</i></p></div><div class='footer'><a href='#'>Dar de baja</a> | <a href='https://www.utalca.cl/'>Universidad de Talca</a> | <a href='http://168.232.165.145/Home/About'>Ayuda</a></div></div></body> </html>";
+            string body = "<html><head><style type='text/css'>body{color:#777;font-family:'Helvetica Neue',Roboto,Arial,'Droid Sans',sans-serif;font-size:13px;font-weight:400;line-height:1.471;background-color:#f7f7f7}.bg{margin:0 auto;width:500px;border:1px solid #e6e9ed;background-color:#fff}.image{background-color:#272727;padding-top:20px;padding-bottom:20px}.image>center>img{width:30%;text-align:center}.content{padding:10px}h2{font-size:18px!important;font-weight:400!important;color:#272727;border-bottom:2px solid #e6e9ed;margin-bottom:10px}.footer{text-align:center;padding-top:10px;padding-bottom:5px}a{font-weight:600!important;color:#337ab7}td{background-color:#e6e9ed}table,td,th{border:1px solid #ddd;padding:8px;line-height:1.42857143;vertical-align:top;border-collapse:collapse}</style></head><body><div class='bg'><div class='image'><center><img src='https://i.imgur.com/HrMODiU.png'></center></div><div class='content'><h2>¡Cambio de contraseña!</h2><p>¡Hola "+u.Nombre+"!. Si recibes este correo electrónico es porque has cambiado la contraseña en <b>EOS3</b>. Para acceder a ella basta con entrar al <a href='http://168.232.165.145/'>enlace</a> de la plataforma e ingresar tus credenciales:</p><center><table><tr><th>Nombre de usuario</th><td>tu rut sin puntos ni digito verificador</td></tr><tr><th>Contraseña</th><td>Tu nueva contraseña</td></tr></table></center><p>Si tienes problemas con tu cuenta, no dudes en consultar al administrador del curso.</p><p>Atentamente,<br><i>El equipo de EOS3</i></p></div><div class='footer'><a href='#'>Dar de baja</a> | <a href='https://www.utalca.cl/'>Universidad de Talca</a> | <a href='http://168.232.165.145/Home/About'>Ayuda</a></div></div></body> </html>";
 
             HomeController.Send(u.CorreoElectronico, "¡Cambio de contraseña!", body);
         }

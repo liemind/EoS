@@ -12,7 +12,7 @@ namespace Eosweb.Controllers
     public class FundamentalesController : Controller
     {
         public IActionResult Index(){
-
+            if (TempData.ContainsKey("Notificacion")) ViewBag.Notificacion = TempData["Notificacion"];
             if (Sesion() == true) {
                 String Rut = HttpContext.Session.GetString(Global.SessionKeyName);
                 ViewData["Sesion"] = true;
@@ -51,11 +51,11 @@ namespace Eosweb.Controllers
                 String RutSesion = HttpContext.Session.GetString(Global.SessionKeyName);
                 
                 Fundamentales f = new Fundamentales();
-                f.Id = Identificador;
                 f.Tc_K = convertToDouble(Tc_K);
                 f.Pc_bar = convertToDouble(Pc_bar);
                 f.Zc = convertToDouble(Zc);
                 f.W = convertToDouble(W);
+                f.i = DataIdentificador.Leer(Identificador);
 
                 if(DataFundamentales.Crear(f)) {
                     TempData["Notificacion"] = "La operación fue realizada correctamente.";

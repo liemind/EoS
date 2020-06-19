@@ -40,7 +40,7 @@ DROP PROCEDURE IF EXISTS sp_habilitar_deshabilitar_usuario $$
 CREATE PROCEDURE sp_habilitar_deshabilitar_usuario
 (
     in_rut INTEGER,
-    in_estado TINYINT
+    in_estado INTEGER
     
 )
 BEGIN
@@ -118,10 +118,11 @@ CREATE PROCEDURE sp_crear_usuario
     in_nombre TEXT,
     in_correoElectronico TEXT,
     in_tipo INTEGER,
-    in_password TEXT
+    in_password TEXT,
+    in_estado INTEGER
 )
 BEGIN
-	INSERT INTO usuario(rut, nombre, correoElectronico, tipo, password)
-	VALUES (in_rut, in_nombre, in_correoElectronico, in_tipo, in_password);
+	INSERT INTO usuario(rut, nombre, correoElectronico, tipo, password, estado)
+	VALUES (in_rut, in_nombre, in_correoElectronico, in_tipo, in_password, in_estado);
 END
 $$

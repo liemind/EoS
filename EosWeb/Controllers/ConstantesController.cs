@@ -53,11 +53,11 @@ namespace Eosweb.Controllers
                 String RutSesion = HttpContext.Session.GetString(Global.SessionKeyName);
             
                 Constantes f = new Constantes();
-                f.Id = Identificador;
                 f.A = convertToDouble(A);
                 f.B = convertToDouble(B);
                 f.C = convertToDouble(C);
                 f.D = convertToDouble(D);
+                f.i = DataIdentificador.Leer(Identificador);
 
                 if(DataConstantes.Crear(f)) {
                     TempData["Notificacion"] = "La operación fue realizada correctamente.";
@@ -82,9 +82,9 @@ namespace Eosweb.Controllers
                 Constantes new_f = new Constantes();
                 double temporal;
                 if(newId != 0) {
-                    new_f.Id = newId;
+                    new_f.i = DataIdentificador.Leer(newId);
                 }else {
-                    new_f.Id = f.Id;
+                    new_f.i = DataIdentificador.Leer(Id);
                 }
 
                 if(A != null) {
