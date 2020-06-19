@@ -44,7 +44,7 @@ CREATE PROCEDURE sp_habilitar_deshabilitar_usuario
     
 )
 BEGIN
-    UPDATE Usuario
+    UPDATE usuario
     SET estado = in_estado
     WHERE rut = in_rut;
 END
@@ -60,7 +60,7 @@ CREATE PROCEDURE sp_verificar_pass
 )
 BEGIN
     Select usuario.password
-    FROM Usuario
+    FROM usuario
     WHERE usuario.rut = in_rut AND usuario.password = in_pass;
 END
 $$
@@ -72,12 +72,11 @@ CREATE PROCEDURE sp_modificar_usuario
     in_rut varchar(9),
     in_nombre TEXT,
     in_correoElectronico TEXT,
-    in_tipo INTEGER,
-    in_matricula INTEGER
+    in_tipo INTEGER
 )
 BEGIN
-    UPDATE Usuario
-    SET nombre = in_nombre, correoelectronico = in_correoElectronico, tipo = in_tipo, matricula = in_matricula
+    UPDATE usuario
+    SET nombre = in_nombre, correoelectronico = in_correoElectronico, tipo = in_tipo
     WHERE rut = in_rut;
 END
 $$
@@ -106,7 +105,23 @@ CREATE PROCEDURE sp_verificar_pass
 )
 BEGIN
     Select usuario.password
-    FROM Usuario
+    FROM usuario
     WHERE usuario.rut = in_rut AND usuario.password = in_pass;
+END
+$$
+
+/** Crear Usuario **/
+DROP PROCEDURE IF EXISTS sp_crear_usuario $$
+CREATE PROCEDURE sp_crear_usuario
+(
+    in_rut varchar(9),
+    in_nombre TEXT,
+    in_correoElectronico TEXT,
+    in_tipo INTEGER,
+    in_password TEXT
+)
+BEGIN
+	INSERT INTO usuario(rut, nombre, correoElectronico, tipo, password)
+	VALUES (in_rut, in_nombre, in_correoElectronico, in_tipo, in_password);
 END
 $$
