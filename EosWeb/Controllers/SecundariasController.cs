@@ -51,11 +51,11 @@ namespace Eosweb.Controllers
                 String RutSesion = HttpContext.Session.GetString(Global.SessionKeyName);
 
                 Secundarias f = new Secundarias();
+                f.Id = Identificador;
                 f.A = convertToDouble(A);
                 f.B = convertToDouble(B);
                 f.C = convertToDouble(C);
                 f.Tmin_k = Tmin_k;
-                f.i = DataIdentificador.Leer(Identificador);
 
                 if(DataSecundarias.Crear(f)) {
                     TempData["Notificacion"] = "La operación fue realizada correctamente.";

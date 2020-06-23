@@ -57,7 +57,7 @@ namespace Eosweb.Controllers
                 f.B = convertToDouble(B);
                 f.C = convertToDouble(C);
                 f.D = convertToDouble(D);
-                f.i = DataIdentificador.Leer(Identificador);
+                f.Id = Identificador;
 
                 if(DataConstantes.Crear(f)) {
                     TempData["Notificacion"] = "La operación fue realizada correctamente.";
@@ -82,9 +82,9 @@ namespace Eosweb.Controllers
                 Constantes new_f = new Constantes();
                 double temporal;
                 if(newId != 0) {
-                    new_f.i = DataIdentificador.Leer(newId);
+                    new_f.Id = newId;
                 }else {
-                    new_f.i = DataIdentificador.Leer(Id);
+                    new_f.Id = f.Id;
                 }
 
                 if(A != null) {
