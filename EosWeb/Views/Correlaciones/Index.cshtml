@@ -144,10 +144,10 @@
                                                             <tbody>
                                                             <tr>
                                                                 @if(@ViewBag.T != null){ 
-                                                                    <td class="text-justify"><input type="number" data-parsley-type="integer" class="form-control" name="T" min="@ViewBag.Tmax_k" max="@ViewBag.Tc_K" placeholder="Ingrese una temperatura entre @ViewBag.Tmax_k (kelvin) y @ViewBag.Tmin_k (kelvin)" data-parsley-pattern="([0-9])+|(\,([0-9]+))" value="@ViewBag.T"></td>
+                                                                    <td class="text-justify"><input type="number" data-parsley-type="integer" class="form-control" name="T" min="@ViewBag.Tmax_k" max="@ViewBag.Tc_K" placeholder="Ingrese una temperatura entre @ViewBag.Tmax_k (K) y @ViewBag.Tmin_k (K)" data-parsley-pattern="([0-9])+|(\,([0-9]+))" value="@ViewBag.T"></td>
                                                                 }
                                                                 else {
-                                                                    <td class="text-justify"><input type="number" data-parsley-type="integer" class="form-control" min="@ViewBag.Tmax_k" max="@ViewBag.Tc_K" placeholder="Ingrese una temperatura entre @ViewBag.Tmax_k (kelvin) y @ViewBag.Tmin_k (kelvin)" data-parsley-pattern="([0-9])+|(\,([0-9]+))" name="T" value="" required></td>
+                                                                    <td class="text-justify"><input type="number" data-parsley-type="integer" class="form-control" min="@ViewBag.Tmax_k" max="@ViewBag.Tc_K" placeholder="Ingrese una temperatura entre @ViewBag.Tmax_k (K) y @ViewBag.Tmin_k (K)" data-parsley-pattern="([0-9])+|(\,([0-9]+))" name="T" value="" required></td>
                                                                 }
                                                                 <td class="text-justify" width="5%"><button id="send" type="submit" class="btn btn-success">Calcular</button></td>
                                                             </tr>
@@ -164,7 +164,11 @@
 
                                                     <div class="clearfix"></div>
 
-                                                    <center> Imagen Formula </center>
+                                                    <center> <img src="~/images/ps.png"> </center>
+                                                    <br>
+                                                    <p><b>P<small>s</small></b>: Presión de saturación.</p>
+                                                    <p><b>A, B y C</b>: Constantes.</p>
+                                                    <p><b>T</b>: Temperatura en Kelvin ingresada.</p>
 
                                                     <div class="clearfix"></div>
                                                     
@@ -175,7 +179,7 @@
                                                                     <th>A</th>
                                                                     <th>B</th>
                                                                     <th>C</th>
-                                                                    <th>P<small>s</small></th>
+                                                                    <th>Presión de saturación</th>
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
@@ -201,7 +205,7 @@
                                                 <div class="panel-body">
                                                     <!-- Content tab 2 -->
 
-                                                    <center> Imagen Formula </center>
+                                                    <center>  </center>
 
                                                     <div class="clearfix"></div>
                                                     
@@ -239,7 +243,11 @@
                                                 <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
                                                 <div class="panel-body">
                                                     <!-- Content tab 3 -->
-                                                        <center> Imagen Formula </center>
+                                                        <center> <img src="~/images/tn.png"> </center>
+                                                        <br>
+                                                        <p><b>T<small>n</small></b>: Temperatura normal de ebullición.</p>
+                                                        <p><b>A, B y C</b>: Constantes.</p>
+                                                        <p><b>P<small>s</small></b>: Presión de saturación.</p>
 
                                                         <div class="clearfix"></div>
                                                         
@@ -293,7 +301,13 @@
                                                 <div id="collapseOne2" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne2">
                                                 <div class="panel-body">
                                                     <!-- Content tab 1-->
-                                                    <center> Imagen Formula </center>
+                                                    <center> <img src="~/images/en.png"> </center>
+                                                        <br>
+                                                        <p><b>E<small>n</small></b>: Entalpía normal de vaporización.</p>
+                                                        <p><b>R</b>: Constante de los gases ideales (8.3144703523).</p>
+                                                        <p><b>T<small>n</small></b>: Temperatura normal de ebullición.</p>
+                                                        <p><b>P<small>c</small></b>: Presión crítica.</p>
+                                                        <p><b>T<small>c</small></b>: Temperatura crítica.</p>
 
                                                     <div class="clearfix"></div>
                                                     
@@ -359,7 +373,12 @@
 
                                                         <div class="clearfix"></div>
 
-                                                        <center> Imagen Formula </center>
+                                                        <center> <img src="~/images/ev.png"> </center>
+                                                        <br>
+                                                        <p><b>E</b>: Entalpía de vaporización.</p>
+                                                        <p><b>T<small>n</small></b>: Temperatura normal de ebullición.</p>
+                                                        <p><b>E<small>n</small></b>: Entalpía normal de vaporización.</p>
+                                                        <p><b>T</b>: Temperatura en Kelvin ingresada.</p>
 
                                                         <div class="clearfix"></div>
                                                         
