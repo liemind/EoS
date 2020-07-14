@@ -1,0 +1,62 @@
+@using Eosweb.Models
+@model Eosweb.Models.Noticia
+
+@{
+    ViewData["Title"] = "Detalle";
+    ViewBag.Title = "Detalle";
+}
+
+<div class="right_col" role="main">
+    <div class="">
+        <!--Titulo-->
+        <div class="page-title">
+            <div class="title_left">
+                <h3>@ViewBag.Title</h3>
+            </div>
+        </div>
+        <br />
+        <!--/ Titulo-->
+        <!--Breadcrumb-->
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="@Url.Action("Index", "Home")">Inicio</a></li>
+                        <li class="breadcrumb-item"><a href="@Url.Action("Index", "Noticia")">Noticias</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">@Model.titulo</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+        <!--/ Breadcrumb-->
+
+        <div class="clearfix"></div>
+
+        <!--Contenido -->
+        <div class="">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2><i class="fa fa-th-list"></i> @Model.titulo</h2>
+                        @if(@ViewBag.Tipo == "Administrador") {
+                            <ul class="nav navbar-right panel_toolbox">
+                                <li></li>
+                                <li></li>
+                                <li><a href=""  class="btn btn-primary" data-title="add" data-toggle="modal" data-target="#add" ><i class="fa fa-edit fa-lg"></i> Modificar</a></li>
+                            </ul>
+                        }
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        <!--Content-->
+                        <p class="byline">@Model.fecha escrito por <span class="badge badge-danger">@Model.autor.Nombre</span></p> 
+
+                        <p class="text-justify">@Model.cuerpo</p>
+                        <!--Content-->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--Contenido -->
+    </div>
+</div>

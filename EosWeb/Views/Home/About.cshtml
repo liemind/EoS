@@ -1,7 +1,74 @@
 ﻿@{
-    ViewData["Title"] = "About";
+    ViewData["Title"] = "Ayuda";
 }
-<h2>@ViewData["Title"]</h2>
-<h3>@ViewData["Message"]</h3>
 
-<p>Use this area to provide additional information.</p>
+<div class="right_col" role="main">
+    <div class="">
+        <!--Titulo-->
+        <div class="page-title">
+            <div class="title_left">
+                <h3>@ViewBag.Title</h3>
+            </div>
+        </div>
+        <br />
+        <!--/ Titulo-->
+        <!--Breadcrumb-->
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="@Url.Action("Index", "Home")">Inicio</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Ayuda</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+        <!--/ Breadcrumb-->
+
+        <div class="clearfix"></div>
+        <!--Contenido -->
+
+        <div class="">
+            <!--Profile -->
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2><i class="fa fa-th-list"></i> </h2>
+                        <div class="clearfix"></div>
+                    </div>
+                        <div class="x_content">
+                        <!--Tab panel -->
+                            <!--aviso -->
+                            <div class="alert alert-info alert-dismissible fade in" role="alert">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+                                <i class="fa fa-info-circle fa-lg"></i> ¡Bienvenido al servicio de ayuda! Haz clic en las pestañas para ver si podemos contestar tu duda. Si no es así, no dudes en contactar al administrador.
+                            </div>
+                            <!--end aviso-->
+
+                            <!-- start accordion -->
+                            <div class="accordion" id="accordion" role="tablist" aria-multiselectable="true">
+                                <div class="panel">
+                                    <a class="panel-heading" role="tab" id="headingOne" data-toggle="collapse" data-parent="#accordion" href="#help1" aria-expanded="true" aria-controls="help1">
+                                    <h4 class="panel-title">¿Puedo crearme una cuenta en el sitio?</h4>
+                                    </a>
+                                    <div id="help1" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                                    <div class="panel-body">
+                                        <!-- content -->
+                                        <p>¡Hola! No es posible crear una cuenta por ti mismo. ¡Pero tu profesor puede hacerlo! No dudes en pedirle a él que lo haga por ti. Recibirás un correo electrónico cuando tu cuenta sea creada.</p>
+                                        <!-- /content -->
+                                    </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end of accordion -->
+
+                        <!--Tab panel end -->
+                    </div>
+                </div>
+            </div>
+            <!--end Lista-->
+        </div>
+
+    </div>
+</div>
+

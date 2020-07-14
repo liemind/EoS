@@ -1,0 +1,225 @@
+@using Eosweb.Models
+@model List<Eosweb.Models.Usuario>
+
+@{
+    ViewData["Title"] = "Usuarios";
+    ViewBag.Title = "Usuarios en el Sistema";
+}
+
+<!-- Datatables -->
+<link href="~/lib/select2/dist/css/select2.min.css" rel="stylesheet" />
+<link href="~/lib/datatables/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
+<link href="~/lib/datatables/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" rel="stylesheet">
+<link href="~/lib/datatables/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
+<link href="~/lib/datatables/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
+<link href="~/lib/datatables/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
+
+
+<div class="right_col" role="main">
+    <div class="">
+        <!--Titulo-->
+        <div class="page-title">
+            <div class="title_left">
+                <h3>@ViewBag.Title</h3>
+            </div>
+        </div>
+        <br />
+        <!--/ Titulo-->
+        <!--Breadcrumb-->
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="@Url.Action("Index", "Home")">Inicio</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Lista de Usuarios</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+        <!--/ Breadcrumb-->
+
+        <div class="clearfix"></div>
+        <!--Contenido -->
+
+        <!--crear un dato-->
+        <div class="">
+            <!--Form -->
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2><i class="fa fa-th-list"></i> Agregar un Usuario</h2>
+                        <ul class="nav navbar-right panel_toolbox">
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        <!--Content-->
+                        @using (Html.BeginForm("Crear", "Usuarios", FormMethod.Post, new { enctype = "multipart/form-data", @style = "border:none", data_parley_validate = false }))
+                        {
+                        <div data-parsley-validate>
+                            <table class="table table-striped table-bordered table-responsive" >
+                                <thead>
+                                    <tr>
+                                        <th>Rut</th>
+                                        <th>Nombre</th>
+                                        <th>Correo Electrónico</th>
+                                        <th>Tipo de Usuario</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="text-justify"><input class="form-control col-md-2 col-xs-12" type="text" name="Rut" placeholder="Ejemplo: 18123456" data-parsley-pattern="\d{0,1}\d{7}" data-parsley-trigger="change" required></td>
+                                        <td class="text-justify"><input class="form-control col-md-2 col-xs-12" type="text" name="Nombre" data-parsley-trigger="change" data-parsley-length="[4, 20]" data-parsley-minwords="2" name="Nombre" placeholder="Nombre y Apellido. Ejemplo: Juan Perez" required></td>
+                                        <td class="text-justify"><input class="form-control col-md-2 col-xs-12" type="email" name="Correo" data-parsley-trigger="change" required></td>
+                                        <td width="30%" >
+                                            <select class="form-control" name="Tipo" required>
+                                                    <option value ="Administrador">Administrador</option>
+                                                    <option value ="Estudiante">Estudiante</option>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="ln_solid"></div>
+                            <div class="form-group">
+                                <div class="">
+                                <button id="send" type="submit" class="btn btn-success">Crear Cuenta</button>
+                            </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+            <!--end Form-->
+        </div>
+        <!--/end -->
+
+        <div class="">
+            <!--Lista -->
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2><i class="fa fa-th-list"></i> </h2>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        <!--Content-->
+                        <table id="datatable" class="table table-striped table-bordered table-responsive">
+                            <thead>
+                                <tr>
+                                    <th>Rut</th>
+                                    <th>Nombre</th>
+                                    <th>Correo Electrónico</th>
+                                    <th>Tipo de Usuario</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var i in Model)
+                                {
+                                    <tr>
+                                        <td width="7%">@i.Rut</td>
+                                        <td>@i.Nombre</td>
+                                        <td>@i.CorreoElectronico</td>
+                                        <td>@i.Tipo</td>
+                                        @if(i.Rut == ViewBag.IdUsuario) {
+                                            <td width="7%"><button type="button" class="btn btn-info btn-round" data-toggle="tooltip" data-placement="top" title="Recuperar contraseña" disabled><i class="fa fa-refresh"></i></button> <button type="button" class="btn btn-danger btn-round" data-toggle="tooltip" data-placement="top" title="Desactivar" disabled><i class="fa fa-close"></i></button></td>
+                                        }
+                                        else if(i.Estado == "Habilitado")
+                                        {
+                                            <td width="7%"><a href=""  class="btn btn-round btn-info" data-title="reiniciar" data-toggle="modal" data-target="#reiniciar" onclick="Reiniciar('@i.Rut', '@i.Nombre')" data-toggle="tooltip" data-placement="top" title="Recuperar contraseña"><i class="fa fa-refresh"></i></a> <a href=""  class="btn btn-round btn-danger" data-title="hab-deshab" data-toggle="modal" data-target="#hab-deshab" onclick="HabDeshabMessaje('@i.Rut', '1')" data-toggle="tooltip" data-placement="top" title="Desactivar usuario"><i class="fa fa-close"></i></a></td>
+                                        }
+                                        else {
+                                            <td width="7%"><a href=""  class="btn btn-round btn-info" data-title="reiniciar" data-toggle="modal" data-target="#reiniciar" onclick="Reiniciar('@i.Rut', '@i.Nombre')" data-toggle="tooltip" data-placement="top" title="Recuperar contraseña"><i class="fa fa-refresh"></i></a> <a href=""  class="btn btn-round btn-danger" data-title="hab-deshab" data-toggle="modal" data-target="#hab-deshab" onclick="HabDeshabMessaje('@i.Rut', '0')" data-toggle="tooltip" data-placement="top" title="Activar usuario"><i class="fa fa-check"></i></a></td>
+                                        }
+                                        
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                        <!--/ Content-->
+                    </div>
+                </div>
+            </div>
+            <!--end Lista-->
+        </div>
+
+    </div>
+</div>
+
+<script type="text/javascript">
+            HabDeshabMessaje = function (idcomp, numero) {
+                document.getElementById("idhabilitar").setAttribute("value", idcomp);
+                if (numero == 1) {
+                    document.getElementById("habdesabtitle").innerHTML = "<i class='fa fa-eye-slash'></i> Deshabilitar Usuario";
+                    document.getElementById("hab-message").innerHTML = "¿Está seguro de que desea deshabilitar al usuario?";
+                    document.getElementById("idcode").setAttribute("value", 1);
+                }
+                else {
+                    document.getElementById("habdesabtitle").innerHTML = "<i class='fa fa-eye'></i> Habilitar Usuario";
+                    document.getElementById("hab-message").innerHTML = "¿Está seguro de que desea habilitar al usuario?";
+                    document.getElementById("idcode").setAttribute("value", 0);
+                }
+            };
+
+            Reiniciar = function(rut, nombre) {
+                document.getElementById("reiniciar-title").innerHTML = "<i class='fa fa-eye-slash'></i> Reiniciar contraseña";
+                    document.getElementById("reiniciar-message").innerHTML = "¿Está seguro de que desea reiniciar la contraseña de "+nombre+"?";
+                    document.getElementById("reiniciar-rut").setAttribute("value", rut);
+            }
+</script>
+
+<!--Modal Deshabilitar/Habilitar-->
+<div class="modal fade" id="hab-deshab" tabindex="-1" role="dialog" aria-labelledby="hab-deshab" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <h4 id="habdesabtitle" class="modal-title">~</h4>
+            </div>
+            @using (Html.BeginForm("HabilitarDeshabilitar", "Usuarios", FormMethod.Post, new { @style = "border:none" }))
+            {
+                <div class="modal-body">
+                    <p id="hab-message"></p>
+                </div>
+                <div class="modal-footer">
+                    <input type="hidden" id="idhabilitar" name="Rut" value="" />
+                    <input type="hidden" id="idcode" name="EstadoActual" value="" />
+                    <button type="submit" class="btn btn-primary">Aceptar</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+<!--Modal Reiniciar-->
+<div class="modal fade" id="reiniciar" tabindex="-1" role="dialog" aria-labelledby="reiniciar" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <h4 id="reiniciar-title" class="modal-title">~</h4>
+            </div>
+            @using (Html.BeginForm("ReiniciarPass", "Usuarios", FormMethod.Post, new { @style = "border:none" }))
+            {
+                <div class="modal-body">
+                    <p id="reiniciar-message"></p>
+                </div>
+                <div class="modal-footer">
+                    <input type="hidden" id="reiniciar-rut" name="Rut" value="" />
+                    <button type="submit" class="btn btn-primary">Aceptar</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                </div>
+            }
+        </div>
+    </div>
+</div>

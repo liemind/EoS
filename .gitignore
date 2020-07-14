@@ -1,2 +1,8 @@
-
 bd/loadAll.bat
+bd/
+pruebacarga/
+EosWeb/bin/
+EosWeb/Data/DataSource.cs
+
+Eospublic/
+EosWeb/bin/Debug/netcoreapp2.1/

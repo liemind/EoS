@@ -910,3 +910,12 @@ INSERT INTO secundarias(id, A, B, C, tmin_k, tmax_k) VALUES (301,9.5308,4294.55,
 
 /*Constantes*/
 INSERT INTO constantes(id, A, B, C, D) VALUES (14,3.47,0.00145,0,12100);
+
+/*Usuarios*/
+INSERT INTO usuario(rut,nombre,correoElectronico,tipo,password,estado) VALUES ('9999999', 'admin', 'admin@eos.cl', 1, 'kkwwGwKSbeigSz7RFJ5NMQ==', 1);
+/*INSERT INTO usuario(rut,nombre,correoElectronico,tipo,password,estado) VALUES ('9999999', 'Hector Quinteros', 'admin@eos.cl', 1, 'kkwwGwKSbeigSz7RFJ5NMQ==', 1);*/
+
+
+/*otras constantes*/
+INSERT INTO otrasconstantes(nombre, valor) VALUES ('r', 8.3144703523);
+INSERT INTO otrasconstantes(nombre, valor) VALUES ('a', 0.2857);

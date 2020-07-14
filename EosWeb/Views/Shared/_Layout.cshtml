@@ -44,26 +44,29 @@
                     <!-- sidebar menu -->
                     <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
                         <div class="menu_section">
-                            <h3>Administrativo</h3>
-                            <ul class="nav side-menu">
-                                <li>
-                                    <a><i class="fa fa-users"></i> Usuarios <span class="fa fa-chevron-down"></span></a>
-                                    <ul class="nav child_menu">
-                                        <li>@Html.ActionLink("Registrados", "Index", "Home")</li>
-                                        <li>@Html.ActionLink("Grupos", "Index", "Home")</li>
-                                        <li>@Html.ActionLink("Llaves", "Index", "Home")</li>
-                                    </ul>
-                                </li>
-                            </ul>
+                            @if(@ViewBag.Tipo == "Administrador")
+                            {
+                                <h3>Administrativo</h3>
+                                <ul class="nav side-menu">
+                                    <li>
+                                        <a><i class="fa fa-users"></i> Usuarios <span class="fa fa-chevron-down"></span></a>
+                                        <ul class="nav child_menu">
+                                            <li>@Html.ActionLink("Registrados", "Index", "Usuarios")</li>
+                                            <li>@Html.ActionLink("Grupos", "Grupos", "Usuarios")</li>
+                                            <li>@Html.ActionLink("Acciones", "Acciones", "Usuarios")</li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            }
                             <h3>General</h3>
                             <ul class="nav side-menu">
                                     <li>
-                                        <a><i class="fa fa-database"></i> Base de Datos <span class="fa fa-chevron-down"></span></a>
+                                        <a><i class="fa fa-database"></i> Base de datos <span class="fa fa-chevron-down"></span></a>
                                         <ul class="nav child_menu">
                                             <li>@Html.ActionLink("Identificador", "Index", "Identificador")</li>
                                             <li>@Html.ActionLink("Fundamentales", "Index", "Fundamentales")</li>
-                                            <li>@Html.ActionLink("Secundarias", "Index", "Secundarias")</li>
-                                            <li>@Html.ActionLink("Constantes", "Index", "Constantes")</li>
+                                            <li>@Html.ActionLink("Constantes de Antoine", "Index", "Secundarias")</li>
+                                            <li>@Html.ActionLink("Capacidades caloríficas", "Index", "Constantes")</li>
                                         </ul>
                                     </li>
                                     <li>
@@ -89,24 +92,34 @@
                                 </div>
 
                                 <ul class="nav navbar-nav navbar-right">
+                                    @if(ViewBag.Sesion != null && ViewBag.Sesion) 
+                                    {
                                     <li class=""><a href="@Url.Action("CerrarSesion", "Home")"><i class="fa fa-sign-out" style="font: 15px!important"></i>Cerrar Sesión</a></li>
-                                    <li class=""><a href="@Url.Action("CerrarSesion", "Home")" style="color: #bd1622!important">Iniciar Sesión</a></li>
-                                    <li class=""><a href="@Url.Action("CerrarSesion", "Home")">Perfil</a></li>
+                                    <li class=""><a href="@Url.Action("Perfil", "Home")">Perfil</a></li>
+                                    } else {
+                                    <li class=""><a href="@Url.Action("Invitado", "Home")" style="color: #bd1622!important">Iniciar Sesión</a></li>
+                                    }
+                                    <li class=""><a href="@Url.Action("Index", "Noticia")">Noticias</a></li>
+                                    <li class=""><a href="@Url.Action("About", "Home")"><i class="fa fa-question-circle"></i></a></li>
                                 </ul>
                             </nav>
                         </div>
-
                 </div>
             <!-- /top navigation -->
+
+            <!--Notificaciones-->
+            @if (ViewBag.Notificacion != null)
+            {   
+                @Html.Partial("_Notificacion")
+            }       
+            <!--Notificaciones-->
+
 
             <!--content-->
             @RenderBody()
             <!-- footer content -->
         <footer>
-          <div class="pull-right">
-            Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a>. Desarrollado por Daniela Paredes
-          </div>
-          <div class="clearfix"></div>
+        @Html.Partial("_Footer")
         </footer>
         <!-- /footer content -->
         </div>
@@ -116,10 +129,10 @@
 
     <environment include="Development">
         <script src="~/lib/jquery/dist/jquery.js"></script>
-        <!--Calendar Scripts-->
+        <!--Calendar Scripts
         <script src="~/lib/moment/min/moment.min.js"></script>
         <script src="~/lib/fullcalendar/dist/fullcalendar.js"></script>
-        <!--End Calendar Scripts-->
+        End Calendar Scripts-->
         <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
         <!--Fast Click-->
         <script src="~/lib/fastclick/lib/fastclick.js"></script>
@@ -149,11 +162,17 @@
         <script src="~/lib/datatables/datatables.net-scroller/js/dataTables.scroller.min.js"></script>
         <!--Date Time Picker-->
         <script type="text/javascript" src="~/lib/bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
-        <!--Full Calendar -->
+        <!--Full Calendar 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.js"></script>
+        -->
+        <!-- bootstrap-wysiwyg -->
+        <script src="~/lib/bootstrap-wysiwyg/js/bootstrap-wysiwyg.min.js"></script>
+        <script src="~/lib/jquery.hotkeys/jquery.hotkeys.js"></script>
+        <script src="~/lib/google-code-prettify/src/prettify.js"></script>
         <!-- jQuery custom content scroller -->
         <script src="~/js/site.js" asp-append-version="true"></script>
+        
     </environment>
     <environment exclude="Development">
         <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.2.0.min.js"
