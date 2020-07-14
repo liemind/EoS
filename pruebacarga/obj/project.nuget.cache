@@ -1,0 +1,21 @@
+{
+  "version": 2,
+  "dgSpecHash": "8DMLO2qBC/TijE2Kty431+XHOQEhwou8sqmL5VK+3y1QEuPQ9aIpMXv4lAcvm/hZOUoNomYoXM9SsL9QvvAWDw==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\elyna\\Documents\\Universidad de Talca\\2019-2\\Diseño y Analisis de Algoritmos\\EoS\\pruebacarga\\pruebacarga.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\elyna\\.nuget\\packages\\microsoft.office.interop.excel\\15.0.4795.1000\\microsoft.office.interop.excel.15.0.4795.1000.nupkg.sha512"
+  ],
+  "logs": [
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "El paquete \"Microsoft.Office.Interop.Excel 15.0.4795.1000\" se restauró con \".NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8\" en lugar de la plataforma de destino del proyecto \".NETCoreApp,Version=v3.1\". Puede que el paquete no sea totalmente compatible con el proyecto.",
+      "libraryId": "Microsoft.Office.Interop.Excel",
+      "targetGraphs": [
+        ".NETCoreApp,Version=v3.1"
+      ]
+    }
+  ]
+}
