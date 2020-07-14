@@ -84,3 +84,4 @@ C:\Users\elyna\Documents\Universidad de Talca\2019-2\Diseño y Analisis de Algor
 C:\Users\elyna\Documents\Universidad de Talca\2019-2\Diseño y Analisis de Algoritmos\EoS\EosWeb\obj\Debug\netcoreapp2.1\Razor\Views\Noticia\Index.cshtml.g.cs
 C:\Users\elyna\Documents\Universidad de Talca\2019-2\Diseño y Analisis de Algoritmos\EoS\EosWeb\obj\Debug\netcoreapp2.1\Razor\Views\Noticia\Noticia.cshtml.g.cs
 C:\Users\elyna\Documents\Universidad de Talca\2019-2\Diseño y Analisis de Algoritmos\EoS\EosWeb\obj\Debug\netcoreapp2.1\Razor\Views\Shared\_Notificacion.cshtml.g.cs
+C:\Users\elyna\Documents\Universidad de Talca\2019-2\Diseño y Analisis de Algoritmos\EoS\EosWeb\obj\Debug\netcoreapp2.1\Razor\Views\Shared\_Footer.cshtml.g.cs

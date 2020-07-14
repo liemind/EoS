@@ -1114,7 +1114,7 @@ a {
 }
 
 footer {
-    background: #fff;
+    background: var(--negro);
     padding: 15px 20px;
     display: block
 }
@@ -5425,3 +5425,11 @@ h2 {
   .bolt {
     font-weight: 500!important;
     }
+
+.color-blanco {
+    color: var(--blanco)!important;
+}
+
+.letter-spacing {
+    letter-spacing:2px!important;
+}
