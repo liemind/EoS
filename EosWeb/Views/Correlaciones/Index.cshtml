@@ -512,47 +512,37 @@
                                 <!-- tab 4-->
                                     @if(@ViewBag.idCompuesto != null) {
                                     <!--form -->
-                                        @using (Html.BeginForm("TemperaturaRacket", "Correlaciones", FormMethod.Post, new { enctype = "multipart/form-data", @style = "border:none", data_parley_validate = false })) {
                                         <div data-parsley-validate>
                                             <table class="table table-striped table-bordered table-responsive">
                                             <tbody>
                                                 <tr>
-                                                @if(@ViewBag.T != null){ 
-                                                    <td class="text-justify"><input type="number" data-parsley-type="integer" class="form-control" name="T3" min="@ViewBag.Tmax_k" max="@ViewBag.Tc_K" placeholder="Ingrese una temperatura entre @ViewBag.Tmax_k (kelvin) y @ViewBag.Tmin_k (kelvin)" data-parsley-pattern="([0-9])+|(\,([0-9]+))" value="@ViewBag.T3"></td>
-                                                }
-                                                else {
-                                                    <td class="text-justify"><input type="number" data-parsley-type="integer" class="form-control" min="@ViewBag.Tmax_k" max="@ViewBag.Tc_K" placeholder="Ingrese una temperatura entre @ViewBag.Tmax_k (kelvin) y @ViewBag.Tmin_k (kelvin)" data-parsley-pattern="([0-9])+|(\,([0-9]+))" name="T3" value="" required></td>
-                                                }
-                                                    <td class="text-justify" width="5%"><button id="send" type="submit" class="btn btn-success">Calcular</button></td>
+                                                <td class="text-justify"><input type="text" class="form-control" name="TRacket" placeholder="Ingrese una temperatura entre @ViewBag.Tmax_k (kelvin) y @ViewBag.Tmin_k (kelvin)" data-parsley-pattern="\d+(\.\d{1,2})?" value="" data-parsley-trigger="change" required></td>
+                                                <td class="text-justify" width="5%"><button id="btnRacket" type="submit" class="btn btn-success">Calcular</button></td>
                                                 </tr>
                                             </tbody>
                                             </table>
                                         </div>
-                                        <input type="hidden" class="form-control" name="IdCompuesto" value="@ViewBag.idCompuesto">
-                                        <input type="hidden" class="form-control" name="T" value="@ViewBag.T">
-                                        <input type="hidden" class="form-control" name="T" value="@ViewBag.T2">
-                                        <input type="hidden" class="form-control" name="Ps" value="@ViewBag.Ps">
-                                        <input type="hidden" class="form-control" name="Te" value="@ViewBag.Te">
-                                        <input type="hidden" class="form-control" name="Tne" value="@ViewBag.Tne">
-                                        <input type="hidden" class="form-control" name="R" value="@ViewBag.R">
-                                        <input type="hidden" class="form-control" name="En" value="@ViewBag.En">
-                                        <input type="hidden" class="form-control" name="Snv" value="@ViewBag.Snv">
-                                        <input type="hidden" class="form-control" name="V" value="@ViewBag.V">
-                                        }
                                     <!-- end form -->
 
-                                    <center> Imagen Formula </center>
                                     <div class="clearfix"></div>
                                     <div>
                                         <table class="table table-striped table-bordered table-responsive">
                                         <thead>
-                                            <tr>
-                                                <th>Volumen del líquido saturado (m^3/mol)</th>
+                                            <tr><th>Volumen crítico</th>
+                                                <th colspan="2">Volumen del líquido saturado</th>
                                             </tr>
                                         </thead>
                                                 <tbody>
                                                     <tr>
-                                                    <td class="text-justify alert-success"><input type="text" class="form-control" name="" value="@ViewBag.V" readonly></td>
+                                                    <td class="text-justify" width="30%"><input type="text" class="form-control" name="Vc" value="" readonly></td>
+                                                    <td class="text-justify alert-success"><input type="text" class="form-control" name="Racket" value="" readonly></td>
+                                                    <td class="text-justify" width="10%">
+                                                        <select class="form-control" id="dropdown" name="racketVar" onchange="CambiarU()">
+                                                            <option value="1">(m<sup>3</sup>/mol)</option>
+                                                            <option value="2">(L/mol)</option>
+                                                            <option value="3">(cm<sup>3</sup>/mol)</option>
+                                                        </select>
+                                                    </td>
                                                     </tr>
                                                 </tbody>
                                         </table>
@@ -711,8 +701,11 @@
                     $("#enfasis").css("background-color","#E74C3C");
                 }
             });
+            $("#dropdown").prop("disabled", true);
 
-            $('#btnCC').click(function () {
+        });
+
+        $('#btnCC').click(function () {
                 //Open modal dialog for edit event
                 var t1 = document.getElementsByName("TCal1")[0].value;
                 var t2 = document.getElementsByName("TCal2")[0].value;
@@ -757,12 +750,12 @@
                     }
                 })
 
-            })
+        })
 
-            function BuscarConstante() {
-                var id = '@ViewBag.IdCompuesto';
+        function BuscarConstante() {
+            var id = '@ViewBag.IdCompuesto';
 
-                $.ajax({
+            $.ajax({
                     type: "POST",
                     url: '/Correlaciones/LeerConstante/',
                     data: {'Id': id },
@@ -784,9 +777,67 @@
                     error: function (f) {
                         console.log(f);
                     }
-                })
-            }
+            })
+        }
 
-        });
+        function CambiarU() {
+            CalcularVc();
+        }
+
+        $('#btnRacket').click(function () {
+            CalcularVc();
+        })
+
+        function CalcularVc() {
+            var id = '@ViewBag.IdCompuesto';
+            var op = $('#dropdown').val();
+            $.ajax({
+                        type: "POST",
+                        url: '/Correlaciones/CalcularVolumenC/',
+                        data: { 'Id': id, 'Opcion': op },
+                        success: function (data) {
+                            if (data != 0) {
+                                document.getElementsByName('Vc')[0].setAttribute("value", data);
+                                CalcularRacket(data);
+                            }
+                            else {
+                                alert('No pudo calcularse el valor debido a que se encuentra fuera de los parámetros');
+                            }
+
+                        },
+                        error: function (f) {
+                            console.log(f);
+                            alert('No pudo calcularse el valor');
+                        }
+            })
+        }
+
+        function CalcularRacket(vc) {
+            var t = document.getElementsByName("TRacket")[0].value;
+            var id = '@ViewBag.IdCompuesto';
+
+            $.ajax({
+                type: "POST",
+                url: '/Correlaciones/TemperaturaRacket/',
+                data: { 'T': t , 'Id': id, 'Vc': vc },
+                success: function (data) {
+                    if (data != 0) {
+                        document.getElementsByName('Racket')[0].setAttribute("value", data);
+                        $("#dropdown").prop("disabled", false);
+                    }
+                    else {
+                        alert('No pudo calcularse el valor debido a que se encuentra fuera de los parámetros');
+                    }
+                },
+                    error: function (f) {
+                    console.log(f);
+                    alert('No pudo calcularse el valor');
+                }
+            })
+        }
+
+        
+
+            
     </script>
 }

@@ -14,5 +14,8 @@ namespace Eosweb.Models
         public double C { get; set; }
         public int Tmin_k { get; set; }
         public int Tmax_k { get; set; }
+        public double Pmin_bar { get; set; }
+        public double Pmax_bar { get; set; }
+    
     }
 }

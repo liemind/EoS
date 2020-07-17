@@ -227,42 +227,57 @@ namespace Eosweb.Controllers
             return RedirectToAction("Index", "Correlaciones");
         }
 
-        public ActionResult TemperaturaRacket(int T3, int IdCompuesto, int T2, int T, string Ps, string Te, string Tne, string R, string En, string Snv){
-            TempData["idCompuesto"] = IdCompuesto;
-            Identificador i = DataIdentificador.Leer(IdCompuesto);
-            TempData["Compuesto"] = i.Compuesto;
-            TempData["Formula"] = i.Formula;
-            TempData["M"] = i.M;
-            Fundamentales f = DataFundamentales.Leer(IdCompuesto);
-            Secundarias s = DataSecundarias.Leer(IdCompuesto);
 
-            if(T3 < s.Tmax_k || T3 > f.Tc_K) {
+        [HttpPost]
+        public JsonResult CalcularVolumenC(int Id, int Opcion) {
+            double valor = 0;
 
+            double r = 8.314;
+            Fundamentales f = DataFundamentales.Leer(Id);
+            if (f != null) {
+                valor = f.Zc*r*f.Tc_K/f.Pc_bar/Math.Pow(10,5);
+                if(Opcion == 2) {
+                    valor = valor * 1000;
+                }else if (Opcion == 3) {
+                    valor = valor * Math.Pow(100,3);
+                }
             }
-            else {
-                TempData["T3"] = T3;
-                //constantes
-                double r = convertToDouble(R);
-                double a = 0.2857;
-                
-                //racket
-                    //temperatura reducida
-                    double tr = f.Pc_bar/f.Tc_K;
-                    //(1-Tr)^a
-                    double tra = Math.Pow(1-tr,a);
-                    //vc
-                    //(zcxRxTC/pC)10^5
-                    double Vc = f.Zc * r * f.Tc_K / f.Pc_bar / Math.Pow(10,5);
-                    
-                //Volumen del liquido saturado
-                double V = tra * Vc;
-                TempData["V"] = V;
+            return new JsonResult(valor);
+        }
 
-                
+        [HttpPost]
+        public JsonResult TemperaturaRacket(String T, int Id, String Vc){
+            double valor = 0;
+            if(Id != 0) {
+                Fundamentales f = DataFundamentales.Leer(Id);
+                Secundarias s = DataSecundarias.Leer(Id);
+                double t = convertToDouble(T);
+                double vc = convertToDouble(Vc);
 
+                if(t >= s.Tmax_k && t <= f.Tc_K) {
+                    //constantes
+                    double a = 0.2857;
+                    valor = vc * Math.Pow(Math.Pow(f.Zc,1-(t/f.Tc_K)),a);
+                }
             }
 
-            return RedirectToAction("Index", "Correlaciones");
+            return new JsonResult(valor);
+        }
+
+        [HttpPost]
+        public JsonResult CambiarUnidad(String Vc, int n) {
+            double valor = 0;
+            if(Vc != null) {
+                double vc = convertToDouble(Vc);
+                if (n == 2) {
+
+                }
+                else {
+
+                }
+            }
+
+            return new JsonResult(valor);
         }
 
         public int search(List<Identificador> list, Identificador value) {
@@ -288,12 +303,6 @@ namespace Eosweb.Controllers
             }
             
             return Convert.ToDouble(final_s);
-        }
-
-        public void inicializar() {
-            if (TempData.ContainsKey("idCompuesto")) ViewBag.idCompuesto = TempData["idCompuesto"];
-            
-
         }
 
 
