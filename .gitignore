@@ -1,6 +1,9 @@
-# Base de datos
+bd/loadAll.bat
 bd/
-# public
+pruebacarga/
+EosWeb/bin/
+EosWeb/Data/DataSource.cs
+
 Eospublic/
 EosWeb/bin/Debug/netcoreapp2.1/
 EosWeb/obj/

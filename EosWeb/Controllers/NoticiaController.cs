@@ -35,6 +35,16 @@ namespace Eosweb.Controllers
         //Ver noticia
         public IActionResult Noticia(int Id)
         {
+            if (Sesion() == true) {
+                String Rut = HttpContext.Session.GetString(Global.SessionKeyName);
+                ViewData["Sesion"] = true;
+                Usuario u = DataUsuario.LeerUno(Rut);
+                    //poned acá más datos de usuario en caso de necesitarlos
+                    ViewData["Tipo"] = u.Tipo;
+                    ViewData["NombreUsuario"] = u.Nombre;
+                    ViewData["IdUsuario"] = u.Rut;
+            }
+            
             Noticia n = DataNoticia.LeerUno(Id);
             return View(n);
         }

@@ -213,7 +213,7 @@ namespace Eosweb.Data
                 tipo = 2;
             }
 
-                try
+            try
             {
                 var command = new MySqlCommand() { CommandText = "sp_crear_usuario", CommandType = System.Data.CommandType.StoredProcedure };
                 command.Parameters.Add(new MySqlParameter() { ParameterName = "in_rut", Direction = System.Data.ParameterDirection.Input, Value = usuario.Rut});
@@ -253,6 +253,39 @@ namespace Eosweb.Data
                 command.Parameters.Add(new MySqlParameter() { ParameterName = "in_correoElectronico", Direction = System.Data.ParameterDirection.Input, Value = usuario.CorreoElectronico });
                 command.Parameters.Add(new MySqlParameter() { ParameterName = "in_tipo", Direction = System.Data.ParameterDirection.Input, Value = tipo });
                 var datos = DataSource.ExecuteProcedure(command);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+                return false;
+            }
+        }
+
+        public static Boolean CambiarPass(string rut, string pass) {
+            try
+            {
+                var command = new MySqlCommand() { CommandText = "sp_cambiar_pass_usuario", CommandType = System.Data.CommandType.StoredProcedure };
+                command.Parameters.Add(new MySqlParameter() { ParameterName = "in_rut", Direction = System.Data.ParameterDirection.Input, Value = rut });
+                command.Parameters.Add(new MySqlParameter() { ParameterName = "in_password", Direction = System.Data.ParameterDirection.Input, Value = pass });
+                var datos = DataSource.ExecuteProcedure(command);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+                return false;
+            }
+        }
+    
+        public static Boolean CrearLog(Log log) {
+            try
+            {
+                var command = new MySqlCommand() { CommandText = "sp_crear_log", CommandType = System.Data.CommandType.StoredProcedure };
+                command.Parameters.Add(new MySqlParameter() { ParameterName = "in_fecha", Direction = System.Data.ParameterDirection.Input, Value = log.fecha});
+                command.Parameters.Add(new MySqlParameter() { ParameterName = "in_autor", Direction = System.Data.ParameterDirection.Input, Value = log.autor.Id });
+                command.Parameters.Add(new MySqlParameter() { ParameterName = "in_accion", Direction = System.Data.ParameterDirection.Input, Value = log.accion });
+                var datos = DataSource.ExecuteProcedure(command);
 
                 return true;
             }
@@ -263,6 +296,43 @@ namespace Eosweb.Data
             }
         }
 
-        
+        public static List<Log> LeerTodoLog() {
+            try
+            {
+                var command = new MySqlCommand() { CommandText = "sp_leertodos_log", CommandType = System.Data.CommandType.StoredProcedure };
+                var datos = DataSource.GetDataSet(command);
+
+                List<Log> logs = new List<Log>();
+                if (datos.Tables[0].Rows.Count > 0)
+                {
+                    foreach (System.Data.DataRow row in datos.Tables[0].Rows)
+                    {
+                        var prodData = row;
+                        var d = new Log()
+                        {
+                            id = Convert.ToInt32(prodData["id"]),
+                            fecha = Convert.ToDateTime(prodData["fecha"]),
+                            accion = prodData["accion"].ToString()
+                        };
+                        Usuario usuario = new Usuario();
+                        usuario.Id = Convert.ToInt32(prodData["autor"]);
+                        usuario = DataUsuario.LeerPorId(usuario.Id);
+                        d.autor = usuario;
+                        logs.Add(d);
+                    }
+                }
+                return logs;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+            finally
+            {
+
+            }
+            return null;
+        }
+    
     }
 }

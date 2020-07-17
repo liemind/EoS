@@ -10,7 +10,7 @@ namespace Eosweb.Data
 {
     public class DataSource
     {
-        private static string connStr = "SERVER=localhost;DATABASE=eos;UID=eosdatabase;PASSWORD=Soyunab4se.de.dat0s;SslMode=none;CHARSET=utf8;";
+        private static string connStr = "SERVER=localhost;DATABASE=eos;UID=root;PASSWORD=;SslMode=none;CHARSET=utf8;";
 
         public static DataSet GetDataSet(MySqlCommand command)
         {

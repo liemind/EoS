@@ -28,6 +28,7 @@
         <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
     </environment>
 </head>
+<script src="https://unpkg.com/moment"></script>
 <body class="nav-md">
     <div class="container body">
         <div class="main_container">
@@ -53,7 +54,7 @@
                                         <ul class="nav child_menu">
                                             <li>@Html.ActionLink("Registrados", "Index", "Usuarios")</li>
                                             <li>@Html.ActionLink("Grupos", "Grupos", "Usuarios")</li>
-                                            <li>@Html.ActionLink("Llaves", "Acciones", "Usuarios")</li>
+                                            <li>@Html.ActionLink("Acciones", "Acciones", "Usuarios")</li>
                                         </ul>
                                     </li>
                                 </ul>
@@ -61,12 +62,12 @@
                             <h3>General</h3>
                             <ul class="nav side-menu">
                                     <li>
-                                        <a><i class="fa fa-database"></i> Base de Datos <span class="fa fa-chevron-down"></span></a>
+                                        <a><i class="fa fa-database"></i> Base de datos <span class="fa fa-chevron-down"></span></a>
                                         <ul class="nav child_menu">
                                             <li>@Html.ActionLink("Identificador", "Index", "Identificador")</li>
                                             <li>@Html.ActionLink("Fundamentales", "Index", "Fundamentales")</li>
-                                            <li>@Html.ActionLink("Secundarias", "Index", "Secundarias")</li>
-                                            <li>@Html.ActionLink("Constantes", "Index", "Constantes")</li>
+                                            <li>@Html.ActionLink("Constantes de Antoine", "Index", "Secundarias")</li>
+                                            <li>@Html.ActionLink("Capacidades caloríficas", "Index", "Constantes")</li>
                                         </ul>
                                     </li>
                                     <li>
@@ -100,6 +101,7 @@
                                     <li class=""><a href="@Url.Action("Invitado", "Home")" style="color: #bd1622!important">Iniciar Sesión</a></li>
                                     }
                                     <li class=""><a href="@Url.Action("Index", "Noticia")">Noticias</a></li>
+                                    <li class=""><a href="@Url.Action("About", "Home")"><i class="fa fa-question-circle"></i></a></li>
                                 </ul>
                             </nav>
                         </div>
@@ -118,10 +120,7 @@
             @RenderBody()
             <!-- footer content -->
         <footer>
-          <div class="pull-right">
-            Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a>. Desarrollado por Daniela Paredes
-          </div>
-          <div class="clearfix"></div>
+        @Html.Partial("_Footer")
         </footer>
         <!-- /footer content -->
         </div>

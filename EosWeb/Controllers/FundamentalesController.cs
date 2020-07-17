@@ -12,7 +12,7 @@ namespace Eosweb.Controllers
     public class FundamentalesController : Controller
     {
         public IActionResult Index(){
-
+            if (TempData.ContainsKey("Notificacion")) ViewBag.Notificacion = TempData["Notificacion"];
             if (Sesion() == true) {
                 String Rut = HttpContext.Session.GetString(Global.SessionKeyName);
                 ViewData["Sesion"] = true;
@@ -47,110 +47,143 @@ namespace Eosweb.Controllers
         }
 
         public ActionResult Crear(int Identificador, string Tc_K, string Pc_bar, string Zc, string W) {
-            Fundamentales f = new Fundamentales();
-            f.Id = Identificador;
-            f.Tc_K = convertToDouble(Tc_K);
-            f.Pc_bar = convertToDouble(Pc_bar);
-            f.Zc = convertToDouble(Zc);
-            f.W = convertToDouble(W);
+            if (Sesion() == true) {
+                String RutSesion = HttpContext.Session.GetString(Global.SessionKeyName);
+                
+                Fundamentales f = new Fundamentales();
+                f.Tc_K = convertToDouble(Tc_K);
+                f.Pc_bar = convertToDouble(Pc_bar);
+                f.Zc = convertToDouble(Zc);
+                f.W = convertToDouble(W);
+                f.i = DataIdentificador.Leer(Identificador);
 
-            if(DataFundamentales.Crear(f)) {
-                //wena
-            }
-            else {
-                //pta :(
+                if(DataFundamentales.Crear(f)) {
+                    TempData["Notificacion"] = "La operación fue realizada correctamente.";
+                    // INICIO LOG
+                    Usuario u = DataUsuario.LeerUno(RutSesion);
+                    HomeController.crearLog(u, "Usuario "+u.Nombre+" creó un dato fundamental.");
+                    // FIN LOG
+                }
+                else {
+                    //pta :(
+                    TempData["Notificacion"] = "La operación no pudo ser realizada. Inténtelo nuevamente o contacte al administrador.";
+                }
             }
             return RedirectToAction("Index", "Fundamentales");
         }
         
         public ActionResult Modificar(int Id, string Tc_K, string Pc_bar, string Zc, string W, int newId) {
+            if (Sesion() == true) {
+                String RutSesion = HttpContext.Session.GetString(Global.SessionKeyName);
+            
+                Fundamentales f = DataFundamentales.Leer(Id);
+                Fundamentales new_f = new Fundamentales();
+                double temporal;
+                if(newId != 0) {
+                    new_f.Id = newId;
+                }else {
+                    new_f.Id = f.Id;
+                }
 
-            Fundamentales f = DataFundamentales.Leer(Id);
-            Fundamentales new_f = new Fundamentales();
-            double temporal;
-            if(newId != 0) {
-                new_f.Id = newId;
-            }else {
-                new_f.Id = f.Id;
-            }
+                if(Tc_K != null) {
+                    temporal = convertToDouble(Tc_K);
+                    if(temporal != f.Tc_K) {
+                        new_f.Tc_K = temporal;
+                    }else {
+                        new_f.Tc_K = f.Tc_K;
+                    }
 
-            if(Tc_K != null) {
-                temporal = convertToDouble(Tc_K);
-                if(temporal != f.Tc_K) {
-                    new_f.Tc_K = temporal;
                 }else {
                     new_f.Tc_K = f.Tc_K;
                 }
 
-            }else {
-                new_f.Tc_K = f.Tc_K;
-            }
-
-            if(Pc_bar != null) {
-                temporal = convertToDouble(Pc_bar);
-                if(temporal != f.Pc_bar) {
-                    new_f.Pc_bar = temporal;
+                if(Pc_bar != null) {
+                    temporal = convertToDouble(Pc_bar);
+                    if(temporal != f.Pc_bar) {
+                        new_f.Pc_bar = temporal;
+                    }else {
+                        new_f.Pc_bar = f.Pc_bar;
+                    }
                 }else {
                     new_f.Pc_bar = f.Pc_bar;
                 }
-            }else {
-                new_f.Pc_bar = f.Pc_bar;
-            }
 
-            if(Zc != null){
-                temporal = convertToDouble(Zc);
-                if(temporal != f.Zc) {
-                    new_f.Zc = temporal;
+                if(Zc != null){
+                    temporal = convertToDouble(Zc);
+                    if(temporal != f.Zc) {
+                        new_f.Zc = temporal;
+                    }else {
+                        new_f.Zc = f.Zc;
+                    }
                 }else {
                     new_f.Zc = f.Zc;
                 }
-            }else {
-                new_f.Zc = f.Zc;
-            }
 
-            if(W != null) {
-                temporal = convertToDouble(W);
-                if(temporal != f.W) {
-                    new_f.W = temporal;
+                if(W != null) {
+                    temporal = convertToDouble(W);
+                    if(temporal != f.W) {
+                        new_f.W = temporal;
+                    }else {
+                        new_f.W = f.W;
+                    }
                 }else {
                     new_f.W = f.W;
                 }
-            }else {
-                new_f.W = f.W;
-            }
 
-            if(DataFundamentales.Modificar(new_f)) {
-                //wena
+                if(DataFundamentales.Modificar(new_f)) {
+                    TempData["Notificacion"] = "La operación fue realizada correctamente.";
+                    // INICIO LOG
+                    Usuario u = DataUsuario.LeerUno(RutSesion);
+                    HomeController.crearLog(u, "Usuario "+u.Nombre+" modificó un dato fundamental.");
+                    // FIN LOG
+                }
+                else {
+                    //pta :(
+                    TempData["Notificacion"] = "La operación no pudo ser realizada. Inténtelo nuevamente o contacte al administrador.";
+                }
             }
-            else {
-                //pta :(
-            }
-            
             return RedirectToAction("Index", "Fundamentales");
         }
 
         public ActionResult Eliminar(int Id) {
+            if (Sesion() == true) {
+                String RutSesion = HttpContext.Session.GetString(Global.SessionKeyName);
 
-            if(DataFundamentales.Eliminar(Id)) {
-                //wena
-            }
-            else {
-                //pta :(
+                if(DataFundamentales.Eliminar(Id)) {
+                    TempData["Notificacion"] = "La operación fue realizada correctamente.";
+                    // INICIO LOG
+                    Usuario u = DataUsuario.LeerUno(RutSesion);
+                    HomeController.crearLog(u, "Usuario "+u.Nombre+" eliminó un dato fundamental.");
+                    // FIN LOG
+                }
+                else {
+                    //pta :(
+                    TempData["Notificacion"] = "La operación no pudo ser realizada. Inténtelo nuevamente o contacte al administrador.";
+                }
             }
             return RedirectToAction("Index", "Fundamentales");
         }
 
         public ActionResult CrearIdentificador(string Compuesto, string Formula, string M) {
-            Identificador identificador = new Identificador();
-            identificador.Compuesto = Compuesto;
-            identificador.Formula = Formula;
-            identificador.M = convertToDouble(M);
+            if (Sesion() == true) {
+                String RutSesion = HttpContext.Session.GetString(Global.SessionKeyName);
+                //Content
+                Identificador identificador = new Identificador();
+                identificador.Compuesto = Compuesto;
+                identificador.Formula = Formula;
+                identificador.M = convertToDouble(M);
 
-            if(DataIdentificador.Crear(identificador)) {
-                //wena
-            }
-            else {
-                //pta :(
+                if(DataIdentificador.Crear(identificador)) {
+                    TempData["Notificacion"] = "La operación fue realizada correctamente.";
+                    // INICIO LOG
+                    Usuario u = DataUsuario.LeerUno(RutSesion);
+                    HomeController.crearLog(u, "Usuario "+u.Nombre+" creó un identificador.");
+                    // FIN LOG
+                }
+                else {
+                    //pta :(
+                    TempData["Notificacion"] = "La operación no pudo ser realizada. Inténtelo nuevamente o contacte al administrador.";
+                }
             }
             return RedirectToAction("Index", "Fundamentales");
         }

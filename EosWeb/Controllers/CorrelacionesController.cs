@@ -21,6 +21,7 @@ namespace Eosweb.Controllers
         // V: Volumen del liquido saturado
 
         public IActionResult Index(){
+            if (TempData.ContainsKey("Notificacion")) ViewBag.Notificacion = TempData["Notificacion"];
             Identificador iden = new Identificador();
 
             if (TempData.ContainsKey("idCompuesto")) {
@@ -294,6 +295,93 @@ namespace Eosweb.Controllers
             
 
         }
+
+
+        //Jsons
+        [HttpPost]
+        public JsonResult CapacidadCaloricaCPH(String T1, String T2, int Id)
+        {
+            double valor = 0;
+            if(T1 != null && T2 != null && Id != 0) {
+                string patron = ".";
+                string[] T1_s = T1.Split(patron);
+                string[] T2_s = T2.Split(patron);
+                string t1 ="", t2 ="";
+
+                double r = 8.314;
+                //reformo
+                if(T1_s.Length > 1) {
+                    t1 = T1_s[0]+","+T1_s[1];  
+                }
+                else { t1 = T1_s[0]; }
+
+                if(T2_s.Length > 1) {
+                    t2 = T2_s[0]+","+T2_s[1];  
+                }
+                else { t2 = T2_s[0]; }
+
+                Double FinalT1 = Convert.ToDouble(t1);
+                Double FinalT2 = Convert.ToDouble(t2);
+
+                Fundamentales f = DataFundamentales.Leer(Id);
+                Secundarias s = DataSecundarias.Leer(Id);
+                if((FinalT1 >= s.Tmax_k && FinalT1 <= f.Tc_K) && (FinalT2 >= s.Tmax_k && FinalT2 <= f.Tc_K)) {
+                    Constantes cons = DataConstantes.Leer(Id);
+                    if (cons != null) {
+                        valor = r/(FinalT2-FinalT1) * (Convert.ToDouble(cons.A) *(FinalT2-FinalT1)+Convert.ToDouble(cons.B)/2*(Math.Pow(FinalT2, 2) - Math.Pow(FinalT1, 2))+Convert.ToDouble(cons.C)/3*(Math.Pow(FinalT2, 3) - Math.Pow(FinalT1, 3))-Convert.ToDouble(cons.D)*(1/FinalT2-1/FinalT1));
+                    } 
+                }
+            }
+            
+            return new JsonResult(valor);
+        }
+
+        [HttpPost]
+        public JsonResult CapacidadCaloricaCPS(String T1, String T2, int Id)
+        {
+            double valor = 0;
+            Constantes cons = DataConstantes.Leer(Id);
+            if (cons != null) {
+                if(T1 != null && T2 != null && Id != 0) {
+                    string patron = ".";
+                    string[] T1_s = T1.Split(patron);
+                    string[] T2_s = T2.Split(patron);
+                    string t1 ="", t2 ="";
+                    double r = 8.314;
+                    //reformo
+                    if(T1_s.Length > 1) {
+                        t1 = T1_s[0]+","+T1_s[1];  
+                    }
+                    else { t1 = T1_s[0]; }
+
+                    if(T2_s.Length > 1) {
+                        t2 = T2_s[0]+","+T2_s[1];  
+                    }
+                    else { t2 = T2_s[0]; }
+
+                    Double FinalT1 = Convert.ToDouble(t1);
+                    Double FinalT2 = Convert.ToDouble(t2);
+
+                    Fundamentales f = DataFundamentales.Leer(Id);
+                    Secundarias s = DataSecundarias.Leer(Id);
+                    if((FinalT1 >= s.Tmax_k && FinalT1 <= f.Tc_K) && (FinalT2 >= s.Tmax_k && FinalT2 <= f.Tc_K)) {
+                        valor =r/Math.Log(FinalT2/FinalT1)*(Convert.ToDouble(cons.A)*(Math.Log(FinalT2)-Math.Log(FinalT1))+Convert.ToDouble(cons.B)*(FinalT2-FinalT1)+Convert.ToDouble(cons.C)/2*(Math.Pow(FinalT2, 2)-Math.Pow(FinalT1, 2))-Convert.ToDouble(cons.D)/2*(1/Math.Pow(FinalT2, 2)-1/Math.Pow(FinalT1, 2)));
+                    }
+                }
+            }
+
+            return new JsonResult(valor);
+        }
+
+        [HttpPost]
+        public JsonResult LeerConstante(int Id)
+        {
+            Constantes c = DataConstantes.Leer(Id);
+            return new JsonResult(c);
+        }
+
+
+        //End Jsons
 
     }
     

@@ -1,0 +1,27 @@
+C:\Users\elyna\Documents\Universidad de Talca\2019-2\Diseño y Analisis de Algoritmos\EoS\pruebacarga\obj\Debug\netcoreapp3.1\pruebacarga.csprojAssemblyReference.cache
+C:\Users\elyna\Documents\Universidad de Talca\2019-2\Diseño y Analisis de Algoritmos\EoS\pruebacarga\obj\Debug\netcoreapp3.1\pruebacarga.csproj.CoreCompileInputs.cache
+C:\Users\elyna\Documents\Universidad de Talca\2019-2\Diseño y Analisis de Algoritmos\EoS\pruebacarga\obj\Debug\netcoreapp3.1\pruebacarga.AssemblyInfoInputs.cache
+C:\Users\elyna\Documents\Universidad de Talca\2019-2\Diseño y Analisis de Algoritmos\EoS\pruebacarga\obj\Debug\netcoreapp3.1\pruebacarga.AssemblyInfo.cs
+C:\Users\elyna\Documents\Universidad de Talca\2019-2\Diseño y Analisis de Algoritmos\EoS\pruebacarga\bin\Debug\netcoreapp3.1\pruebacarga.exe
+C:\Users\elyna\Documents\Universidad de Talca\2019-2\Diseño y Analisis de Algoritmos\EoS\pruebacarga\bin\Debug\netcoreapp3.1\pruebacarga.deps.json
+C:\Users\elyna\Documents\Universidad de Talca\2019-2\Diseño y Analisis de Algoritmos\EoS\pruebacarga\bin\Debug\netcoreapp3.1\pruebacarga.runtimeconfig.json
+C:\Users\elyna\Documents\Universidad de Talca\2019-2\Diseño y Analisis de Algoritmos\EoS\pruebacarga\bin\Debug\netcoreapp3.1\pruebacarga.runtimeconfig.dev.json
+C:\Users\elyna\Documents\Universidad de Talca\2019-2\Diseño y Analisis de Algoritmos\EoS\pruebacarga\bin\Debug\netcoreapp3.1\pruebacarga.dll
+C:\Users\elyna\Documents\Universidad de Talca\2019-2\Diseño y Analisis de Algoritmos\EoS\pruebacarga\bin\Debug\netcoreapp3.1\pruebacarga.pdb
+C:\Users\elyna\Documents\Universidad de Talca\2019-2\Diseño y Analisis de Algoritmos\EoS\pruebacarga\obj\Debug\netcoreapp3.1\pruebacarga.dll
+C:\Users\elyna\Documents\Universidad de Talca\2019-2\Diseño y Analisis de Algoritmos\EoS\pruebacarga\obj\Debug\netcoreapp3.1\pruebacarga.pdb
+C:\Users\elyna\Documents\Universidad de Talca\2019-2\Diseño y Analisis de Algoritmos\EoS\pruebacarga\obj\Debug\netcoreapp3.1\pruebacarga.genruntimeconfig.cache
+D:\Descargas\pruebacarga\bin\Debug\netcoreapp3.1\pruebacarga.exe
+D:\Descargas\pruebacarga\bin\Debug\netcoreapp3.1\pruebacarga.deps.json
+D:\Descargas\pruebacarga\bin\Debug\netcoreapp3.1\pruebacarga.runtimeconfig.json
+D:\Descargas\pruebacarga\bin\Debug\netcoreapp3.1\pruebacarga.runtimeconfig.dev.json
+D:\Descargas\pruebacarga\bin\Debug\netcoreapp3.1\pruebacarga.dll
+D:\Descargas\pruebacarga\bin\Debug\netcoreapp3.1\pruebacarga.pdb
+D:\Descargas\pruebacarga\obj\Debug\netcoreapp3.1\pruebacarga.csprojAssemblyReference.cache
+D:\Descargas\pruebacarga\obj\Debug\netcoreapp3.1\pruebacarga.AssemblyInfoInputs.cache
+D:\Descargas\pruebacarga\obj\Debug\netcoreapp3.1\pruebacarga.AssemblyInfo.cs
+D:\Descargas\pruebacarga\obj\Debug\netcoreapp3.1\pruebacarga.dll
+D:\Descargas\pruebacarga\obj\Debug\netcoreapp3.1\pruebacarga.pdb
+D:\Descargas\pruebacarga\obj\Debug\netcoreapp3.1\pruebacarga.genruntimeconfig.cache
+C:\Users\elyna\Documents\Universidad de Talca\2019-2\Diseño y Analisis de Algoritmos\EoS\pruebacarga\bin\Debug\netcoreapp3.1\Microsoft.Office.Interop.Excel.dll
+C:\Users\elyna\Documents\Universidad de Talca\2019-2\Diseño y Analisis de Algoritmos\EoS\pruebacarga\obj\Debug\netcoreapp3.1\pruebacarga.csproj.CopyComplete
