@@ -32,22 +32,6 @@ namespace Eosweb.Controllers
             if (TempData.ContainsKey("Formula")) ViewBag.Formula = TempData["Formula"];
             if (TempData.ContainsKey("M")) ViewBag.M = TempData["M"];
 
-            if (TempData.ContainsKey("T")) ViewBag.T = TempData["T"];
-            if (TempData.ContainsKey("Tne")) ViewBag.Tne = TempData["Tne"];
-            if (TempData.ContainsKey("Te")) ViewBag.Te = TempData["Te"];
-            if (TempData.ContainsKey("Ps")) ViewBag.Ps = TempData["Ps"];
-
-            if (TempData.ContainsKey("En")) ViewBag.En = TempData["En"];
-            if (TempData.ContainsKey("R")) ViewBag.R = TempData["R"];
-
-            if (TempData.ContainsKey("T2")) ViewBag.T2 = TempData["T2"];
-            if (TempData.ContainsKey("E")) ViewBag.E = TempData["E"];
-            if (TempData.ContainsKey("Snv")) ViewBag.Snv = TempData["Snv"];
-            if (TempData.ContainsKey("Sv")) ViewBag.Sv = TempData["Sv"];
-
-            if (TempData.ContainsKey("T3")) ViewBag.T3 = TempData["T3"];
-            if (TempData.ContainsKey("V")) ViewBag.V = TempData["V"];
-
             
             List<Identificador> i = DataIdentificador.LeerTodo();
             if (i == null) {
@@ -85,15 +69,6 @@ namespace Eosweb.Controllers
             TempData["Compuesto"] = i.Compuesto;
             TempData["Formula"] = i.Formula;
             TempData["M"] = i.M;
-
-            TempData.Remove("T");
-            TempData.Remove("TEn");
-            TempData.Remove("Ps");
-            TempData.Remove("En");
-            TempData.Remove("R");
-            TempData.Remove("V");
-            TempData.Remove("T2");
-            TempData.Remove("T3");
 
             return RedirectToAction("Index", "Correlaciones");
         }
@@ -227,6 +202,34 @@ namespace Eosweb.Controllers
             return RedirectToAction("Index", "Correlaciones");
         }
 
+        [HttpPost]
+        public JsonResult CalcularAntoine(String T, int Id){ 
+            double[] valor = new double[3];
+
+            if(Id != 0 && T != null) {
+                double t = convertToDouble(T);
+                Fundamentales f = DataFundamentales.Leer(Id);
+                Secundarias s = DataSecundarias.Leer(Id);
+
+                if(t >= s.Tmax_k && t <= f.Tc_K) {
+                    //Presion de Saturacion
+                    double Ps = Math.Exp(s.A - ((s.B)/(t + s.C)));
+                    valor[0] = Ps;
+
+                    //Temperatura de ebullición
+                    double Te = (s.B / (s.A- Math.Log(Ps))) - s.C;
+                    valor[1] = Te;
+
+                    //Temperatura normal de ebullición
+                    double Tne = (s.B / (s.A- Math.Log(750))) - s.C;
+                    valor[2] = Tne;
+
+
+                }
+            }
+
+            return new JsonResult(valor);
+        }
 
         [HttpPost]
         public JsonResult CalcularVolumenC(int Id, int Opcion) {
@@ -246,7 +249,7 @@ namespace Eosweb.Controllers
         }
 
         [HttpPost]
-        public JsonResult TemperaturaRacket(String T, int Id, String Vc){
+        public JsonResult CalcularRacket(String T, int Id, String Vc){
             double valor = 0;
             if(Id != 0) {
                 Fundamentales f = DataFundamentales.Leer(Id);
@@ -265,16 +268,45 @@ namespace Eosweb.Controllers
         }
 
         [HttpPost]
-        public JsonResult CambiarUnidad(String Vc, int n) {
-            double valor = 0;
-            if(Vc != null) {
-                double vc = convertToDouble(Vc);
-                if (n == 2) {
+        public JsonResult CalcularRiedell(String P, int Id, int Opcion, String Tne, String T) {
+            double[] valor = new double[5];
+            
+            if(Id != 0 && P != null && T != null) {
+                Fundamentales f = DataFundamentales.Leer(Id);
+                Secundarias s = DataSecundarias.Leer(Id);
+                double p = convertToDouble(P);
+                //acá deberia restringir la presion. Pero nope e.e
+                double t = convertToDouble(T);
 
-                }
-                else {
+                if(t >= s.Tmax_k && t <= f.Tc_K) {
+                    double tne = convertToDouble(Tne);
+                    double r;
+                    if(Opcion == 1) {
+                        r = 8.314;
+                    }else {
+                        r = 1.987;
+                    }
+                    valor[0] = r;
+                    
 
+                    //Entalpia normal 
+                    double En = r * tne * 1.092 * (Math.Log(f.Pc_bar)- 1.013)/ (0.93-tne/f.Tc_K);
+                    valor[1] = En;
+
+
+                    //Entalpia
+                    double E = En * Math.Pow((1-t/f.Tc_K)/(1-tne/f.Tc_K),(19/50));
+                    valor[2] = E;
+
+                    //Entropia normal
+                    double Sn = En/tne;
+                    valor[3] = Sn;
+
+                    //Entropia vaporisacion
+                    double Sv = E / t;
+                    valor[4] = Sv;
                 }
+
             }
 
             return new JsonResult(valor);
@@ -304,7 +336,6 @@ namespace Eosweb.Controllers
             
             return Convert.ToDouble(final_s);
         }
-
 
         //Jsons
         [HttpPost]
@@ -389,8 +420,12 @@ namespace Eosweb.Controllers
             return new JsonResult(c);
         }
 
-
-        //End Jsons
+        [HttpPost]
+        public JsonResult LeerSecundarias(int Id)
+        {
+            Secundarias s = DataSecundarias.Leer(Id);
+            return new JsonResult(s);
+        }
 
     }
     
