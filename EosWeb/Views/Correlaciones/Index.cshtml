@@ -129,29 +129,19 @@
                                 </div>
                                 <div role="tabpanel" class="tab-pane fade" id="tab_content2" aria-labelledby="antoine-tab">
                                 <!-- tab 2 -->
-                                        @if(@ViewBag.idCompuesto != null) {
+                                    @if(@ViewBag.idCompuesto != null) {
                                             <!--form -->
-                                            @using (Html.BeginForm("SeleccionarTemperatura", "Correlaciones", FormMethod.Post, new { enctype = "multipart/form-data", @style = "border:none", data_parley_validate = false })) {
                                             <div data-parsley-validate>
                                                 <table class="table table-striped table-bordered table-responsive">
                                                     <tbody>
                                                         <tr>
-                                                                @if(@ViewBag.T != null){ 
-                                                                    <td class="text-justify" id="enfasis"><input type="text" data-parsley-type="number" id="correlacion" class="form-control" name="T" placeholder="Ingrese una temperatura entre @ViewBag.Tmax_k (K) y @ViewBag.Tmin_k (K)" data-parsley-pattern="([0-9])+|(\.([0-9]+))" value="@ViewBag.T"></td>
-                                                                }
-                                                                else {
-                                                                    <td class="text-justify" id="enfasis"><input type="text" data-parsley-type="number" id="correlacion" class="form-control" placeholder="Ingrese una temperatura entre @ViewBag.Tmax_k (K) y @ViewBag.Tmin_k (K)" data-parsley-pattern="([0-9])+|(\.([0-9]+))" name="T" value="" required></td>
-                                                                }
-                                                                <td class="text-justify" width="5%"><button id="send" type="submit" class="btn btn-success">Calcular</button></td>
+                                                            <td class="text-justify" id="enfasis"><input type="text" class="form-control" placeholder="Ingrese una temperatura entre @ViewBag.Tmax_k (K) y @ViewBag.Tmin_k (K)" data-parsley-pattern="\d+(\.\d{1,2})?" data-parsley-trigger="change" name="T" value="" required></td>
+                                                            <td class="text-justify" width="5%"><button id="btnAntoine" type="submit" class="btn btn-success">Calcular</button></td>
                                                         </tr>
                                                     </tbody>
                                                 </table>
                                             </div>
-                                            <input type="hidden" class="form-control" name="IdCompuesto" value="@ViewBag.idCompuesto">
-                                            <input type="hidden" class="form-control" name="Snv" value="@ViewBag.Snv">
-                                            <input type="hidden" class="form-control" name="V" value="@ViewBag.V">
-                                            <input type="hidden" class="form-control" name="T3" value="@ViewBag.T3">
-                                            }
+                                            
                                             <!-- end form -->
 
                                         <div class="clearfix"></div>
@@ -185,10 +175,10 @@
                                                             </thead>
                                                             <tbody>
                                                                 <tr>
-                                                                    <td class="text-justify"><input type="text" class="form-control" name="" value="@ViewBag.A" readonly></td>
-                                                                    <td class="text-justify"><input type="text" class="form-control" name="" value="@ViewBag.B" readonly></td>
-                                                                    <td class="text-justify"><input type="text" class="form-control" name="" value="@ViewBag.C" readonly></td>
-                                                                    <td class="text-justify alert-success"><input type="text" class="form-control" name="" value="@ViewBag.Ps" readonly></td>
+                                                                    <td class="text-justify"><input type="text" class="form-control" name="A" value="" readonly></td>
+                                                                    <td class="text-justify"><input type="text" class="form-control" name="B" value="" readonly></td>
+                                                                    <td class="text-justify"><input type="text" class="form-control" name="C" value="" readonly></td>
+                                                                    <td class="text-justify alert-success"><input type="text" class="form-control" name="Ps" value="" readonly></td>
                                                                 </tr>
                                                             </tbody>
                                                         </table>
@@ -223,11 +213,11 @@
                                                             </thead>
                                                             <tbody>
                                                                 <tr>
-                                                                    <td class="text-justify"><input type="text" class="form-control" name="" value="@ViewBag.A" readonly></td>
-                                                                    <td class="text-justify"><input type="text" class="form-control" name="" value="@ViewBag.B" readonly></td>
-                                                                    <td class="text-justify"><input type="text" class="form-control" name="" value="@ViewBag.C" readonly></td>
-                                                                    <td class="text-justify"><input type="text" class="form-control" name="" value="@ViewBag.Ps" readonly></td>
-                                                                    <td class="text-justify alert-success"><input type="text" class="form-control" name="" value="@ViewBag.Te" readonly></td>
+                                                                    <td class="text-justify"><input type="text" class="form-control" name="A" value="" readonly></td>
+                                                                    <td class="text-justify"><input type="text" class="form-control" name="B" value="" readonly></td>
+                                                                    <td class="text-justify"><input type="text" class="form-control" name="C" value="" readonly></td>
+                                                                    <td class="text-justify"><input type="text" class="form-control" name="Ps" value="" readonly></td>
+                                                                    <td class="text-justify alert-success"><input type="text" class="form-control" name="Te" value="" readonly></td>
                                                                 </tr>
                                                             </tbody>
                                                         </table>
@@ -264,10 +254,10 @@
                                                                 </thead>
                                                                 <tbody>
                                                                     <tr>
-                                                                        <td class="text-justify"><input type="text" class="form-control" name="" value="@ViewBag.A" readonly></td>
-                                                                        <td class="text-justify"><input type="text" class="form-control" name="" value="@ViewBag.B" readonly></td>
-                                                                        <td class="text-justify"><input type="text" class="form-control" name="" value="@ViewBag.C" readonly></td>
-                                                                        <td class="text-justify alert-success"><input type="text" class="form-control" name="" value="@ViewBag.Tne" readonly></td>
+                                                                        <td class="text-justify"><input type="text" class="form-control" name="A" value="" readonly></td>
+                                                                        <td class="text-justify"><input type="text" class="form-control" name="B" value="" readonly></td>
+                                                                        <td class="text-justify"><input type="text" class="form-control" name="C" value="" readonly></td>
+                                                                        <td class="text-justify alert-success"><input type="text" class="form-control" name="Tne" value="" readonly></td>
                                                                     </tr>
                                                                 </tbody>
                                                             </table>
@@ -293,10 +283,48 @@
                                 <div role="tabpanel" class="tab-pane fade" id="tab_content3" aria-labelledby="riedel-tab">
                                 <!-- tab 3-->
                                     @if(@ViewBag.idCompuesto != null) {
+                                        <!--aviso -->
+                                                        <div class="alert alert-danger alert-dismissible fade in" role="alert">
+                                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span>
+                                                            </button>
+                                                            <i class="fa fa-info-circle fa-lg"></i> <strong>Debe</strong> escribir una temperatura en Antoine para comenzar con los cálculos.
+                                                        </div>
+                                                        <!--end aviso-->
+
+                                        <!--form -->
+                                        <div data-parsley-validate>
+                                            <table class="table table-striped table-bordered table-responsive">
+                                            <tbody>
+                                                <tr>
+                                                    <th width="15%">Temperatura</th>
+                                                    <td><input type="text" class="form-control" placeholder="Ingrese una temperatura entre @ViewBag.Tmax_k (kelvin) y @ViewBag.Tmin_k (kelvin)" data-parsley-pattern="\d+(\.\d{1,2})?" name="TRiedell" value="" data-parsley-trigger="change" required></td>
+                                                </tr>
+                                                <tr>
+                                                    <th width="15%">Presión</th>
+                                                    <td><input type="text" class="form-control" name="PRiedell" placeholder="Ingrese una presión para comenzar con los cálculos" data-parsley-pattern="\d+(\.\d{1,2})?" value="" data-parsley-trigger="change" required></td>
+                                                </tr>
+                                                <tr>
+                                                    <th width="15%">Constante de los gases</th>
+                                                    <td><select class="form-control" id="dropdownRiedell">
+                                                            <option value="1">J/mol/K</option>
+                                                            <option value="2">cal/mol/K</option>
+                                                        </select>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td><button id="btnRiedell" type="submit" class="btn btn-success">Calcular</button></td>
+                                                    <td></td>
+                                                </tr>
+                                            </tbody>
+                                            </table>
+                                        </div>
+                                        <!-- end form -->
+                                    
                                         <!-- start accordion -->
                                         <div class="accordion" id="accordion2" role="tablist" aria-multiselectable="true">
+                                            <!--Entalpia normal de vaporización-->
                                             <div class="panel">
-                                                <a class="panel-heading" role="tab" id="headingOne2" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne2" aria-expanded="true" aria-controls="collapseOne2">
+                                                <a class="panel-heading" role="tab" id="headingOne2" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne2" aria-expanded="false" aria-controls="collapseOne2">
                                                 <h4 class="panel-title">Entalpia normal de vaporización</h4>
                                                 </a>
                                                 <div id="collapseOne2" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne2">
@@ -316,14 +344,14 @@
                                                         <table class="table table-striped table-bordered table-responsive">
                                                             <thead>
                                                                 <tr>
-                                                                    <th>R (J/Mol/K)</th>
+                                                                    <th>Constante de los gases ideales</th>
                                                                     <th>Entalpia normal</th>
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
                                                                 <tr>
-                                                                    <td class="text-justify"><input type="text" class="form-control" name="" value="@ViewBag.R" readonly></td>
-                                                                    <td class="text-justify alert-success"><input type="text" class="form-control" name="" value="@ViewBag.En" readonly></td>
+                                                                    <td class="text-justify"><input type="text" class="form-control" name="R" value="" readonly></td>
+                                                                    <td class="text-justify alert-success"><input type="text" class="form-control" name="En" value="" readonly></td>
                                                                 </tr>
                                                             </tbody>
                                                         </table>
@@ -334,6 +362,8 @@
                                                 </div>
                                                 </div>
                                             </div>
+                                            <!--END Entalpia normal de vaporización-->
+                                            <!--Entalpia de vaporización-->
                                             <div class="panel">
                                                 <a class="panel-heading collapsed" role="tab" id="headingTwo2" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo2" aria-expanded="false" aria-controls="collapseTwo2">
                                                 <h4 class="panel-title">Entalpia de vaporización</h4>
@@ -341,37 +371,6 @@
                                                 <div id="collapseTwo2" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo2">
                                                 <div class="panel-body">
                                                     <!-- Content tab 2 -->
-                                                    @if(@ViewBag.T != null) {
-                                                        <!--form -->
-                                                        @using (Html.BeginForm("TemperaturaRiedel", "Correlaciones", FormMethod.Post, new { enctype = "multipart/form-data", @style = "border:none", data_parley_validate = false })) {
-                                                        <div data-parsley-validate>
-                                                            <table class="table table-striped table-bordered table-responsive">
-                                                                <tbody>
-                                                                <tr>
-                                                                    @if(@ViewBag.T2 != null){ 
-                                                                        <td class="text-justify" id="enfasis"><input id="correlacion" type="text" data-parsley-type="number" class="form-control" name="T2" min="@ViewBag.Tmax_k" max="@ViewBag.Tc_K" placeholder="Ingrese una temperatura entre @ViewBag.Tmax_k (kelvin) y @ViewBag.Tmin_k (kelvin)" data-parsley-pattern="([0-9])+|(\,([0-9]+))" value="@ViewBag.T2"></td>
-                                                                    }
-                                                                    else {
-                                                                        <td class="text-justify" id="enfasis"><input id="correlacion" type="text" data-parsley-type="number" class="form-control" min="@ViewBag.Tmax_k" max="@ViewBag.Tc_K" placeholder="Ingrese una temperatura entre @ViewBag.Tmax_k (kelvin) y @ViewBag.Tmin_k (kelvin)" data-parsley-pattern="([0-9])+|(\,([0-9]+))" name="T2" value="" required></td>
-                                                                    }
-                                                                    <td class="text-justify" width="5%"><button id="send" type="submit" class="btn btn-success">Calcular</button></td>
-                                                                </tr>
-                                                                </tbody>
-                                                            </table>
-                                                        </div>
-                                                        <input type="hidden" class="form-control" name="IdCompuesto" value="@ViewBag.idCompuesto">
-                                                        <input type="hidden" class="form-control" name="T" value="@ViewBag.T">
-                                                        <input type="hidden" class="form-control" name="Ps" value="@ViewBag.Ps">
-                                                        <input type="hidden" class="form-control" name="Te" value="@ViewBag.Te">
-                                                        <input type="hidden" class="form-control" name="Tne" value="@ViewBag.Tne">
-                                                        <input type="hidden" class="form-control" name="R" value="@ViewBag.R">
-                                                        <input type="hidden" class="form-control" name="En" value="@ViewBag.En">
-                                                        <input type="hidden" class="form-control" name="Snv" value="@ViewBag.Snv">
-                                                        <input type="hidden" class="form-control" name="V" value="@ViewBag.V">
-                                                        <input type="hidden" class="form-control" name="T3" value="@ViewBag.T3">
-                                                        }
-                                                        <!-- end form -->
-
                                                         <div class="clearfix"></div>
 
                                                         <center> <img src="~/images/ev.png"> </center>
@@ -392,28 +391,19 @@
                                                                 </thead>
                                                                 <tbody>
                                                                     <tr>
-                                                                        <td class="text-justify alert-success"><input type="text" class="form-control" name="" value="@ViewBag.E" readonly></td>
+                                                                        <td class="text-justify alert-success"><input type="text" class="form-control" name="E" value="" readonly></td>
                                                                     </tr>
                                                                 </tbody>
                                                             </table>
                                                         </div>
 
-
-                                                    }
-                                                    else {
-                                                        <!--aviso -->
-                                                        <div class="alert alert-danger alert-dismissible fade in" role="alert">
-                                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span>
-                                                            </button>
-                                                            <i class="fa fa-info-circle fa-lg"></i> <strong>Debe</strong> escribir una temperatura en Antoine para comenzar con los cálculos.
-                                                        </div>
-                                                        <!--end aviso-->
-                                                    }
                                                     <!-- end Content tab 2 -->
                                                     
                                                 </div>
                                                 </div>
                                             </div>
+                                            <!--END Entalpia de vaporización-->
+                                            <!--Entropia normal de vaporización-->
                                             <div class="panel">
                                                 <a class="panel-heading collapsed" role="tab" id="headingThree2" data-toggle="collapse" data-parent="#accordion2" href="#collapseThree2" aria-expanded="false" aria-controls="collapseTwo2">
                                                 <h4 class="panel-title">Entropia normal de vaporización</h4>
@@ -421,10 +411,7 @@
                                                 <div id="collapseThree2" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree2">
                                                 <div class="panel-body">
                                                     <!-- Content tab 3 -->
-                                                        @if(@ViewBag.T != null) {
-                                                            <center> Imagen Formula </center>
                                                             <div class="clearfix"></div>
-                                                            
                                                             <div>
                                                                 <table class="table table-striped table-bordered table-responsive">
                                                                     <thead>
@@ -434,25 +421,17 @@
                                                                     </thead>
                                                                     <tbody>
                                                                         <tr>
-                                                                            <td class="text-justify alert-success"><input type="text" class="form-control" name="" value="@ViewBag.Snv" readonly></td>
+                                                                            <td class="text-justify alert-success"><input type="text" class="form-control" name="Sn" value="" readonly></td>
                                                                         </tr>
                                                                     </tbody>
                                                                 </table>
                                                             </div>
-                                                        }
-                                                        else {
-                                                            <!--aviso -->
-                                                            <div class="alert alert-danger alert-dismissible fade in" role="alert">
-                                                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span>
-                                                                </button>
-                                                                <i class="fa fa-info-circle fa-lg"></i> <strong>Debe</strong> escribir una temperatura en Antoine para comenzar con los cálculos.
-                                                            </div>
-                                                            <!--end aviso-->
-                                                        }
                                                     <!-- end Content tab 3 -->
                                                 </div>
                                                 </div>
                                             </div>
+                                            <!--END Entropia normal de vaporización-->
+                                            <!--Entropia de vaporización-->
                                             <div class="panel">
                                                 <a class="panel-heading collapsed" role="tab" id="headingFour2" data-toggle="collapse" data-parent="#accordion2" href="#collapseFour2" aria-expanded="false" aria-controls="collapseTwo2">
                                                 <h4 class="panel-title">Entropia de vaporización</h4>
@@ -460,11 +439,8 @@
                                                 <div id="collapseFour2" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour2">
                                                 <div class="panel-body">
                                                     <!-- Content tab 4 -->
-                                                        @if(@ViewBag.T != null) {
-                                                            <center> Imagen Formula </center>
-                                                            <div class="clearfix"></div>
-                                                            
-                                                            <div>
+                                                        <div class="clearfix"></div>
+                                                        <div>
                                                                 <table class="table table-striped table-bordered table-responsive">
                                                                     <thead>
                                                                         <tr>
@@ -473,27 +449,17 @@
                                                                     </thead>
                                                                     <tbody>
                                                                         <tr>
-                                                                            <td class="text-justify alert-success"><input type="text" class="form-control" name="" value="@ViewBag.Sv" readonly></td>
+                                                                            <td class="text-justify alert-success"><input type="text" class="form-control" name="Sv" readonly></td>
                                                                         </tr>
                                                                     </tbody>
                                                                 </table>
                                                             </div>
-                                                        }
-                                                        else {
-                                                            <!--aviso -->
-                                                            <div class="alert alert-danger alert-dismissible fade in" role="alert">
-                                                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span>
-                                                                </button>
-                                                                <i class="fa fa-info-circle fa-lg"></i> <strong>Debe</strong> escribir una temperatura en Antoine para comenzar con los cálculos.
-                                                            </div>
-                                                            <!--end aviso-->
-                                                        }
+                                                        
                                                     <!-- end Content tab 4 -->
                                                 </div>
                                                 </div>
                                             </div>
-
-
+                                            <!--END Entropia de vaporización-->
                                         </div>
                                         <!-- end of accordion -->
                                     }
@@ -512,47 +478,37 @@
                                 <!-- tab 4-->
                                     @if(@ViewBag.idCompuesto != null) {
                                     <!--form -->
-                                        @using (Html.BeginForm("TemperaturaRacket", "Correlaciones", FormMethod.Post, new { enctype = "multipart/form-data", @style = "border:none", data_parley_validate = false })) {
                                         <div data-parsley-validate>
                                             <table class="table table-striped table-bordered table-responsive">
                                             <tbody>
                                                 <tr>
-                                                @if(@ViewBag.T != null){ 
-                                                    <td class="text-justify"><input type="number" data-parsley-type="integer" class="form-control" name="T3" min="@ViewBag.Tmax_k" max="@ViewBag.Tc_K" placeholder="Ingrese una temperatura entre @ViewBag.Tmax_k (kelvin) y @ViewBag.Tmin_k (kelvin)" data-parsley-pattern="([0-9])+|(\,([0-9]+))" value="@ViewBag.T3"></td>
-                                                }
-                                                else {
-                                                    <td class="text-justify"><input type="number" data-parsley-type="integer" class="form-control" min="@ViewBag.Tmax_k" max="@ViewBag.Tc_K" placeholder="Ingrese una temperatura entre @ViewBag.Tmax_k (kelvin) y @ViewBag.Tmin_k (kelvin)" data-parsley-pattern="([0-9])+|(\,([0-9]+))" name="T3" value="" required></td>
-                                                }
-                                                    <td class="text-justify" width="5%"><button id="send" type="submit" class="btn btn-success">Calcular</button></td>
+                                                <td class="text-justify"><input type="text" class="form-control" name="TRacket" placeholder="Ingrese una temperatura entre @ViewBag.Tmax_k (kelvin) y @ViewBag.Tmin_k (kelvin)" data-parsley-pattern="\d+(\.\d{1,2})?" value="" data-parsley-trigger="change" required></td>
+                                                <td class="text-justify" width="5%"><button id="btnRacket" type="submit" class="btn btn-success">Calcular</button></td>
                                                 </tr>
                                             </tbody>
                                             </table>
                                         </div>
-                                        <input type="hidden" class="form-control" name="IdCompuesto" value="@ViewBag.idCompuesto">
-                                        <input type="hidden" class="form-control" name="T" value="@ViewBag.T">
-                                        <input type="hidden" class="form-control" name="T" value="@ViewBag.T2">
-                                        <input type="hidden" class="form-control" name="Ps" value="@ViewBag.Ps">
-                                        <input type="hidden" class="form-control" name="Te" value="@ViewBag.Te">
-                                        <input type="hidden" class="form-control" name="Tne" value="@ViewBag.Tne">
-                                        <input type="hidden" class="form-control" name="R" value="@ViewBag.R">
-                                        <input type="hidden" class="form-control" name="En" value="@ViewBag.En">
-                                        <input type="hidden" class="form-control" name="Snv" value="@ViewBag.Snv">
-                                        <input type="hidden" class="form-control" name="V" value="@ViewBag.V">
-                                        }
                                     <!-- end form -->
 
-                                    <center> Imagen Formula </center>
                                     <div class="clearfix"></div>
                                     <div>
                                         <table class="table table-striped table-bordered table-responsive">
                                         <thead>
-                                            <tr>
-                                                <th>Volumen del líquido saturado (m^3/mol)</th>
+                                            <tr><th>Volumen crítico</th>
+                                                <th colspan="2">Volumen del líquido saturado</th>
                                             </tr>
                                         </thead>
                                                 <tbody>
                                                     <tr>
-                                                    <td class="text-justify alert-success"><input type="text" class="form-control" name="" value="@ViewBag.V" readonly></td>
+                                                    <td class="text-justify" width="30%"><input type="text" class="form-control" name="Vc" value="" readonly></td>
+                                                    <td class="text-justify alert-success"><input type="text" class="form-control" name="Racket" value="" readonly></td>
+                                                    <td class="text-justify" width="10%">
+                                                        <select class="form-control" id="dropdown" name="racketVar" onchange="CambiarU()">
+                                                            <option value="1">(m<sup>3</sup>/mol)</option>
+                                                            <option value="2">(L/mol)</option>
+                                                            <option value="3">(cm<sup>3</sup>/mol)</option>
+                                                        </select>
+                                                    </td>
                                                     </tr>
                                                 </tbody>
                                         </table>
@@ -711,8 +667,13 @@
                     $("#enfasis").css("background-color","#E74C3C");
                 }
             });
+            $("#dropdown").prop("disabled", true);
+            $("#dropdownRiedell").prop("disabled", true);
+            document.getElementById("btnRiedell").disabled = true;
 
-            $('#btnCC').click(function () {
+        });
+
+        $('#btnCC').click(function () {
                 //Open modal dialog for edit event
                 var t1 = document.getElementsByName("TCal1")[0].value;
                 var t2 = document.getElementsByName("TCal2")[0].value;
@@ -757,17 +718,16 @@
                     }
                 })
 
-            })
+        })
 
-            function BuscarConstante() {
-                var id = '@ViewBag.IdCompuesto';
+        function BuscarConstante() {
+            var id = '@ViewBag.IdCompuesto';
 
-                $.ajax({
+            $.ajax({
                     type: "POST",
                     url: '/Correlaciones/LeerConstante/',
                     data: {'Id': id },
                     success: function (data) {
-                        console.log(data);
                         document.getElementsByName('CA')[0].setAttribute("value", data.a);
                         document.getElementsByName('CA')[1].setAttribute("value", data.a);
                         document.getElementsByName('CB')[0].setAttribute("value", data.b);
@@ -784,9 +744,160 @@
                     error: function (f) {
                         console.log(f);
                     }
-                })
-            }
+            })
+        }
 
-        });
+        function BuscarSecundarias() {
+            var id = '@ViewBag.IdCompuesto';
+
+            $.ajax({
+                    type: "POST",
+                    url: '/Correlaciones/LeerSecundarias/',
+                    data: {'Id': id },
+                    success: function (data) {
+                        console.log(data);
+                        document.getElementsByName('A')[0].setAttribute("value", data.a);
+                        document.getElementsByName('A')[1].setAttribute("value", data.a);
+                        document.getElementsByName('A')[2].setAttribute("value", data.a);
+                        document.getElementsByName('B')[0].setAttribute("value", data.b);
+                        document.getElementsByName('B')[1].setAttribute("value", data.c);
+                        document.getElementsByName('B')[2].setAttribute("value", data.c);
+                        document.getElementsByName('C')[0].setAttribute("value", data.c);
+                        document.getElementsByName('C')[1].setAttribute("value", data.c);
+                        document.getElementsByName('C')[2].setAttribute("value", data.c);
+
+                        document.getElementsByName('CompuestoNombre')[0].setAttribute("value", data.i.compuesto);
+                        document.getElementsByName('CompuestoNombre')[1].setAttribute("value", data.i.compuesto);
+                        
+                    },
+                    error: function (f) {
+                        console.log(f);
+                    }
+            })
+        }
+
+        function CambiarU() {
+            CalcularVc();
+        }
+
+        $('#btnRacket').click(function () {
+            CalcularVc();
+        })
+
+        function CalcularVc() {
+            var id = '@ViewBag.IdCompuesto';
+            var op = $('#dropdown').val();
+            $.ajax({
+                        type: "POST",
+                        url: '/Correlaciones/CalcularVolumenC/',
+                        data: { 'Id': id, 'Opcion': op },
+                        success: function (data) {
+                            if (data != 0) {
+                                document.getElementsByName('Vc')[0].setAttribute("value", data);
+                                CalcularRacket(data);
+                            }
+                            else {
+                                alert('No pudo calcularse el valor debido a que se encuentra fuera de los parámetros');
+                            }
+
+                        },
+                        error: function (f) {
+                            console.log(f);
+                            alert('No pudo calcularse el valor');
+                        }
+            })
+        }
+
+        function CalcularRacket(vc) {
+            var t = document.getElementsByName("TRacket")[0].value;
+            var id = '@ViewBag.IdCompuesto';
+
+            $.ajax({
+                type: "POST",
+                url: '/Correlaciones/CalcularRacket/',
+                data: { 'T': t , 'Id': id, 'Vc': vc },
+                success: function (data) {
+                    if (data != 0) {
+                        document.getElementsByName('Racket')[0].setAttribute("value", data);
+                        $("#dropdown").prop("disabled", false);
+                    }
+                    else {
+                        alert('No pudo calcularse el valor debido a que se encuentra fuera de los parámetros');
+                    }
+                },
+                    error: function (f) {
+                    console.log(f);
+                    alert('No pudo calcularse el valor');
+                }
+            })
+        }
+
+        $('#btnAntoine').click(function () {
+            var id = '@ViewBag.IdCompuesto';
+            var t = document.getElementsByName("T")[0].value;
+            $.ajax({
+                        type: "POST",
+                        url: '/Correlaciones/CalcularAntoine/',
+                        data: { 'T':t, 'Id': id},
+                        success: function (data) {
+                            if (data != 0) {
+                                document.getElementsByName('Ps')[0].setAttribute("value", data[0]);
+                                document.getElementsByName('Ps')[1].setAttribute("value", data[0]);
+                                document.getElementsByName('Te')[0].setAttribute("value", data[1]);
+                                document.getElementsByName('Tne')[0].setAttribute("value", data[2]);
+
+                                $("#dropdownRiedell").prop("disabled", false);
+                                document.getElementById("btnRiedell").disabled = false;
+                                BuscarSecundarias();
+                            }
+                            else {
+                                alert('No pudo calcularse el valor debido a que se encuentra fuera de los parámetros');
+                            }
+
+                        },
+                        error: function (f) {
+                            console.log(f);
+                            alert('No pudo calcularse el valor');
+                        }
+            })
+
+        })
+
+        $('#btnRiedell').click(function () {
+            var p = document.getElementsByName("PRiedell")[0].value;
+            var id = '@ViewBag.IdCompuesto';
+            var op = $('#dropdownRiedell').val();
+            var tne = document.getElementsByName("Tne")[0].value;
+            var t = document.getElementsByName("TRiedell")[0].value;
+
+            $.ajax({
+                        type: "POST",
+                        url: '/Correlaciones/CalcularRiedell/',
+                        data: { 'P':p, 'Id': id, 'Opcion': op, 'Tne':tne, 'T':t },
+                        success: function (data) {
+                            if (data != 0) {
+                                console.log(data)
+                                document.getElementsByName('R')[0].setAttribute("value", data[0]);
+                                document.getElementsByName('En')[0].setAttribute("value", data[1]);
+                                document.getElementsByName('E')[0].setAttribute("value", data[2]);
+                                document.getElementsByName('Sn')[0].setAttribute("value", data[3]);
+                                document.getElementsByName('Sv')[0].setAttribute("value", data[4]);
+                            }
+                            else {
+                                alert('No pudo calcularse el valor debido a que se encuentra fuera de los parámetros');
+                            }
+
+                        },
+                        error: function (f) {
+                            console.log(f);
+                            alert('No pudo calcularse el valor');
+                        }
+            })
+
+        })
+
+        
+        
+            
     </script>
 }
